@@ -1,0 +1,64 @@
+id,category_name,parent_id,category_level,description,common_uses,typical_side_effects,created_at
+1,Antidiabetic Medications,,1,Medications for managing diabetes mellitus,Medications for managing diabetes mellitus,,2026-01-01 00:00:00
+2,Antihypertensive Medications,,1,Medications for managing high blood pressure,Medications for managing high blood pressure,,2026-01-01 00:00:00
+3,Lipid-Lowering Agents,,1,Medications for managing cholesterol and triglycerides,Medications for managing cholesterol and triglycerides,,2026-01-01 00:00:00
+4,Anticoagulants and Antiplatelets,,1,Blood thinners and clot prevention medications,Blood thinners and clot prevention medications,,2026-01-01 00:00:00
+5,Antibiotics,,1,Medications for treating bacterial infections,Medications for treating bacterial infections,,2026-01-01 00:00:00
+6,Antimalarials,,1,Medications for preventing and treating malaria,Medications for preventing and treating malaria,,2026-01-01 00:00:00
+7,Analgesics,,1,Pain relief medications,Pain relief medications,,2026-01-01 00:00:00
+8,Gastrointestinal Medications,,1,Medications for digestive system disorders,Medications for digestive system disorders,,2026-01-01 00:00:00
+9,CKD Medications,,1,Medications for chronic kidney disease management,Medications for chronic kidney disease management,,2026-01-01 00:00:00
+10,Supplements and Vitamins,,1,Nutritional supplements and vitamin preparations,Nutritional supplements and vitamin preparations,,2026-01-01 00:00:00
+11,Respiratory Medications,,1,Medications for asthma and respiratory conditions,Medications for asthma and respiratory conditions,,2026-01-01 00:00:00
+12,Thyroid Medications,,1,Medications for thyroid disorders,Medications for thyroid disorders,,2026-01-01 00:00:00
+13,Antiretrovirals,,1,HIV treatment medications (HAART),HIV treatment medications (HAART),,2026-01-01 00:00:00
+14,Antifungals,,1,Medications for fungal infections,Medications for fungal infections,,2026-01-01 00:00:00
+15,Anthelmintics,,1,Deworming medications for parasitic infections,Deworming medications for parasitic infections,,2026-01-01 00:00:00
+16,Antihistamines,,1,Allergy medications,Allergy medications,,2026-01-01 00:00:00
+17,Antiemetics,,1,Anti-nausea and vomiting medications,Anti-nausea and vomiting medications,,2026-01-01 00:00:00
+18,Laxatives,,1,Constipation relief medications,Constipation relief medications,,2026-01-01 00:00:00
+19,Antidiarrheals,,1,Diarrhea treatment medications,Diarrhea treatment medications,,2026-01-01 00:00:00
+20,Psychiatric Medications,,1,Medications for mental health conditions,Medications for mental health conditions,,2026-01-01 00:00:00
+21,Antidepressants,,1,Medications for depression and anxiety disorders,Medications for depression and anxiety disorders,,2026-01-01 00:00:00
+22,Biguanides,1,2,Diabetes medications that reduce glucose production,Diabetes medications that reduce glucose production,,2026-01-01 00:00:00
+23,Sulfonylureas,1,2,Diabetes medications that stimulate insulin secretion,Diabetes medications that stimulate insulin secretion,,2026-01-01 00:00:00
+24,Insulins,1,2,Injectable insulin preparations,Injectable insulin preparations,,2026-01-01 00:00:00
+25,Calcium Channel Blockers,2,2,Blood pressure medications that relax blood vessels,Blood pressure medications that relax blood vessels,,2026-01-01 00:00:00
+26,ACE Inhibitors,2,2,Blood pressure medications that block angiotensin conversion,Blood pressure medications that block angiotensin conversion,,2026-01-01 00:00:00
+27,ARBs,2,2,Angiotensin receptor blockers for blood pressure,Angiotensin receptor blockers for blood pressure,,2026-01-01 00:00:00
+28,Diuretics,2,2,Water pills that reduce blood pressure,Water pills that reduce blood pressure,,2026-01-01 00:00:00
+29,Beta Blockers,2,2,Medications that block adrenaline effects on heart,Medications that block adrenaline effects on heart,,2026-01-01 00:00:00
+30,Statins,3,2,Cholesterol-lowering medications,Cholesterol-lowering medications,,2026-01-01 00:00:00
+31,Antiplatelet Agents,4,2,Medications that prevent platelet clumping,Medications that prevent platelet clumping,,2026-01-01 00:00:00
+32,Anticoagulants,4,2,Medications that prevent blood clotting,Medications that prevent blood clotting,,2026-01-01 00:00:00
+33,Penicillins,5,2,Beta-lactam antibiotics,Beta-lactam antibiotics,,2026-01-01 00:00:00
+34,Fluoroquinolones,5,2,Broad-spectrum antibiotics,Broad-spectrum antibiotics,,2026-01-01 00:00:00
+35,Nitroimidazoles,5,2,Antibiotics for anaerobic bacteria and protozoa,Antibiotics for anaerobic bacteria and protozoa,,2026-01-01 00:00:00
+36,Cephalosporins,5,2,Beta-lactam antibiotics related to penicillins,Beta-lactam antibiotics related to penicillins,,2026-01-01 00:00:00
+37,Macrolides,5,2,Protein synthesis inhibitor antibiotics,Protein synthesis inhibitor antibiotics,,2026-01-01 00:00:00
+38,Tetracyclines,5,2,Broad-spectrum protein synthesis inhibitor antibiotics,Broad-spectrum protein synthesis inhibitor antibiotics,,2026-01-01 00:00:00
+39,Sulfonamides,5,2,Antibiotics that inhibit folic acid synthesis,Antibiotics that inhibit folic acid synthesis,,2026-01-01 00:00:00
+40,Non-opioid Analgesics,7,2,Pain medications without addiction potential,Pain medications without addiction potential,,2026-01-01 00:00:00
+41,NSAIDs,7,2,Non-steroidal anti-inflammatory drugs,Non-steroidal anti-inflammatory drugs,,2026-01-01 00:00:00
+42,Opioid Analgesics,7,2,Strong pain medications with addiction potential,Strong pain medications with addiction potential,,2026-01-01 00:00:00
+43,Proton Pump Inhibitors,8,2,Medications that reduce stomach acid production,Medications that reduce stomach acid production,,2026-01-01 00:00:00
+44,H2 Receptor Antagonists,8,2,Medications that reduce stomach acid,Medications that reduce stomach acid,,2026-01-01 00:00:00
+45,Antacids,8,2,Medications that neutralize stomach acid,Medications that neutralize stomach acid,,2026-01-01 00:00:00
+46,Phosphate Binders,9,2,Medications that reduce phosphate absorption in CKD,Medications that reduce phosphate absorption in CKD,,2026-01-01 00:00:00
+47,Erythropoiesis-Stimulating Agents,9,2,Medications that stimulate red blood cell production,Medications that stimulate red blood cell production,,2026-01-01 00:00:00
+48,Active Vitamin D,9,2,Vitamin D preparations for CKD patients,Vitamin D preparations for CKD patients,,2026-01-01 00:00:00
+49,Iron Supplements,10,2,Iron preparations for anemia,Iron preparations for anemia,,2026-01-01 00:00:00
+50,Vitamins,10,2,Vitamin preparations,Vitamin preparations,,2026-01-01 00:00:00
+51,Beta-2 Agonists,11,2,Bronchodilators for asthma,Bronchodilators for asthma,,2026-01-01 00:00:00
+52,Inhaled Corticosteroids,11,2,Anti-inflammatory medications for asthma,Anti-inflammatory medications for asthma,,2026-01-01 00:00:00
+53,Corticosteroids,11,2,Anti-inflammatory steroid medications,Anti-inflammatory steroid medications,,2026-01-01 00:00:00
+54,Thyroid Hormones,12,2,Medications for hypothyroidism,Medications for hypothyroidism,,2026-01-01 00:00:00
+55,Antithyroid Agents,12,2,Medications for hyperthyroidism,Medications for hyperthyroidism,,2026-01-01 00:00:00
+56,NRTIs,13,2,Nucleoside reverse transcriptase inhibitors,Nucleoside reverse transcriptase inhibitors,,2026-01-01 00:00:00
+57,NNRTIs,13,2,Non-nucleoside reverse transcriptase inhibitors,Non-nucleoside reverse transcriptase inhibitors,,2026-01-01 00:00:00
+58,Integrase Inhibitors,13,2,HIV medications that block viral integration,HIV medications that block viral integration,,2026-01-01 00:00:00
+59,HAART Combinations,13,2,Fixed-dose combination antiretroviral therapy,Fixed-dose combination antiretroviral therapy,,2026-01-01 00:00:00
+60,Benzodiazepines,20,2,Anxiety and sedative medications,Anxiety and sedative medications,,2026-01-01 00:00:00
+61,Antipsychotics,20,2,Medications for psychosis and severe mental illness,Medications for psychosis and severe mental illness,,2026-01-01 00:00:00
+62,SSRIs,21,2,Selective serotonin reuptake inhibitors,Selective serotonin reuptake inhibitors,,2026-01-01 00:00:00
+63,Tricyclic Antidepressants,21,2,Older class of antidepressants,Older class of antidepressants,,2026-01-01 00:00:00

@@ -1,0 +1,77 @@
+name: vurafya_app
+description: "Vurafya - Health Platform by Vura iX"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # ── State management ─────────────────────────────────────────────────────────
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # ── Navigation ────────────────────────────────────────────────────────────────
+  go_router: ^14.2.0
+
+  # ── Networking ────────────────────────────────────────────────────────────────
+  dio: ^5.4.3+1
+  retrofit: ^4.1.0
+
+  # ── Local storage ─────────────────────────────────────────────────────────────
+  flutter_secure_storage: ^10.2.0   # JWT tokens (encrypted)
+  shared_preferences: ^2.3.3       # Light user prefs
+  sqflite: ^2.4.1                  # Local SQLite cache
+  path_provider: ^2.1.5
+
+  # ── Payments ─────────────────────────────────────────────────────────────────
+  flutterwave_standard: ^1.0.5     # FlutterWave mobile money
+
+  # ── Push notifications ────────────────────────────────────────────────────────
+  firebase_core: ^4.8.0
+  firebase_messaging: ^16.2.1
+  flutter_local_notifications: ^21.0.0
+
+  # ── UI ────────────────────────────────────────────────────────────────────────
+  cached_network_image: ^3.4.1
+  shimmer: ^3.0.0                  # Loading skeletons
+  fl_chart: ^1.2.0                # Charts for biometrics/revenue
+  percent_indicator: ^4.2.3        # Health progress rings
+  lottie: ^3.2.0                   # Animations
+  flutter_svg: ^2.0.10+1
+
+  # ── Forms & input ─────────────────────────────────────────────────────────────
+  flutter_form_builder: ^10.3.0+2
+  form_builder_validators: ^11.1.0
+
+  # ── Utilities ─────────────────────────────────────────────────────────────────
+  intl: ^0.20.2
+  uuid: ^4.5.1
+  connectivity_plus: ^7.1.1        # Offline detection
+  device_info_plus: ^13.1.0        # Device ID for FCM
+  package_info_plus: ^10.1.0        # App version
+  url_launcher: ^6.3.1
+  share_plus: ^13.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.13
+  riverpod_generator: ^2.4.0
+  retrofit_generator: ^8.2.0
+  json_serializable: ^6.8.0
+  json_annotation: ^4.9.0
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/lottie/

@@ -1,0 +1,41 @@
+id,drug_id,beverage_id,severity,description
+1,27,2,contraindicated,Metronidazole + Alcohol causes disulfiram-like reaction: severe nausea vomiting flushing headache chest pain
+2,23,1,severe,Warfarin + Alcohol increases bleeding risk and may cause INR fluctuations
+3,34,1,severe,Paracetamol + Alcohol increases liver toxicity risk especially in chronic users
+4,1,1,moderate,Metformin + Alcohol increases lactic acidosis risk
+5,77,1,severe,Diazepam + Alcohol causes dangerous CNS depression respiratory depression
+6,79,1,moderate,Fluoxetine + Alcohol increases sedation and impairs judgment
+7,80,1,severe,Amitriptyline + Alcohol severe CNS depression and anticholinergic effects
+8,37,1,severe,Tramadol + Alcohol increases risk of respiratory depression and overdose
+9,38,1,contraindicated,Morphine + Alcohol can cause fatal respiratory depression
+10,53,1,moderate,Prednisolone + Alcohol increases gastric irritation and bleeding risk
+11,71,1,moderate,Metoclopramide + Alcohol increases sedation
+12,35,1,moderate,Ibuprofen + Alcohol increases risk of gastric bleeding
+13,36,1,severe,Diclofenac + Alcohol significant GI bleeding risk
+14,24,13,moderate,Amoxicillin + Milk (calcium) may reduce antibiotic absorption
+15,26,13,severe,Ciprofloxacin + Milk significantly reduces antibiotic levels (30-40%)
+16,30,13,moderate,Doxycycline + Milk (calcium) reduces absorption
+17,55,13,moderate,Levothyroxine + Milk reduces thyroid hormone absorption by 20-30%
+18,46,13,moderate,Ferrous Sulfate + Milk (calcium) reduces iron absorption
+19,55,8,moderate,Levothyroxine + Coffee reduces thyroid hormone absorption
+20,55,3,moderate,Levothyroxine + Black Tea (tannins) reduces absorption
+21,46,3,moderate,Ferrous Sulfate + Black Tea (tannins) markedly reduces iron absorption
+22,46,7,moderate,Ferrous Sulfate + Coffee reduces iron absorption
+23,51,8,moderate,Salbutamol + Coffee (caffeine) increases tremor and palpitations
+24,16,8,mild,Atenolol + Coffee - caffeine may partially counter blood pressure lowering
+25,77,8,moderate,Diazepam + Coffee - caffeine counteracts sedative effect
+26,23,11,moderate,Warfarin + Green Tea (vitamin K) may reduce anticoagulant effect
+27,19,10,severe,Atorvastatin + Grapefruit Juice increases statin levels significantly (CYP3A4 inhibition)
+28,20,10,severe,Simvastatin + Grapefruit Juice markedly increases statin toxicity risk
+29,7,10,moderate,Amlodipine + Grapefruit Juice increases blood pressure lowering
+30,55,15,moderate,Levothyroxine + Soy Milk (isoflavones) reduces thyroid hormone absorption
+31,42,4,moderate,Calcium Carbonate + Fortified Juice - calcium overload if juice also contains calcium
+32,55,4,moderate,Levothyroxine + Calcium-Fortified Juice reduces absorption
+33,26,14,mild,Ciprofloxacin + Orange Juice (acidic) - acidity doesn't significantly affect absorption
+34,46,14,beneficial,Ferrous Sulfate + Orange Juice (vitamin C) ENHANCES iron absorption
+35,39,5,moderate,Omeprazole + Cola - PPIs work best but cola may reduce absorption of some nutrients
+36,34,9,mild,Paracetamol + Ginger Tea - ginger may enhance pain relief
+37,35,9,mild,Ibuprofen + Ginger Tea - additive anti-inflammatory effect
+38,75,12,mild,Loperamide + Lemon Grass Tea - herbal teas generally safe with anti-diarrheals
+39,76,6,beneficial,ORS + Coconut Water - both rehydrate but ORS preferred for severe dehydration
+40,15,6,moderate,Spironolactone + Coconut Water (high potassium 250mg/100ml) may increase hyperkalemia risk

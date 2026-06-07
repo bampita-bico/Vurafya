@@ -1,0 +1,81 @@
+id,generic_name,brand_name,category,description,requires_prescription,price,created_at
+1,Metformin,Glucophage,,Biguanides - Metformin Hydrochloride,TRUE,,2026-01-01 00:00:00
+2,Glibenclamide,Daonil,,Sulfonylureas - Glibenclamide,TRUE,,2026-01-01 00:00:00
+3,Gliclazide,Diamicron,,Sulfonylureas - Gliclazide,TRUE,,2026-01-01 00:00:00
+4,Insulin Regular,Actrapid,,Short-acting Insulin - Insulin Human,TRUE,,2026-01-01 00:00:00
+5,Insulin NPH,Insulatard,,Intermediate-acting Insulin - Insulin Human NPH,TRUE,,2026-01-01 00:00:00
+6,Insulin Glargine,Lantus,,Long-acting Insulin - Insulin Glargine,TRUE,,2026-01-01 00:00:00
+7,Amlodipine,Norvasc,,Calcium Channel Blockers - Amlodipine Besylate,TRUE,,2026-01-01 00:00:00
+8,Nifedipine,Adalat,,Calcium Channel Blockers - Nifedipine,TRUE,,2026-01-01 00:00:00
+9,Lisinopril,Zestril,,ACE Inhibitors - Lisinopril,TRUE,,2026-01-01 00:00:00
+10,Enalapril,Vasotec,,ACE Inhibitors - Enalapril Maleate,TRUE,,2026-01-01 00:00:00
+11,Losartan,Cozaar,,ARBs (Angiotensin II Receptor Blockers) - Losartan Potassium,TRUE,,2026-01-01 00:00:00
+12,Valsartan,Diovan,,ARBs - Valsartan,TRUE,,2026-01-01 00:00:00
+13,Hydrochlorothiazide,Microzide,,Thiazide Diuretics - Hydrochlorothiazide,TRUE,,2026-01-01 00:00:00
+14,Furosemide,Lasix,,Loop Diuretics - Furosemide,TRUE,,2026-01-01 00:00:00
+15,Spironolactone,Aldactone,,Potassium-Sparing Diuretics - Spironolactone,TRUE,,2026-01-01 00:00:00
+16,Atenolol,Tenormin,,Beta Blockers - Atenolol,TRUE,,2026-01-01 00:00:00
+17,Bisoprolol,Concor,,Beta Blockers - Bisoprolol Fumarate,TRUE,,2026-01-01 00:00:00
+18,Carvedilol,Coreg,,Alpha and Beta Blockers - Carvedilol,TRUE,,2026-01-01 00:00:00
+19,Atorvastatin,Lipitor,,Statins - Atorvastatin Calcium,TRUE,,2026-01-01 00:00:00
+20,Simvastatin,Zocor,,Statins - Simvastatin,TRUE,,2026-01-01 00:00:00
+21,Aspirin,Disprin,,Antiplatelet - Acetylsalicylic Acid,FALSE,,2026-01-01 00:00:00
+22,Clopidogrel,Plavix,,Antiplatelet - Clopidogrel Bisulfate,TRUE,,2026-01-01 00:00:00
+23,Warfarin,Coumadin,,Anticoagulants - Warfarin Sodium,TRUE,,2026-01-01 00:00:00
+24,Amoxicillin,Amoxil,,Penicillins - Amoxicillin Trihydrate,TRUE,,2026-01-01 00:00:00
+25,Amoxicillin-Clavulanate,Augmentin,,Penicillins + Beta-lactamase Inhibitors - Amoxicillin + Clavulanic Acid,TRUE,,2026-01-01 00:00:00
+26,Ciprofloxacin,Cipro,,Fluoroquinolones - Ciprofloxacin Hydrochloride,TRUE,,2026-01-01 00:00:00
+27,Metronidazole,Flagyl,,Nitroimidazoles - Metronidazole,TRUE,,2026-01-01 00:00:00
+28,Ceftriaxone,Rocephin,,Cephalosporins - Ceftriaxone Sodium,TRUE,,2026-01-01 00:00:00
+29,Azithromycin,Zithromax,,Macrolides - Azithromycin,TRUE,,2026-01-01 00:00:00
+30,Doxycycline,Vibramycin,,Tetracyclines - Doxycycline Hyclate,TRUE,,2026-01-01 00:00:00
+31,Artemether-Lumefantrine,Coartem,,Antimalarials - Artemether + Lumefantrine,FALSE,,2026-01-01 00:00:00
+32,Quinine,Quinine Sulfate,,Antimalarials - Quinine Sulfate,TRUE,,2026-01-01 00:00:00
+33,Artesunate,Artesun,,Antimalarials - Artesunate,TRUE,,2026-01-01 00:00:00
+34,Paracetamol,Panadol,,Analgesics (Non-opioid) - Paracetamol (Acetaminophen),FALSE,,2026-01-01 00:00:00
+35,Ibuprofen,Brufen,,NSAIDs - Ibuprofen,FALSE,,2026-01-01 00:00:00
+36,Diclofenac,Voltaren,,NSAIDs - Diclofenac Sodium,TRUE,,2026-01-01 00:00:00
+37,Tramadol,Ultram,,Opioid Analgesics - Tramadol Hydrochloride,TRUE,,2026-01-01 00:00:00
+38,Morphine,MS Contin,,Opioid Analgesics - Morphine Sulfate,TRUE,,2026-01-01 00:00:00
+39,Omeprazole,Prilosec,,Proton Pump Inhibitors - Omeprazole,FALSE,,2026-01-01 00:00:00
+40,Ranitidine,Zantac,,H2 Receptor Antagonists - Ranitidine Hydrochloride,FALSE,,2026-01-01 00:00:00
+41,Aluminum Hydroxide,Maalox,,Antacids - Aluminum Hydroxide + Magnesium Hydroxide,FALSE,,2026-01-01 00:00:00
+42,Calcium Carbonate,Tums,,Phosphate Binders - Calcium Carbonate,FALSE,,2026-01-01 00:00:00
+43,Sevelamer,Renagel,,Phosphate Binders - Sevelamer Carbonate,TRUE,,2026-01-01 00:00:00
+44,Erythropoietin,Eprex,,Erythropoiesis-Stimulating Agents - Epoetin Alfa,TRUE,,2026-01-01 00:00:00
+45,Calcitriol,Rocaltrol,,Active Vitamin D - Calcitriol,TRUE,,2026-01-01 00:00:00
+46,Ferrous Sulfate,Ferodan,,Iron Supplements - Ferrous Sulfate,FALSE,,2026-01-01 00:00:00
+47,Folic Acid,Folate,,Vitamins - Folic Acid,FALSE,,2026-01-01 00:00:00
+48,Vitamin B Complex,B-Complex,,Vitamins - Multivitamin B,FALSE,,2026-01-01 00:00:00
+49,Vitamin D3,Cholecalciferol,,Vitamins - Cholecalciferol,FALSE,,2026-01-01 00:00:00
+50,Multivitamin,Centrum,,Vitamins - Multivitamin + Minerals,FALSE,,2026-01-01 00:00:00
+51,Salbutamol,Ventolin,,Beta-2 Agonists - Salbutamol Sulfate,TRUE,,2026-01-01 00:00:00
+52,Beclomethasone,Becotide,,Inhaled Corticosteroids - Beclomethasone Dipropionate,TRUE,,2026-01-01 00:00:00
+53,Prednisolone,Deltacortril,,Corticosteroids - Prednisolone,TRUE,,2026-01-01 00:00:00
+54,Hydrocortisone,Cortef,,Corticosteroids - Hydrocortisone,TRUE,,2026-01-01 00:00:00
+55,Levothyroxine,Synthroid,,Thyroid Hormones - Levothyroxine Sodium,TRUE,,2026-01-01 00:00:00
+56,Carbimazole,Neo-Mercazole,,Antithyroid Agents - Carbimazole,TRUE,,2026-01-01 00:00:00
+57,Tenofovir-Lamivudine-Efavirenz,TLE,,Antiretrovirals (HAART) - Tenofovir + Lamivudine + Efavirenz,TRUE,,2026-01-01 00:00:00
+58,Tenofovir-Lamivudine-Dolutegravir,TLD,,Antiretrovirals (HAART) - Tenofovir + Lamivudine + Dolutegravir,TRUE,,2026-01-01 00:00:00
+59,Zidovudine-Lamivudine,Combivir,,Antiretrovirals (NRTIs) - Zidovudine + Lamivudine,TRUE,,2026-01-01 00:00:00
+60,Nevirapine,Viramune,,Antiretrovirals (NNRTIs) - Nevirapine,TRUE,,2026-01-01 00:00:00
+61,Cotrimoxazole,Septrin,,Sulfonamides + Antifolates - Sulfamethoxazole + Trimethoprim,TRUE,,2026-01-01 00:00:00
+62,Fluconazole,Diflucan,,Antifungals - Fluconazole,TRUE,,2026-01-01 00:00:00
+63,Nystatin,Mycostatin,,Antifungals - Nystatin,FALSE,,2026-01-01 00:00:00
+64,Mebendazole,Vermox,,Anthelmintics - Mebendazole,FALSE,,2026-01-01 00:00:00
+65,Albendazole,Zentel,,Anthelmintics - Albendazole,FALSE,,2026-01-01 00:00:00
+66,Praziquantel,Biltricide,,Anthelmintics - Praziquantel,TRUE,,2026-01-01 00:00:00
+67,Chloroquine,Aralen,,Antimalarials - Chloroquine Phosphate,FALSE,,2026-01-01 00:00:00
+68,Chlorpheniramine,Piriton,,Antihistamines (1st generation) - Chlorpheniramine Maleate,FALSE,,2026-01-01 00:00:00
+69,Cetirizine,Zyrtec,,Antihistamines (2nd generation) - Cetirizine Hydrochloride,FALSE,,2026-01-01 00:00:00
+70,Loratadine,Claritin,,Antihistamines (2nd generation) - Loratadine,FALSE,,2026-01-01 00:00:00
+71,Metoclopramide,Maxolon,,Antiemetics - Metoclopramide Hydrochloride,TRUE,,2026-01-01 00:00:00
+72,Domperidone,Motilium,,Antiemetics - Domperidone,FALSE,,2026-01-01 00:00:00
+73,Lactulose,Duphalac,,Laxatives (Osmotic) - Lactulose,FALSE,,2026-01-01 00:00:00
+74,Bisacodyl,Dulcolax,,Laxatives (Stimulant) - Bisacodyl,FALSE,,2026-01-01 00:00:00
+75,Loperamide,Imodium,,Antidiarrheals - Loperamide Hydrochloride,FALSE,,2026-01-01 00:00:00
+76,ORS (Oral Rehydration Salts),ORS,,Rehydration - Sodium Chloride + Potassium + Glucose,FALSE,,2026-01-01 00:00:00
+77,Diazepam,Valium,,Benzodiazepines - Diazepam,TRUE,,2026-01-01 00:00:00
+78,Haloperidol,Haldol,,Antipsychotics (Typical) - Haloperidol,TRUE,,2026-01-01 00:00:00
+79,Fluoxetine,Prozac,,SSRIs - Fluoxetine Hydrochloride,TRUE,,2026-01-01 00:00:00
+80,Amitriptyline,Elavil,,Tricyclic Antidepressants - Amitriptyline Hydrochloride,TRUE,,2026-01-01 00:00:00

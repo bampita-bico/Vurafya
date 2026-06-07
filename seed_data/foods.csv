@@ -1,0 +1,101 @@
+id,name,local_name,category,glycemic_index,is_local,is_verified,region_code
+1,Matoke (Cooking Banana),Matoke,Starchy Staples,70,TRUE,TRUE,UG.C
+2,Maize Meal (Posho),Posho,Starchy Staples,85,TRUE,TRUE,UG
+3,White Rice,Mchele,Starchy Staples,73,FALSE,TRUE,
+4,Brown Rice,Mchele wa Kienyeji,Starchy Staples,68,FALSE,TRUE,
+5,Cassava (Boiled),Muhogo,Starchy Staples,46,TRUE,TRUE,UG.E
+6,Sweet Potato (Orange),Viazi Vitamu,Starchy Staples,63,TRUE,TRUE,UG
+7,Irish Potato (Boiled),Viazi,Starchy Staples,78,TRUE,TRUE,UG
+8,Millet Porridge,Bulo,Cereals,71,TRUE,TRUE,UG.N
+9,Sorghum,Mtama,Cereals,70,TRUE,TRUE,UG.N
+10,Finger Millet (Wimbi),Bulo,Cereals,75,TRUE,TRUE,UG.N
+11,Red Beans (Boiled),Maharagwe,Legumes,24,TRUE,TRUE,UG
+12,Black Beans,Maharage Meusi,Legumes,30,TRUE,TRUE,
+13,Cowpeas (Black-eyed Peas),Kunde,Legumes,42,TRUE,TRUE,UG.E
+14,Green Gram (Mung Beans),Dengu,Legumes,25,TRUE,TRUE,
+15,Pigeon Peas,Mbaazi,Legumes,22,TRUE,TRUE,UG.E
+16,Groundnuts (Peanuts),Karanga,Nuts & Seeds,14,TRUE,TRUE,UG
+17,Sesame Seeds,Ufuta,Nuts & Seeds,35,TRUE,TRUE,
+18,Sunflower Seeds,Mbegu za Alizeti,Nuts & Seeds,35,TRUE,TRUE,
+19,Pumpkin Seeds,Mbegu za Malenge,Nuts & Seeds,25,FALSE,TRUE,
+20,Sukuma Wiki (Collard Greens),Sukuma Wiki,Leafy Vegetables,15,TRUE,TRUE,UG
+21,Amaranth Leaves (Dodo),Dodo,Leafy Vegetables,15,TRUE,TRUE,UG.E
+22,African Nightshade (Managu),Managu,Leafy Vegetables,15,TRUE,TRUE,KE.C
+23,Cassava Leaves,Kisamvu,Leafy Vegetables,15,TRUE,TRUE,UG.E
+24,Spider Plant (Saget),Sagaa,Leafy Vegetables,15,TRUE,TRUE,KE
+25,Pumpkin Leaves,Seveve,Leafy Vegetables,15,TRUE,TRUE,UG
+26,Jute Leaves (Murere),Murere,Leafy Vegetables,15,TRUE,TRUE,UG.W
+27,Sweet Potato Leaves,Matembele,Leafy Vegetables,15,TRUE,TRUE,UG
+28,Spinach,Mchicha,Leafy Vegetables,15,FALSE,TRUE,
+29,Cabbage,Kabichi,Vegetables,15,FALSE,TRUE,
+30,Tomatoes,Nyanya,Vegetables,38,TRUE,TRUE,UG
+31,Onions,Vitunguu,Vegetables,10,TRUE,TRUE,UG
+32,Carrots,Karoti,Vegetables,39,TRUE,TRUE,UG
+33,Eggplant (African),Biringanya,Vegetables,15,TRUE,TRUE,UG
+34,Okra,Bamia,Vegetables,20,TRUE,TRUE,UG.E
+35,Pumpkin,Malenge,Vegetables,75,TRUE,TRUE,UG
+36,Cucumber,Tango,Vegetables,15,TRUE,TRUE,
+37,Bell Pepper (Green),Pilipili Hoho,Vegetables,15,TRUE,TRUE,
+38,Garlic,Vitunguu Saumu,Vegetables,NULL,TRUE,TRUE,
+39,Ginger,Tangawizi,Spices & Herbs,NULL,TRUE,TRUE,
+40,Green Chili,Pilipili Mbichi,Spices & Herbs,NULL,TRUE,TRUE,
+41,Banana (Ripe),Ndizi,Fruits,51,TRUE,TRUE,UG
+42,Mango,Embe,Fruits,51,TRUE,TRUE,UG
+43,Papaya (Pawpaw),Papai,Fruits,60,TRUE,TRUE,UG
+44,Pineapple,Nanasi,Fruits,66,TRUE,TRUE,UG.C
+45,Watermelon,Tikiti Maji,Fruits,72,TRUE,TRUE,
+46,Avocado,Parachichi,Fruits,15,TRUE,TRUE,UG
+47,Passion Fruit,Maracuja,Fruits,30,TRUE,TRUE,UG
+48,Guava,Mapera,Fruits,33,TRUE,TRUE,UG
+49,Oranges,Machungwa,Fruits,43,TRUE,TRUE,UG
+50,Lemons,Ndimu,Fruits,20,TRUE,TRUE,
+51,Jack Fruit,Fenesi,Fruits,75,TRUE,TRUE,UG
+52,Tilapia Fish (Grilled),Sato,Animal Proteins,NULL,TRUE,TRUE,UG
+53,Nile Perch,Mbuta,Animal Proteins,NULL,TRUE,TRUE,UG
+54,Sardines,Dagaa,Animal Proteins,NULL,TRUE,TRUE,UG
+55,Chicken (Boiled),Kuku,Animal Proteins,NULL,TRUE,TRUE,
+56,Chicken (Grilled),Kuku wa Kuchoma,Animal Proteins,NULL,TRUE,TRUE,
+57,Beef (Boiled),Nyama ya Ng'ombe,Animal Proteins,NULL,TRUE,TRUE,
+58,Goat Meat (Stewed),Mbuzi,Animal Proteins,NULL,TRUE,TRUE,UG
+59,Eggs (Boiled),Mayai,Animal Proteins,NULL,TRUE,TRUE,
+60,Eggs (Fried),Mayai ya Kukaanga,Animal Proteins,NULL,TRUE,TRUE,
+61,Milk (Cow - Whole),Maziwa,Dairy,NULL,TRUE,TRUE,UG
+62,Milk (Cow - Skimmed),Maziwa Pasipo Mafuta,Dairy,NULL,TRUE,TRUE,
+63,Yogurt (Plain),Mtindi,Dairy,NULL,TRUE,TRUE,
+64,Fermented Milk (Mala),Mala,Dairy,NULL,TRUE,TRUE,UG.N
+65,Cooking Oil (Vegetable),Mafuta ya Kupikia,Oils & Fats,NULL,TRUE,TRUE,
+66,Palm Oil,Mafuta ya Mnazi,Oils & Fats,NULL,TRUE,TRUE,UG.W
+67,Coconut Oil,Mafuta ya Nazi,Oils & Fats,NULL,TRUE,TRUE,
+68,Margarine,Siagi,Oils & Fats,NULL,FALSE,TRUE,
+69,Butter,Siagi ya Maziwa,Oils & Fats,NULL,FALSE,TRUE,
+70,Coconut (Fresh),Nazi,Nuts & Seeds,45,TRUE,TRUE,UG.E
+71,Coconut Milk,Tui la Nazi,Oils & Fats,NULL,TRUE,TRUE,
+72,Sugar (White),Sukari,Sweeteners,65,FALSE,TRUE,
+73,Honey,Asali,Sweeteners,58,TRUE,TRUE,UG
+74,Salt,Chumvi,Condiments,NULL,FALSE,TRUE,
+75,Black Tea (Plain),Chai,Beverages,NULL,TRUE,TRUE,
+76,Lemon Grass Tea,Mchaichai,Beverages,NULL,TRUE,TRUE,UG
+77,Ginger Tea,Tangawizi,Beverages,NULL,TRUE,TRUE,
+78,Tamarind,Ukwaju,Fruits,NULL,TRUE,TRUE,UG.E
+79,Baobab Fruit,Mbuyu,Fruits,NULL,TRUE,TRUE,UG.N
+80,Moringa Leaves,Mlonge,Leafy Vegetables,NULL,TRUE,TRUE,UG
+81,Hibiscus Tea (Zobo),Zobo,Beverages,NULL,TRUE,TRUE,
+82,African Plum (Safou),Safou,Fruits,NULL,TRUE,TRUE,
+83,Bush Mango,Bush Mango,Fruits,NULL,TRUE,TRUE,
+84,African Yam,Yam,Starchy Staples,54,TRUE,TRUE,UG.E
+85,Cocoyam (Taro),Cocoyam,Starchy Staples,48,TRUE,TRUE,UG.W
+86,Bambara Groundnut,Njugu Mawe,Legumes,NULL,TRUE,TRUE,UG.E
+87,African Locust Bean,Dawadawa,Legumes,NULL,TRUE,TRUE,
+88,Tiger Nut,Tiger Nut,Nuts & Seeds,55,TRUE,TRUE,
+89,Shea Butter,Shea Butter,Oils & Fats,NULL,TRUE,TRUE,
+90,African Oil Bean,Ugba,Legumes,NULL,TRUE,TRUE,
+91,Roselle Leaves,Boo,Leafy Vegetables,NULL,TRUE,TRUE,UG.N
+92,Water Spinach,Water Spinach,Leafy Vegetables,NULL,TRUE,TRUE,
+93,African Eggplant (Garden Egg),Garden Egg,Vegetables,15,TRUE,TRUE,
+94,Bitter Leaf,Bitter Leaf,Leafy Vegetables,NULL,TRUE,TRUE,
+95,Fluted Pumpkin Leaves,Ugu,Leafy Vegetables,NULL,TRUE,TRUE,
+96,African Breadfruit,African Breadfruit,Fruits,NULL,TRUE,TRUE,
+97,Velvet Tamarind,Velvet Tamarind,Fruits,NULL,TRUE,TRUE,
+98,Soursop,Soursop,Fruits,32,TRUE,TRUE,
+99,African Star Apple,Agbalumo,Fruits,NULL,TRUE,TRUE,
+100,African Pear,African Pear,Fruits,NULL,TRUE,TRUE,

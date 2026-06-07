@@ -1,0 +1,51 @@
+id,name,symbol,units,recommended_daily_intake
+1,Protein,PRO,g,56
+2,Carbohydrates,CARB,g,130
+3,Dietary Fiber,FIB,g,38
+4,Total Fat,FAT,g,
+5,Saturated Fat,SFAT,g,
+6,Monounsaturated Fat,MUFA,g,
+7,Polyunsaturated Fat,PUFA,g,
+8,Omega-3 Fatty Acids,O3FA,g,1.6
+9,Omega-6 Fatty Acids,O6FA,g,17
+10,Energy,KCAL,kcal,2500
+11,Vitamin A,A,μg RAE,900
+12,Vitamin C,C,mg,90
+13,Vitamin D,D,μg,15
+14,Vitamin E,E,mg,15
+15,Vitamin K,K,μg,120
+16,Thiamin (B1),B1,mg,1.2
+17,Riboflavin (B2),B2,mg,1.3
+18,Niacin (B3),B3,mg,16
+19,Vitamin B6,B6,mg,1.3
+20,Folate (B9),B9,μg DFE,400
+21,Vitamin B12,B12,μg,2.4
+22,Pantothenic Acid (B5),B5,mg,5
+23,Biotin,BIO,μg,30
+24,Choline,CHOL,mg,550
+25,Calcium,CA,mg,1000
+26,Phosphorus,P,mg,700
+27,Magnesium,MG,mg,420
+28,Sodium,NA,mg,1500
+29,Potassium,K,mg,3400
+30,Iron,FE,mg,8
+31,Zinc,ZN,mg,11
+32,Copper,CU,μg,900
+33,Manganese,MN,mg,2.3
+34,Selenium,SE,μg,55
+35,Iodine,I,μg,150
+36,Chromium,CR,μg,35
+37,Molybdenum,MO,μg,45
+38,Fluoride,F,mg,4
+39,Chloride,CL,mg,2300
+40,Water,H2O,ml,3700
+41,Caffeine,CAFF,mg,
+42,Cholesterol,CHOL-EST,mg,
+43,Sugar,SUG,g,
+44,Added Sugar,ADD-SUG,g,
+45,Trans Fat,TFAT,g,
+46,Alcohol,ALC,g,
+47,Phytic Acid,PHYT,mg,
+48,Oxalates,OX,mg,
+49,Tannins,TAN,mg,
+50,Polyphenols,POLY,mg,

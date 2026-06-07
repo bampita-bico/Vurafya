@@ -1,0 +1,201 @@
+id,name,local_name,scientific_name,category_id,state,description,glycemic_index,gi_classification,yield_factor,preparation_method,verified,region
+103,Jollof Rice,Jollof,,1,cooked,West African one-pot rice dish with tomatoes and spices,70,high,0.95,Stewed rice with tomato base,TRUE,West Africa
+104,Egusi Soup,Egusi,,6,cooked,Nigerian melon seed soup with vegetables and meat,35,low,1.00,Thick soup made from ground melon seeds,TRUE,West Africa
+105,Fufu (Cassava),Fufu,,1,cooked,West African staple made from pounded cassava,85,high,0.90,Boiled and pounded cassava,TRUE,West Africa
+106,Fufu (Plantain),Fufu,,1,cooked,West African staple made from pounded plantain,75,high,0.88,Boiled and pounded plantain,TRUE,West Africa
+107,Fufu (Yam),Fufu,,1,cooked,West African staple made from pounded yam,80,high,0.90,Boiled and pounded yam,TRUE,West Africa
+108,Moin Moin,Moi Moi,,2,cooked,Nigerian steamed bean pudding,45,low,0.95,Steamed black-eyed pea pudding,TRUE,West Africa
+109,Suya,Suya,,3,cooked,West African spicy grilled meat skewers,0,low,0.80,Grilled beef with peanut spice mix,TRUE,West Africa
+110,Pepper Soup,Pepper Soup,,6,cooked,Spicy West African broth with meat or fish,30,low,1.00,Spicy broth with pepper and spices,TRUE,West Africa
+111,Garri,Gari,,1,processed,Fermented cassava granules,75,high,1.00,Dried fermented cassava,TRUE,West Africa
+112,Pounded Yam,Iyan,,1,cooked,Smooth starchy staple from pounded yam,80,high,0.90,Boiled and pounded yam,TRUE,West Africa
+113,Akara,Akara,,2,cooked,Deep-fried bean cakes,55,medium,0.85,Deep-fried black-eyed pea fritters,TRUE,West Africa
+114,Efo Riro,Efo Riro,,4,cooked,Nigerian spinach stew,35,low,0.95,Spinach stew with palm oil and meat,TRUE,West Africa
+115,Ewedu Soup,Ewedu,,6,cooked,Yoruba jute leaf soup,30,low,1.00,Blended jute leaves in broth,TRUE,West Africa
+116,Waakye,Waakye,,1,cooked,Ghanaian rice and beans cooked with millet leaves,55,medium,0.95,Rice and beans with sorghum leaves,TRUE,West Africa
+117,Banku,Banku,,1,cooked,Fermented corn and cassava dough,70,high,0.92,Fermented maize and cassava ball,TRUE,West Africa
+118,Kenkey,Kenkey,,1,cooked,Fermented corn dough wrapped in plantain leaves,68,medium,0.90,Fermented maize wrapped and steamed,TRUE,West Africa
+119,Red Red,Red Red,,2,cooked,Ghanaian black-eyed pea stew with plantains,50,low,1.00,Black-eyed peas in palm oil with plantains,TRUE,West Africa
+120,Groundnut Soup,Groundnut Soup,,6,cooked,West African peanut-based soup,45,low,1.00,Peanut butter soup with meat or fish,TRUE,West Africa
+121,Plantain Chips,Kelewele (when spiced),,1,cooked,Fried or baked plantain slices,65,medium,0.85,Sliced and fried ripe plantains,TRUE,West Africa
+122,Chin Chin,Chin Chin,,1,processed,West African fried dough snack,70,high,0.90,Deep-fried dough strips,TRUE,West Africa
+123,Puff Puff,Puff Puff,,1,cooked,Nigerian deep-fried dough balls,75,high,0.85,Sweet fried dough balls,TRUE,West Africa
+124,Masa,Masa,,1,cooked,Nigerian rice cake,65,medium,0.92,Fermented rice flour pancakes,TRUE,West Africa
+125,Kuli Kuli,Kuli Kuli,,2,processed,Nigerian groundnut snack,55,medium,0.95,Spiced peanut cakes,TRUE,West Africa
+126,Kosai,Kosai,,2,cooked,Nigerian bean fritter,55,medium,0.85,Deep-fried bean cakes (Hausa style),TRUE,West Africa
+127,Tuwo Shinkafa,Tuwo,,1,cooked,Northern Nigerian rice pudding,75,high,0.95,Soft rice mash,TRUE,West Africa
+128,Miyan Kuka,Miyan Kuka,,6,cooked,Northern Nigerian baobab leaf soup,30,low,1.00,Powdered baobab leaves in broth,TRUE,West Africa
+129,Dan Wake,Dan Wake,,2,cooked,Nigerian steamed bean cake,50,low,0.92,Steamed cowpea with potash,TRUE,West Africa
+130,Ewa Agoyin,Ewa Agoyin,,2,cooked,Nigerian mashed beans with pepper sauce,48,low,0.95,Mashed honey beans with spicy sauce,TRUE,West Africa
+131,Ofada Rice,Ofada,,1,cooked,Nigerian unpolished brown rice,60,medium,0.95,Local brown rice with unique aroma,TRUE,West Africa
+132,Ayamase,Ofada Stew,,6,cooked,Nigerian green pepper stew,35,low,1.00,Green pepper and locust bean stew,TRUE,West Africa
+133,Edikang Ikong,Edikang Ikong,,4,cooked,Nigerian vegetable soup,32,low,0.95,Fluted pumpkin and waterleaf soup,TRUE,West Africa
+134,Afang Soup,Afang,,4,cooked,Nigerian wild vegetable soup,30,low,0.98,Wild spinach soup with waterleaf,TRUE,West Africa
+135,Bitterleaf Soup,Ofe Onugbu,,4,cooked,Igbo bitter leaf soup,28,low,1.00,Soup made from bitter leaves,TRUE,West Africa
+136,Ogbono Soup,Ogbono,,6,cooked,Nigerian wild mango seed soup,38,low,1.05,Thick soup from ground ogbono seeds,TRUE,West Africa
+137,Nkwobi,Nkwobi,,3,cooked,Igbo spicy cow foot dish,25,low,0.85,Spicy palm oil cow foot,TRUE,West Africa
+138,Abacha,African Salad,,1,raw,Igbo cassava salad,55,medium,1.00,Shredded dried cassava with sauce,TRUE,West Africa
+139,Ukwa,Breadfruit,,2,cooked,Nigerian boiled breadfruit seeds,60,medium,0.90,Boiled African breadfruit,TRUE,West Africa
+140,Boli,Boli,,1,cooked,Nigerian roasted plantain,70,high,0.88,Roasted ripe plantains,TRUE,West Africa
+141,Fried Plantain,Dodo,,1,cooked,Fried ripe plantain slices,68,medium,0.85,Pan-fried ripe plantains,TRUE,West Africa
+142,Gizdodo,Gizdodo,,3,cooked,Nigerian gizzard and plantain,58,medium,0.90,Stir-fried gizzard with plantains,TRUE,West Africa
+143,Asaro,Yam Porridge,,1,cooked,Nigerian yam pottage,65,medium,0.95,Mashed yam with palm oil,TRUE,West Africa
+144,Ekuru,Ekuru,,2,cooked,Nigerian steamed white bean pudding,42,low,0.95,Steamed peeled beans,TRUE,West Africa
+145,Gbegiri,Gbegiri,,2,cooked,Yoruba bean soup,40,low,1.00,Smooth bean soup,TRUE,West Africa
+146,Obe Ata,Ata Dindin,,6,cooked,Yoruba fresh pepper stew,32,low,1.00,Fresh pepper and tomato stew,TRUE,West Africa
+147,Fried Rice (Nigerian),Fried Rice,,1,cooked,Nigerian-style vegetable fried rice,72,high,0.90,Rice stir-fried with vegetables,TRUE,West Africa
+148,Coconut Rice,Coconut Rice,,1,cooked,Rice cooked in coconut milk,68,medium,0.95,Rice with coconut milk and spices,TRUE,West Africa
+149,Ofada Sauce,Ofada Sauce,,6,cooked,Spicy Nigerian pepper mix,30,low,1.00,Locust bean and pepper sauce,TRUE,West Africa
+150,Palm Nut Soup,Banga,,6,cooked,Nigerian palm fruit soup,40,low,1.00,Palm fruit extract soup,TRUE,West Africa
+151,Banga Rice,Banga Rice,,1,cooked,Rice cooked in palm nut extract,65,medium,0.95,Rice with palm fruit extract,TRUE,West Africa
+152,Efo Elegusi,Efo Elegusi,,4,cooked,Spinach and melon seed soup,35,low,0.98,Spinach with ground egusi,TRUE,West Africa
+153,White Soup,Ofe Nsala,,6,cooked,Nigerian white yam soup,38,low,1.00,Yam-thickened soup without palm oil,TRUE,West Africa
+154,Ukodo,Yam and Plantain Pepper Soup,,1,cooked,Delta-style yam pepper soup,60,medium,0.95,Spicy yam and plantain soup,TRUE,West Africa
+155,Native Jollof,Native Jollof,,1,cooked,Palm oil jollof rice,72,high,0.95,Jollof rice with palm oil,TRUE,West Africa
+156,Fisherman Soup,Point and Kill,,6,cooked,Fresh fish pepper soup,25,low,1.00,Fresh fish in spicy broth,TRUE,West Africa
+157,Catfish Pepper Soup,Catfish Peppersoup,,6,cooked,Spicy catfish soup,28,low,1.00,Fresh catfish in pepper broth,TRUE,West Africa
+158,Goat Meat Pepper Soup,Goat Meat Peppersoup,,6,cooked,Spicy goat meat soup,30,low,1.00,Goat meat in pepper broth,TRUE,West Africa
+159,Nkwobi,Isi Ewu,,3,cooked,Spicy goat head delicacy,32,low,0.80,Goat head in palm oil sauce,TRUE,West Africa
+160,Abacha and Ugba,African Salad,,2,raw,Cassava and oil bean salad,52,low,1.00,Shredded cassava with fermented oil bean,TRUE,West Africa
+161,Okpa,Okpa,,2,cooked,Bambara groundnut pudding,48,low,0.95,Steamed Bambara nut pudding,TRUE,West Africa
+162,Yam Porridge,Asaro,,1,cooked,Yam cooked in rich sauce,62,medium,0.95,Yam in palm oil sauce,TRUE,West Africa
+163,Plantain Porridge,Plantain Pottage,,1,cooked,Unripe plantain in sauce,58,medium,0.92,Plantain cooked with vegetables,TRUE,West Africa
+164,Beans Porridge,Ewa Oloyin,,2,cooked,Nigerian honey bean pottage,45,low,0.98,Beans cooked with palm oil,TRUE,West Africa
+165,Yam and Egg,Yam and Egg Sauce,,1,cooked,Boiled yam with egg sauce,68,medium,0.90,Yam with scrambled egg sauce,TRUE,West Africa
+166,Boiled Plantain and Egg,Boiled Plantain,,1,cooked,Boiled unripe plantain with egg,60,medium,0.90,Plantain with egg sauce,TRUE,West Africa
+167,Fried Yam,Dundun,,1,cooked,Deep-fried yam slices,75,high,0.85,Sliced and fried yam,TRUE,West Africa
+168,Yam Chips,Yam Chips,,1,cooked,Crispy fried yam slices,78,high,0.85,Thinly sliced fried yam,TRUE,West Africa
+169,Roasted Yam,Roasted Yam,,1,cooked,Roasted yam with palm oil,70,high,0.88,Fire-roasted yam,TRUE,West Africa
+170,Yam Balls,Ojojo,,1,cooked,Grated yam fritters,72,high,0.85,Deep-fried yam balls,TRUE,West Africa
+171,Plantain Mosa,Plantain Mosa,,1,cooked,Plantain fritters,68,medium,0.85,Battered and fried plantain,TRUE,West Africa
+172,Groundnut Cake,Kulikuli,,2,processed,Roasted peanut cake,58,medium,0.95,Ground roasted peanuts formed into cakes,TRUE,West Africa
+173,Kwanga,Kwanga,,1,cooked,Central African fermented cassava bread,72,high,0.92,Fermented cassava loaf,TRUE,Central Africa
+174,Moambe Chicken,Poulet Moambe,,3,cooked,Congolese chicken in palm butter,35,low,0.90,Chicken in palm nut sauce,TRUE,Central Africa
+175,Ndolé,Ndolé,,4,cooked,Cameroonian bitter leaf stew,32,low,0.95,Bitter leaves with peanuts and meat,TRUE,Central Africa
+176,Saka Saka,Pondu,,4,cooked,Congolese cassava leaf stew,30,low,0.98,Mashed cassava leaves with peanut butter,TRUE,Central Africa
+177,Liboke,Liboke,,3,cooked,Central African fish/chicken wrapped in leaves,28,low,0.92,Fish or chicken steamed in banana leaves,TRUE,Central Africa
+178,Chikwanga,Chikwanga,,1,cooked,Central African fermented cassava,75,high,0.90,Fermented cassava wrapped in leaves,TRUE,Central Africa
+179,Pondu,Saka Saka,,4,cooked,Cassava leaves in peanut sauce,30,low,0.98,Cassava leaf stew,TRUE,Central Africa
+180,Fufu de Maïs,Corn Fufu,,1,cooked,Central African corn fufu,78,high,0.92,Pounded corn dough,TRUE,Central Africa
+181,Makayabu,Makayabu,,3,processed,Congolese dried salted fish,0,low,0.85,Salted dried fish,TRUE,Central Africa
+182,Chikwangue,Kwanga,,1,cooked,Fermented cassava stick,72,high,0.92,Cassava fermented and wrapped,TRUE,Central Africa
+183,Eru Soup,Eru,,4,cooked,Cameroonian vegetable soup,28,low,1.00,Wild vegetable soup,TRUE,Central Africa
+184,Koki,Koki Beans,,2,cooked,Cameroonian steamed bean pudding,45,low,0.95,Steamed black-eyed peas,TRUE,Central Africa
+185,Achu Soup,Yellow Soup,,6,cooked,Cameroonian yellow soup,35,low,1.00,Spicy palm oil soup,TRUE,Central Africa
+186,Pounded Cocoyam,Coco Fufu,,1,cooked,Pounded cocoyam,68,medium,0.90,Boiled and pounded taro,TRUE,Central Africa
+187,Safou,African Pear,,5,raw,Central African butter fruit,25,low,1.00,Native pear/plum,TRUE,Central Africa
+188,Miondo,Miondo,,1,cooked,Cameroonian fermented cassava,70,high,0.92,Fermented cassava sticks,TRUE,Central Africa
+189,Egusi Pudding,Egusi Pudding,,2,cooked,Central African melon seed pudding,40,low,0.95,Steamed ground egusi,TRUE,Central Africa
+190,Plantain Fufu,Foufou Banane,,1,cooked,Central African plantain fufu,75,high,0.88,Pounded boiled plantains,TRUE,Central Africa
+191,Ngon'do,Ngon'do,,1,cooked,Cameroonian water fufu,68,medium,0.95,Cassava flour fufu,TRUE,Central Africa
+192,Sauce Graine,Palm Nut Sauce,,6,cooked,Palm fruit sauce,38,low,1.00,Palm kernel sauce with meat,TRUE,Central Africa
+193,Poulet DG,Poulet Directeur Général,,3,cooked,Cameroonian fried chicken with vegetables,42,low,0.88,Fried chicken with plantains and vegetables,TRUE,Central Africa
+194,Kanda,Kanda Ti Nyama,,3,cooked,Cameroonian grilled meat,25,low,0.80,Spiced grilled beef,TRUE,Central Africa
+195,Mbongo Tchobi,Black Soup,,6,cooked,Cameroonian black spice stew,30,low,1.00,Fish or meat in burnt spice sauce,TRUE,Central Africa
+196,Sangah,Sangah,,1,cooked,Cameroonian corn meal,65,medium,0.95,Corn meal with vegetables,TRUE,Central Africa
+197,Kondre,Kondre,,2,cooked,Cameroonian plantain and bean dish,55,medium,0.92,Plantain with beans,TRUE,Central Africa
+198,Okok,Okok,,4,cooked,Cameroonian wild vegetable,28,low,1.00,Gnetum africanum leaves,TRUE,Central Africa
+199,Fufu Water,Water Fufu,,1,cooked,Soaked cassava fufu,70,high,0.95,Cold soaked cassava flour,TRUE,Central Africa
+200,Bobolo,Bobolo,,1,cooked,Fermented cassava bread,72,high,0.92,Long fermented cassava loaf,TRUE,Central Africa
+201,Corn Chaff,Corn Chaff,,1,cooked,Ground fermented corn porridge,58,medium,0.95,Fermented corn meal,TRUE,Central Africa
+202,Baton de Manioc,Cassava Stick,,1,cooked,Cassava stick,75,high,0.90,Fermented cassava loaf,TRUE,Central Africa
+203,Gari Foto,Gari Photo,,1,cooked,Fried gari with vegetables and eggs,68,medium,0.92,Cassava granules stir-fried,TRUE,Central Africa
+204,Smoked Fish Stew,Smoked Fish,,6,cooked,Fish in tomato sauce,30,low,0.95,Smoked fish in stew,TRUE,Central Africa
+205,Pili Pili,Pili Pili,,6,raw,Central African hot pepper sauce,15,low,1.00,Hot chili pepper condiment,TRUE,Central Africa
+206,Brochettes,Brochettes,,3,cooked,Central African meat skewers,28,low,0.85,Grilled meat on skewers,TRUE,Central Africa
+207,Mikate,Mikate,,1,cooked,Congolese fried dough,72,high,0.85,Fried dough balls,TRUE,Central Africa
+208,Fumbwa,Fumbwa,,4,cooked,Congolese wild spinach,25,low,0.98,Wild greens stew,TRUE,Central Africa
+209,Liboké de Poisson,Fish Liboké,,3,cooked,Fish in banana leaves,30,low,0.92,Steamed fish with vegetables,TRUE,Central Africa
+210,Makemba,Fried Plantain,,1,cooked,Congolese fried plantain,68,medium,0.85,Fried ripe plantain,TRUE,Central Africa
+211,Lituma,Lituma,,1,cooked,Congolese yam fufu,78,high,0.90,Pounded yam,TRUE,Central Africa
+212,Pap,Mealie Pap,,1,cooked,Southern African maize porridge,70,high,0.95,Stiff maize meal porridge,TRUE,Southern Africa
+213,Chakalaka,Chakalaka,,4,cooked,South African spicy vegetable relish,35,low,1.00,Spicy mixed vegetable relish,TRUE,Southern Africa
+214,Biltong,Biltong,,3,processed,South African dried cured meat,0,low,0.75,Air-dried spiced meat,TRUE,Southern Africa
+215,Morogo,Morogo,,4,cooked,Southern African wild spinach,28,low,0.95,Wild greens/African spinach,TRUE,Southern Africa
+216,Sadza,Sadza,,1,cooked,Zimbabwean maize meal,72,high,0.95,Thick maize porridge,TRUE,Southern Africa
+217,Potjiekos,Potjie,,6,cooked,South African stew in cast iron pot,42,low,0.95,Slow-cooked meat and vegetable stew,TRUE,Southern Africa
+218,Bobotie,Bobotie,,3,cooked,South African curried meat bake,45,low,0.92,Spiced minced meat with egg topping,TRUE,Southern Africa
+219,Bunny Chow,Bunny Chow,,1,cooked,South African curry in bread loaf,65,medium,0.95,Hollowed bread filled with curry,TRUE,Southern Africa
+220,Sosaties,Sosaties,,3,cooked,South African meat skewers,30,low,0.85,Marinated grilled meat kebabs,TRUE,Southern Africa
+221,Melktert,Milk Tart,,8,cooked,South African milk tart,65,medium,0.95,Custard tart with cinnamon,TRUE,Southern Africa
+222,Koeksister,Koeksister,,8,cooked,South African fried dough in syrup,75,high,0.85,Twisted fried dough soaked in syrup,TRUE,Southern Africa
+223,Vetkoek,Vetkoek,,1,cooked,South African fried bread,72,high,0.85,Deep-fried bread dough,TRUE,Southern Africa
+224,Boerewors,Boerewors,,3,cooked,South African farmer's sausage,25,low,0.88,Traditional spiced sausage,TRUE,Southern Africa
+225,Umngqusho,Umngqusho,,2,cooked,Xhosa samp and beans,52,low,0.95,Stamped corn with beans,TRUE,Southern Africa
+226,Amadumbe,Amadumbe,,1,cooked,Zulu taro,65,medium,0.90,Boiled taro root,TRUE,Southern Africa
+227,Ujeqe,Ujeqe,,1,cooked,Zulu steamed bread,68,medium,0.92,Steamed bread,TRUE,Southern Africa
+228,Umfino,Umfino,,4,cooked,Zulu wild greens,28,low,0.95,Mixed wild vegetables,TRUE,Southern Africa
+229,Ting,Ting,,1,cooked,Fermented maize porridge,65,medium,0.95,Sour porridge,TRUE,Southern Africa
+230,Mogodu,Mogodu,,3,cooked,Southern African tripe,22,low,0.85,Slow-cooked tripe,TRUE,Southern Africa
+231,Walkie Talkies,Chicken Feet and Heads,,3,cooked,Township chicken pieces,20,low,0.75,Grilled chicken feet and heads,TRUE,Southern Africa
+232,Amagwinya,Vetkoek,,1,cooked,Xhosa fried bread,72,high,0.85,Fried dough balls,TRUE,Southern Africa
+233,Umphokogo,Umphokogo,,1,cooked,Mealie meal dish,70,high,0.95,Maize meal with amadumbe,TRUE,Southern Africa
+234,Isitambu,Isitambu,,1,cooked,Stamped corn,68,medium,0.95,Crushed dried corn,TRUE,Southern Africa
+235,Umvubo,Umvubo,,1,raw,Zulu soured milk and meal,60,medium,1.00,Sour milk mixed with maize meal,TRUE,Southern Africa
+236,Uphuthu,Uphuthu,,1,cooked,Crumbly maize meal,68,medium,0.95,Dry crumbly pap,TRUE,Southern Africa
+237,Umqombothi,African Beer,,9,fermented,Traditional Xhosa beer,45,low,1.00,Fermented sorghum beer,TRUE,Southern Africa
+238,Amasi,Amasi,,7,fermented,Soured milk,42,low,1.00,Fermented milk,TRUE,Southern Africa
+239,Samp,Samp,,1,cooked,Dried corn kernels,62,medium,0.95,Boiled stamped maize,TRUE,Southern Africa
+240,Mealie Bread,Mealie Bread,,1,cooked,Corn bread,65,medium,0.92,Sweet corn bread,TRUE,Southern Africa
+241,Boerewors Roll,Boerewors Roll,,1,cooked,Sausage in roll,68,medium,0.90,Sausage in bread roll,TRUE,Southern Africa
+242,Gatsby,Gatsby,,1,cooked,Cape Town sandwich,70,high,0.92,Large submarine sandwich,TRUE,Southern Africa
+243,Peri-Peri Chicken,Peri-Peri Chicken,,3,cooked,Mozambican spicy chicken,28,low,0.88,Grilled chicken in chili sauce,TRUE,Southern Africa
+244,Matapa,Matapa,,4,cooked,Mozambican cassava leaf dish,32,low,0.95,Cassava leaves with peanuts,TRUE,Southern Africa
+245,Xima,Xima,,1,cooked,Mozambican maize porridge,70,high,0.95,Stiff maize meal,TRUE,Southern Africa
+246,Piri Piri Sauce,Piri Piri,,6,raw,Mozambican hot sauce,20,low,1.00,African bird's eye chili sauce,TRUE,Southern Africa
+247,Chambo,Chambo,,3,cooked,Lake Malawi fish,25,low,0.85,Grilled tilapia,TRUE,Southern Africa
+248,Nshima,Nshima,,1,cooked,Zambian maize porridge,72,high,0.95,Stiff maize meal,TRUE,Southern Africa
+249,Kapenta,Kapenta,,3,processed,Dried lake sardines,0,low,0.80,Dried small fish,TRUE,Southern Africa
+250,Chibwabwa,Chibwabwa,,4,cooked,Pumpkin leaves,25,low,0.95,Cooked pumpkin greens,TRUE,Southern Africa
+251,Ifisashi,Ifisashi,,2,cooked,Peanut and greens,38,low,0.95,Vegetables in peanut sauce,TRUE,Southern Africa
+252,Vinkubala,Vinkubala,,3,processed,Mopane worms,0,low,0.85,Dried caterpillars,TRUE,Southern Africa
+253,Ndiwo,Ndiwo,,6,cooked,Zambian relish/stew,35,low,1.00,Meat or vegetable relish,TRUE,Southern Africa
+254,Chikanda,African Polony,,2,cooked,Zambian orchid tuber cake,48,low,0.92,Ground orchid tuber loaf,TRUE,Southern Africa
+255,Munkoyo,Munkoyo,,9,fermented,Zambian fermented drink,42,low,1.00,Fermented maize drink,TRUE,Southern Africa
+256,Chibuku,Chibuku,,9,fermented,Commercially brewed African beer,48,low,1.00,Sorghum beer,TRUE,Southern Africa
+257,Maheu,Maheu,,9,fermented,Fermented maize drink,52,low,1.00,Sweet fermented drink,TRUE,Southern Africa
+258,Boeber,Boeber,,8,cooked,Cape Malay dessert,68,medium,0.98,Vermicelli pudding,TRUE,Southern Africa
+259,Malva Pudding,Malva Pudding,,8,cooked,Sweet spongy pudding,72,high,0.95,Apricot jam sponge pudding,TRUE,Southern Africa
+260,Koeksusters,Koeksusters,,8,cooked,Syrup-soaked dough,75,high,0.85,Plaited fried dough in syrup,TRUE,Southern Africa
+261,Braaibroodjie,Braai Sandwich,,1,cooked,Grilled sandwich,65,medium,0.90,Toasted cheese sandwich from braai,TRUE,Southern Africa
+262,Couscous,Couscous,,1,cooked,North African steamed semolina,65,medium,0.95,Steamed semolina granules,TRUE,North Africa
+263,Tajine,Tagine,,6,cooked,North African slow-cooked stew,40,low,0.95,Slow-cooked stew in clay pot,TRUE,North Africa
+264,Ful Medames,Ful,,2,cooked,Egyptian fava bean stew,35,low,0.98,Slow-cooked fava beans,TRUE,North Africa
+265,Harissa,Harissa,,6,raw,North African hot chili paste,25,low,1.00,Spicy chili pepper paste,TRUE,North Africa
+266,Preserved Lemons,Preserved Lemons,,5,preserved,Moroccan pickled lemons,20,low,1.00,Salt-cured lemons,TRUE,North Africa
+267,Shakshuka,Shakshuka,,11,cooked,North African eggs in tomato sauce,42,low,0.95,Poached eggs in spiced tomato,TRUE,North Africa
+268,Merguez,Merguez,,3,cooked,North African lamb sausage,28,low,0.85,Spicy lamb or beef sausage,TRUE,North Africa
+269,Koshari,Koshari,,1,cooked,Egyptian rice and lentils,58,medium,0.95,Rice lentils pasta with tomato sauce,TRUE,North Africa
+270,Brik,Brik,,1,cooked,Tunisian pastry,68,medium,0.88,Thin pastry filled with egg and tuna,TRUE,North Africa
+271,Bastilla,Pastilla,,3,cooked,Moroccan pigeon pie,62,medium,0.90,Sweet and savory meat pie,TRUE,North Africa
+272,Makouda,Makouda,,1,cooked,North African potato fritters,70,high,0.85,Deep-fried potato cakes,TRUE,North Africa
+273,Chermoula,Chermoula,,6,raw,Moroccan herb marinade,20,low,1.00,Cilantro and spice paste,TRUE,North Africa
+274,Msemen,Msemen,,1,cooked,Moroccan flatbread,68,medium,0.90,Layered square flatbread,TRUE,North Africa
+275,Harira,Harira,,6,cooked,Moroccan soup,45,low,1.00,Tomato lentil and chickpea soup,TRUE,North Africa
+276,Pastilla au Poulet,Chicken Pastilla,,3,cooked,Moroccan chicken pie,60,medium,0.90,Spiced chicken in phyllo,TRUE,North Africa
+277,Mechouia Salad,Mechouia,,4,cooked,Tunisian grilled vegetable salad,30,low,0.95,Grilled pepper and tomato salad,TRUE,North Africa
+278,Lablabi,Lablabi,,2,cooked,Tunisian chickpea soup,48,low,1.00,Spiced chickpea stew,TRUE,North Africa
+279,Merguez Sandwich,Merguez Sandwich,,1,cooked,Sausage in bread,65,medium,0.88,Merguez in baguette,TRUE,North Africa
+280,Bissara,Bissara,,2,cooked,Moroccan fava bean soup,38,low,1.00,Dried fava bean soup,TRUE,North Africa
+281,Zaalouk,Zaalouk,,4,cooked,Moroccan eggplant dip,32,low,0.95,Cooked eggplant and tomato salad,TRUE,North Africa
+282,Taktouka,Taktouka,,4,cooked,Moroccan pepper and tomato salad,30,low,0.95,Cooked pepper salad,TRUE,North Africa
+283,Kefta Tagine,Kefta,,3,cooked,Moroccan meatball stew,38,low,0.92,Meatballs in tomato sauce with eggs,TRUE,North Africa
+284,Chicken Tagine,Chicken Tagine,,3,cooked,Moroccan chicken stew,42,low,0.92,Slow-cooked chicken with vegetables,TRUE,North Africa
+285,Lamb Tagine,Lamb Tagine,,3,cooked,Moroccan lamb stew,40,low,0.90,Slow-cooked lamb with prunes,TRUE,North Africa
+286,Moroccan Carrot Salad,Carrot Salad,,4,cooked,Spiced carrot salad,38,low,0.95,Cooked carrots with cumin,TRUE,North Africa
+287,Khobz,Moroccan Bread,,1,cooked,Moroccan round bread,65,medium,0.90,Round flatbread,TRUE,North Africa
+288,Maakouda,Maakouda,,1,cooked,Potato cakes,70,high,0.85,Fried mashed potato balls,TRUE,North Africa
+289,Briouat,Briouat,,1,cooked,Moroccan filled pastry,68,medium,0.88,Triangular filled pastries,TRUE,North Africa
+290,Chebakia,Chebakia,,8,cooked,Moroccan sesame cookie,75,high,0.85,Fried dough in honey,TRUE,North Africa
+291,Sellou,Sfouf,,8,raw,Moroccan nutty sweet,65,medium,1.00,Toasted flour and nut mixture,TRUE,North Africa
+292,Baghrir,Baghrir,,1,cooked,Moroccan semolina pancakes,68,medium,0.92,Spongy pancakes with holes,TRUE,North Africa
+293,Ksra,Ksra,,1,cooked,Moroccan whole wheat bread,62,medium,0.90,Round whole wheat flatbread,TRUE,North Africa
+294,Tafarnout,Tafarnout,,1,cooked,Berber bread,65,medium,0.90,Flatbread cooked in tagine,TRUE,North Africa
+295,Tangia,Tangia,,3,cooked,Marrakech slow-cooked meat,38,low,0.88,Meat slow-cooked in urn,TRUE,North Africa
+296,Rfissa,Rfissa,,1,cooked,Moroccan chicken and lentils,60,medium,0.92,Shredded msemen with chicken,TRUE,North Africa
+297,Tanjia,Tanjia,,3,cooked,Slow-cooked meat dish,40,low,0.90,Preserved meat stew,TRUE,North Africa
+298,Seffa,Seffa,,1,cooked,Sweet couscous,70,high,0.95,Sweetened couscous with cinnamon,TRUE,North Africa
+299,Khlea,Khlea,,3,preserved,Moroccan preserved meat,25,low,0.80,Dried spiced meat,TRUE,North Africa
+300,Amlou,Amlou,,2,raw,Moroccan nut butter spread,55,medium,1.00,Almond argan oil and honey spread,TRUE,North Africa
+301,Beghrir,Beghrir,,1,cooked,Thousand hole pancakes,68,medium,0.92,Yeast-risen semolina pancakes,TRUE,North Africa
+302,Batbout,Batbout,,1,cooked,Moroccan pita bread,65,medium,0.90,Pan-cooked flatbread,TRUE,North Africa

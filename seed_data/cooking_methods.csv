@@ -1,0 +1,11 @@
+id,method_name,method_category,description,vitamin_retention_avg,mineral_retention_avg,protein_impact,fat_impact,carb_impact,water_content_change,weight_yield_factor,health_rating
+1,Boiling,moist_heat,Cooking in water at 100°C,0.50,0.85,1.0,1.0,1.0,0.0,0.90,4
+2,Steaming,moist_heat,Cooking with steam,0.85,0.95,1.0,1.0,1.0,0.05,0.95,5
+3,Frying (Deep),dry_heat,Submerging in hot oil,0.60,0.90,1.0,2.5,1.0,-0.20,0.80,1
+4,Frying (Shallow),dry_heat,Cooking in small amount of oil,0.70,0.92,1.0,1.5,1.0,-0.10,0.85,2
+5,Grilling,dry_heat,Cooking over direct heat,0.75,0.90,0.95,0.90,1.0,-0.15,0.85,3
+6,Roasting,dry_heat,Baking in oven with dry heat,0.80,0.92,1.0,1.0,1.0,-0.10,0.90,4
+7,Microwaving,combination,Heating with microwave radiation,0.90,0.98,1.0,1.0,1.0,-0.05,0.98,5
+8,Pressure Cooking,moist_heat,Cooking under high pressure,0.80,0.95,1.0,1.0,1.0,0.0,0.92,4
+9,Stewing,moist_heat,Slow cooking in liquid,0.65,0.90,1.0,1.0,1.0,0.10,0.95,4
+10,Raw,no_cooking,Uncooked food,1.0,1.0,1.0,1.0,1.0,0.0,1.0,5

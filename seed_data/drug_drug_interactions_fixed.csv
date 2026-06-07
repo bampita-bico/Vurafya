@@ -1,0 +1,41 @@
+id,drug1_id,drug2_id,severity,risk_description,interaction_result
+1,23,35,severe,Warfarin + Ibuprofen increases bleeding risk due to antiplatelet effects and gastric irritation,Monitor INR closely. Consider alternative analgesic (paracetamol). If combined use necessary reduce warfarin dose by 10-20%.
+2,23,36,severe,Warfarin + Diclofenac significantly increases bleeding risk,Avoid combination if possible. If necessary monitor INR weekly and reduce warfarin dose.
+3,23,21,moderate,Warfarin + Aspirin increases bleeding risk,Use with caution. Monitor for signs of bleeding. Consider reducing aspirin to 75mg daily.
+4,23,24,moderate,Warfarin + Amoxicillin can increase INR due to alteration of gut flora (vitamin K production),Monitor INR 3-5 days after starting antibiotic. May need temporary warfarin dose reduction.
+5,11,15,severe,Losartan + Spironolactone increases risk of hyperkalemia,Monitor serum potassium closely. Avoid in patients with baseline K+ >5.0 mmol/L. Check K+ within 1 week of starting combination.
+6,9,15,severe,Lisinopril + Spironolactone significantly increases hyperkalemia risk,Same as above - monitor potassium closely. Consider alternative diuretic (hydrochlorothiazide).
+7,10,15,severe,Enalapril + Spironolactone increases hyperkalemia risk,Monitor potassium. Avoid in CKD Stage 4-5.
+8,1,14,severe,Metformin + Furosemide increases lactic acidosis risk in dehydrated patients,Monitor renal function. Hold metformin if severe dehydration or acute illness. Ensure adequate hydration.
+9,16,4,moderate,Atenolol + Insulin Regular can mask hypoglycemia symptoms,Educate patient on hypoglycemia without tremor/palpitations. Monitor blood glucose more frequently.
+10,16,1,moderate,Atenolol + Metformin - beta blocker may mask hypoglycemia in diabetics,Educate patient. Prefer cardioselective beta blockers (bisoprolol) in diabetics.
+11,17,1,mild,Bisoprolol + Metformin - less masking effect due to cardioselectivity,Monitor blood glucose. Educate on atypical hypoglycemia symptoms.
+12,79,37,severe,Fluoxetine + Tramadol increases serotonin syndrome risk,Avoid combination. If necessary use lowest tramadol dose (50mg) and monitor for agitation confusion tachycardia hyperthermia.
+13,37,60,moderate,Tramadol + Nevirapine - CYP450 interaction may alter tramadol metabolism,Monitor pain control. May need tramadol dose adjustment.
+14,27,23,contraindicated,Metronidazole + Warfarin significantly increases INR and bleeding risk,Avoid combination if possible. If necessary reduce warfarin dose by 30-40% and monitor INR every 2-3 days.
+15,61,23,moderate,Cotrimoxazole + Warfarin increases bleeding risk,Reduce warfarin dose. Monitor INR closely.
+16,26,19,moderate,Ciprofloxacin + Atorvastatin increases statin levels (rhabdomyolysis risk),Consider statin dose reduction or temporary discontinuation during antibiotic course.
+17,26,23,moderate,Ciprofloxacin + Warfarin increases INR,Monitor INR. May need warfarin dose reduction during antibiotic treatment.
+18,35,1,mild,Ibuprofen + Metformin - NSAIDs can reduce renal clearance of metformin,Monitor renal function. Use lowest effective NSAID dose for shortest duration.
+19,35,9,moderate,Ibuprofen + Lisinopril reduces antihypertensive effect,Monitor blood pressure. Consider alternative analgesic (paracetamol) for chronic use.
+20,36,10,moderate,Diclofenac + Enalapril reduces blood pressure lowering effect,Monitor BP. Avoid chronic NSAID use in hypertensive patients.
+21,13,11,mild,Hydrochlorothiazide + Losartan may cause excessive blood pressure lowering,This is intentional combination therapy. Monitor BP and electrolytes.
+22,7,20,mild,Amlodipine + Simvastatin increases statin exposure,Limit simvastatin dose to 20mg daily when combined with amlodipine.
+23,55,46,moderate,Levothyroxine + Ferrous Sulfate reduces thyroid hormone absorption,Separate administration by at least 4 hours. Take levothyroxine on empty stomach 30-60 min before iron.
+24,55,42,moderate,Levothyroxine + Calcium Carbonate reduces thyroid hormone absorption,Separate by 4 hours.
+25,57,62,moderate,TLE (Efavirenz) + Fluconazole - CYP450 interaction,Monitor for increased efavirenz toxicity. May need dose adjustment.
+26,58,62,mild,TLD (Dolutegravir) + Fluconazole - minimal interaction,Generally safe combination. Monitor clinical response.
+27,28,7,mild,Ceftriaxone + Amlodipine - no significant interaction but monitor renal function,Safe combination. Routine monitoring.
+28,53,1,moderate,Prednisolone + Metformin - steroids increase blood glucose,Monitor blood glucose closely. May need increased metformin dose or additional diabetic medication.
+29,53,4,severe,Prednisolone + Insulin Regular - steroids cause insulin resistance,Increase insulin dose by 20-50%. Monitor blood glucose 4-6 times daily.
+30,14,11,severe,Furosemide + Losartan can cause excessive blood pressure drop and acute kidney injury,Start with low doses. Monitor BP blood pressure and renal function. Ensure adequate hydration.
+31,15,42,moderate,Spironolactone + Calcium Carbonate - no direct interaction but monitor potassium,Calcium binders don't affect potassium but monitor electrolytes in CKD patients.
+32,44,46,moderate,Erythropoietin + Ferrous Sulfate - iron is required for EPO effectiveness,This is synergistic clinically. Ensure adequate iron stores (ferritin >100) before starting EPO.
+33,45,42,moderate,Calcitriol + Calcium Carbonate increases risk of hypercalcemia,Monitor serum calcium monthly. Target calcium 8.5-10.2 mg/dL. Hold calcitriol if Ca >10.5.
+34,1,61,moderate,Metformin + Cotrimoxazole increases risk of lactic acidosis,Monitor renal function and lactate. Hold metformin if severe infection.
+35,78,9,moderate,Haloperidol + Lisinopril can cause excessive blood pressure lowering,Monitor BP. Start with low haloperidol dose.
+36,77,34,moderate,Diazepam + Paracetamol - paracetamol may increase sedation,Generally safe. Warn patient about increased drowsiness.
+37,80,23,moderate,Amitriptyline + Warfarin increases bleeding risk,Monitor INR. Amitriptyline may potentiate anticoagulant effect.
+38,31,57,moderate,Artemether-Lumefantrine + TLE (Efavirenz) - complex CYP450 interaction,Monitor for treatment failure. May need increased artemether dose or alternative antimalarial.
+39,52,62,mild,Beclometasone + Fluconazole - azole increases steroid exposure,Generally safe at standard doses. Monitor for steroid side effects (oral thrush hoarseness).
+40,71,27,moderate,Metoclopramide + Metronidazole both cause CNS effects,Warn patient about drowsiness and confusion. Avoid driving.

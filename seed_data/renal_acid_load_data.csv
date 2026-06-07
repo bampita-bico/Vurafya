@@ -1,0 +1,73 @@
+food_id,food_name,pral_value,phosphorus_mg,potassium_mg,sodium_mg,protein_g,ckd_recommendation
+1,Matoke (Cooking Banana),-5.8,37,499,4,1.3,encourage
+2,Maize Meal (Posho),1.2,210,195,8,6.5,moderate
+3,White Rice,1.7,115,115,5,7.1,moderate
+4,Brown Rice,-0.5,333,223,7,7.9,encourage
+5,Cassava (Boiled),-2.1,27,558,14,1.4,encourage
+6,Sweet Potato (Orange),-3.4,47,475,55,1.6,encourage
+7,Irish Potato (Boiled),-4.0,44,379,6,2.0,encourage
+8,Millet Porridge,0.8,285,195,5,10.6,moderate
+9,Sorghum,1.0,287,350,6,10.4,moderate
+10,Finger Millet (Wimbi),1.5,283,408,11,11.0,moderate
+11,Red Beans (Boiled),-3.1,142,405,2,8.7,encourage
+12,Black Beans,-2.8,140,355,1,8.9,encourage
+13,Cowpeas (Black-eyed Peas),-1.5,278,559,6,9.3,moderate
+14,Green Gram (Mung Beans),-3.5,367,1246,15,23.9,moderate
+15,Pigeon Peas,-4.0,187,1392,17,21.7,moderate
+16,Groundnuts (Peanuts),8.3,376,705,18,25.8,limit
+17,Sesame Seeds,12.4,629,468,11,17.7,limit
+18,Sunflower Seeds,11.8,660,645,9,20.8,limit
+19,Pumpkin Seeds,12.1,1233,809,7,28.8,limit
+20,Sukuma Wiki (Collard Greens),-8.2,52,212,25,3.0,encourage
+21,Amaranth Leaves (Dodo),-12.5,103,611,20,4.6,encourage
+22,African Nightshade (Managu),-10.2,75,410,22,3.2,encourage
+23,Cassava Leaves,-7.8,111,734,10,5.8,encourage
+24,Spider Plant (Saget),-9.5,92,695,18,4.7,encourage
+25,Pumpkin Leaves,-11.3,87,436,15,3.7,encourage
+26,Jute Leaves (Murere),-10.8,65,300,12,6.0,encourage
+27,Sweet Potato Leaves,-8.9,48,518,16,5.9,encourage
+28,Spinach,-11.8,49,558,79,2.9,encourage
+29,Cabbage,-4.0,26,170,18,1.3,encourage
+30,Tomatoes,-3.1,24,237,5,0.9,encourage
+31,Onions,-1.5,29,146,4,1.1,encourage
+32,Carrots,-4.9,35,320,69,0.8,encourage
+33,Eggplant (African),-3.4,25,230,2,1.0,encourage
+34,Okra,-1.8,63,303,8,1.2,encourage
+35,Pumpkin,-4.5,44,340,1,0.8,encourage
+36,Cucumber,-2.0,24,147,2,0.8,encourage
+37,Bell Pepper (Green),-1.4,20,175,3,0.9,encourage
+41,Banana (Ripe),-6.9,22,358,1,1.1,encourage
+42,Mango,-3.0,14,168,2,0.8,encourage
+43,Papaya (Pawpaw),-4.5,10,182,8,0.5,encourage
+44,Pineapple,-2.7,8,109,1,0.5,encourage
+45,Watermelon,-1.9,11,112,1,0.6,encourage
+46,Avocado,-8.2,52,485,7,2.0,encourage
+47,Passion Fruit,-2.5,68,348,28,0.9,encourage
+48,Guava,-3.8,40,417,2,2.6,encourage
+49,Oranges,-2.7,14,181,0,0.9,encourage
+50,Lemons,-2.5,16,138,2,0.8,encourage
+51,Jack Fruit,-3.2,36,303,3,1.5,encourage
+52,Tilapia Fish (Grilled),7.9,204,302,52,26.2,moderate
+53,Nile Perch,8.5,230,320,60,26.0,moderate
+54,Sardines,13.5,490,397,307,20.1,limit
+55,Chicken (Boiled),8.7,200,256,82,27.0,moderate
+56,Chicken (Grilled),9.1,210,268,77,27.3,moderate
+57,Beef (Boiled),9.8,216,318,55,25.9,moderate
+58,Goat Meat (Stewed),10.2,201,385,86,25.9,moderate
+59,Eggs (Boiled),8.2,198,138,140,12.6,moderate
+60,Eggs (Fried),9.0,215,147,207,13.6,moderate
+61,Milk (Cow - Whole),0.7,93,150,49,3.2,moderate
+62,Milk (Cow - Skimmed),-0.4,101,156,44,3.4,encourage
+63,Yogurt (Plain),1.2,135,155,46,3.5,moderate
+64,Fermented Milk (Mala),0.5,95,141,38,3.5,moderate
+65,Cooking Oil (Vegetable),0.0,0,0,0,0.0,encourage
+66,Palm Oil,0.0,0,0,0,0.0,encourage
+67,Coconut Oil,0.0,0,0,0,0.0,encourage
+68,Margarine,0.1,3,5,943,0.1,moderate
+69,Butter,0.5,24,24,643,0.9,moderate
+70,Coconut (Fresh),-0.8,113,356,20,3.3,encourage
+71,Coconut Milk,0.2,100,263,15,1.7,encourage
+72,Sugar (White),0.0,0,2,1,0.0,encourage
+73,Honey,-0.3,4,52,4,0.3,encourage
+84,African Yam,-4.1,55,816,9,1.4,encourage
+85,Cocoyam (Taro),-3.8,84,615,11,1.5,encourage

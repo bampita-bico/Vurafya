@@ -1,0 +1,51 @@
+id,biomarker_name,unit,age_min,age_max,gender,critical_low,low_threshold,normal_min,normal_max,high_threshold,critical_high,condition,condition_stage,interpretation_notes,action_required
+1,potassium,mEq/L,18,120,all,2.5,3.5,3.5,5.0,5.5,6.0,all,,Normal range for adults,Critical if <2.5 or >6.0
+2,potassium,mEq/L,18,120,all,2.0,3.0,3.5,4.5,5.0,5.5,CKD,Stage 3+,Tighter control needed for CKD,Restrict high-K foods if >5.0
+3,sodium,mEq/L,18,120,all,120,135,135,145,150,160,all,,Normal serum sodium,Urgent if <120 or >160
+4,sodium,mEq/L,18,120,all,125,132,135,142,148,155,CKD,Stage 3+,CKD patients need tighter Na+ control,Monitor closely
+5,creatinine,mg/dL,18,120,male,0.3,0.6,0.7,1.2,1.5,3.0,all,,Normal for adult males,Kidney function concern if >1.5
+6,creatinine,mg/dL,18,120,female,0.3,0.5,0.6,1.1,1.4,2.5,all,,Normal for adult females,Kidney function concern if >1.4
+7,egfr,mL/min,18,120,all,15,30,90,120,,,all,,Normal kidney function >90,Stage 4 CKD if <30
+8,egfr,mL/min,18,120,all,15,30,45,59,,,CKD,Stage 3a,Stage 3a CKD (45-59),Dietary restrictions
+9,egfr,mL/min,18,120,all,15,30,30,44,,,CKD,Stage 3b,Stage 3b CKD (30-44),Stricter diet + nephrologist
+10,egfr,mL/min,18,120,all,,,15,29,,,CKD,Stage 4,Stage 4 CKD (15-29),Prepare for dialysis
+11,phosphorus,mg/dL,18,120,all,1.5,2.5,2.5,4.5,5.0,7.0,all,,Normal serum phosphorus,Hyperphosphatemia if >4.5
+12,phosphorus,mg/dL,18,120,all,2.0,2.5,2.7,4.0,4.5,5.5,CKD,Stage 3+,Strict phosphorus control for CKD,Limit dairy and phosphate additives
+13,fbs,mg/dL,18,120,all,40,70,70,100,125,200,all,,Fasting blood sugar,Diabetes if >=126
+14,fbs,mg/dL,18,120,all,50,70,80,110,130,180,Diabetes,Type 2,Tighter control for diabetes,Adjust medications if consistently >130
+15,rbs,mg/dL,18,120,all,40,70,80,140,180,300,all,,Random blood sugar,Hyperglycemia if >200
+16,hba1c,%,18,120,all,3.0,4.0,4.0,5.6,6.4,10.0,all,,Glycated hemoglobin,Prediabetes 5.7-6.4
+17,hba1c,%,18,120,all,4.0,5.0,5.5,7.0,8.0,10.0,Diabetes,Type 2,Target <7% for diabetes control,Medication adjustment if >8%
+18,hba1c,%,18,120,all,3.5,4.5,5.0,6.5,7.5,9.0,Diabetes,Type 1,Tighter control for Type 1,Insulin adjustment needed
+19,bp_systolic,mmHg,18,120,all,70,90,90,120,139,180,all,,Normal blood pressure,Hypertensive crisis if >=180
+20,bp_systolic,mmHg,18,120,all,80,100,110,130,140,160,Hypertension,Stage 1,Stage 1 hypertension (130-139),Lifestyle + medication
+21,bp_systolic,mmHg,18,120,all,90,110,120,140,160,180,Hypertension,Stage 2,Stage 2 hypertension (>=140),Multiple medications needed
+22,bp_diastolic,mmHg,18,120,all,40,60,60,80,89,120,all,,Normal diastolic BP,Critical if >=120
+23,bp_diastolic,mmHg,18,120,all,50,70,70,85,90,100,Hypertension,Stage 1,Stage 1 diastolic (80-89),Monitor closely
+24,calcium,mg/dL,18,120,all,6.0,8.0,8.5,10.5,11.0,13.0,all,,Normal serum calcium,Hypercalcemia if >10.5
+25,calcium,mg/dL,18,120,all,7.0,8.0,8.5,10.0,10.5,11.5,CKD,Stage 3+,Lower target for CKD,Monitor Ca x P product
+26,hemoglobin,g/dL,18,120,male,8.0,12.0,13.5,17.5,18.5,20.0,all,,Normal Hb for males,Anemia if <13.0
+27,hemoglobin,g/dL,18,120,female,7.0,11.0,12.0,16.0,17.0,19.0,all,,Normal Hb for females,Anemia if <12.0
+28,hemoglobin,g/dL,18,120,all,8.0,10.0,11.0,12.0,13.5,15.0,CKD,Stage 3+,CKD anemia target 11-12,ESA therapy if <10
+29,albumin,g/dL,18,120,all,2.0,3.0,3.5,5.0,5.5,6.0,all,,Normal serum albumin,Malnutrition if <3.5
+30,albumin,g/dL,18,120,all,2.5,3.0,3.5,4.5,5.0,5.5,CKD,Stage 3+,Protein status critical in CKD,Nutritional intervention if <3.5
+31,bun,mg/dL,18,120,all,5,7,7,20,25,50,all,,Blood urea nitrogen,Kidney dysfunction if >25
+32,bun,mg/dL,18,120,all,10,15,20,40,50,80,CKD,Stage 3+,Elevated in CKD,Expected elevation in advanced CKD
+33,uric_acid,mg/dL,18,120,male,2.0,3.5,3.5,7.0,8.0,12.0,all,,Normal for males,Gout risk if >7.0
+34,uric_acid,mg/dL,18,120,female,1.5,2.5,2.5,6.0,7.0,10.0,all,,Normal for females,Gout risk if >6.0
+35,cholesterol_total,mg/dL,18,120,all,100,120,120,200,239,300,all,,Desirable <200,High risk if >=240
+36,ldl,mg/dL,18,120,all,40,70,70,100,159,190,all,,LDL target <100,High risk if >=160
+37,ldl,mg/dL,18,120,all,30,40,40,70,100,130,CKD,Stage 3+,Aggressive LDL control in CKD,Target <70 mg/dL
+38,hdl,mg/dL,18,120,male,20,40,40,60,,,all,,HDL >60 protective,Risk if <40
+39,hdl,mg/dL,18,120,female,30,50,50,70,,,all,,HDL >60 protective,Risk if <50
+40,triglycerides,mg/dL,18,120,all,30,50,50,150,199,500,all,,Normal <150,High if >=200
+41,alt,U/L,18,120,male,5,10,10,40,55,200,all,,Liver enzyme normal,Hepatotoxicity if >3x normal
+42,alt,U/L,18,120,female,5,7,7,35,50,180,all,,Liver enzyme normal,Hepatotoxicity if >3x normal
+43,ast,U/L,18,120,all,5,10,10,40,55,200,all,,Liver enzyme normal,Hepatotoxicity if >3x normal
+44,tsh,mIU/L,18,120,all,0.1,0.4,0.4,4.0,10.0,20.0,all,,Normal thyroid function,Hypothyroid if >4.0
+45,glucose_2hr_ogtt,mg/dL,18,120,all,70,100,100,140,199,300,all,,2-hour OGTT normal <140,Diabetes if >=200
+46,vitamin_d,ng/mL,18,120,all,10,20,30,50,100,150,all,,Optimal 30-50,Deficiency if <20
+47,vitamin_b12,pg/mL,18,120,all,100,200,200,900,1500,2000,all,,Normal B12 levels,Deficiency if <200
+48,ferritin,ng/mL,18,120,male,20,30,30,300,500,1000,all,,Iron stores normal,Deficiency if <30
+49,ferritin,ng/mL,18,120,female,10,15,15,200,300,800,all,,Iron stores normal,Deficiency if <15
+50,inr,ratio,18,120,all,0.8,0.9,0.9,1.1,,,all,Warfarin,INR for patients on warfarin,Target 2.0-3.0 on warfarin

@@ -1,0 +1,430 @@
+food_id,nutrient_id,amount_per_100g,data_quality,data_source
+1,1,1.3,measured,FAO INFOODS
+1,2,31.2,measured,FAO INFOODS
+1,3,2.6,measured,FAO INFOODS
+1,10,122,calculated,FAO INFOODS
+1,29,499,measured,FAO INFOODS
+1,27,37,measured,FAO INFOODS
+1,12,18.4,measured,HarvestPlus
+2,1,6.5,measured,Uganda NEMA
+2,2,79.0,measured,Uganda NEMA
+2,3,3.0,measured,Uganda NEMA
+2,10,365,calculated,Uganda NEMA
+2,30,2.5,measured,Uganda NEMA
+2,18,4.8,measured,Uganda NEMA
+3,1,7.1,measured,USDA FoodData Central
+3,2,79.9,measured,USDA FoodData Central
+3,3,1.3,measured,USDA FoodData Central
+3,10,365,calculated,USDA FoodData Central
+3,30,0.8,measured,USDA FoodData Central
+3,27,25,measured,USDA FoodData Central
+4,1,7.9,measured,USDA FoodData Central
+4,2,77.2,measured,USDA FoodData Central
+4,3,3.5,measured,USDA FoodData Central
+4,10,370,calculated,USDA FoodData Central
+4,30,1.5,measured,USDA FoodData Central
+4,27,43,measured,USDA FoodData Central
+4,31,2.2,measured,USDA FoodData Central
+5,1,1.4,measured,FAO INFOODS
+5,2,38.1,measured,FAO INFOODS
+5,3,1.8,measured,FAO INFOODS
+5,10,160,calculated,FAO INFOODS
+5,29,558,measured,FAO INFOODS
+5,12,20.6,measured,FAO INFOODS
+6,1,1.6,measured,HarvestPlus
+6,2,27.0,measured,HarvestPlus
+6,3,3.3,measured,HarvestPlus
+6,10,112,calculated,HarvestPlus
+6,11,14187,measured,HarvestPlus
+6,12,19.6,measured,HarvestPlus
+6,29,475,measured,HarvestPlus
+7,1,2.0,measured,USDA FoodData Central
+7,2,20.1,measured,USDA FoodData Central
+7,3,1.8,measured,USDA FoodData Central
+7,10,87,calculated,USDA FoodData Central
+7,29,379,measured,USDA FoodData Central
+7,12,13.0,measured,USDA FoodData Central
+8,1,10.6,measured,Uganda NEMA
+8,2,72.5,measured,Uganda NEMA
+8,3,5.4,measured,Uganda NEMA
+8,10,378,calculated,Uganda NEMA
+8,30,4.3,measured,Uganda NEMA
+8,27,27,measured,Uganda NEMA
+9,1,10.4,measured,Uganda NEMA
+9,2,73.2,measured,Uganda NEMA
+9,3,4.8,measured,Uganda NEMA
+9,10,370,calculated,Uganda NEMA
+9,30,4.4,measured,Uganda NEMA
+9,27,25,measured,Uganda NEMA
+10,1,11.0,measured,FAO INFOODS
+10,2,75.0,measured,FAO INFOODS
+10,3,6.7,measured,FAO INFOODS
+10,10,390,calculated,FAO INFOODS
+10,30,3.9,measured,FAO INFOODS
+10,25,168,measured,FAO INFOODS
+11,1,8.7,measured,FAO INFOODS
+11,2,62.4,measured,FAO INFOODS
+11,3,7.8,measured,FAO INFOODS
+11,10,337,calculated,FAO INFOODS
+11,30,6.9,measured,FAO INFOODS
+11,20,394,measured,FAO INFOODS
+11,31,4.0,measured,FAO INFOODS
+12,1,8.9,measured,USDA FoodData Central
+12,2,63.0,measured,USDA FoodData Central
+12,3,8.7,measured,USDA FoodData Central
+12,10,341,calculated,USDA FoodData Central
+12,30,7.5,measured,USDA FoodData Central
+12,20,444,measured,USDA FoodData Central
+13,1,9.3,measured,FAO INFOODS
+13,2,60.0,measured,FAO INFOODS
+13,3,10.7,measured,FAO INFOODS
+13,10,343,calculated,FAO INFOODS
+13,30,8.3,measured,FAO INFOODS
+13,20,405,measured,FAO INFOODS
+14,1,23.9,measured,FAO INFOODS
+14,2,62.6,measured,FAO INFOODS
+14,3,4.5,measured,FAO INFOODS
+14,10,347,calculated,FAO INFOODS
+14,30,6.7,measured,FAO INFOODS
+14,20,410,measured,FAO INFOODS
+15,1,21.7,measured,FAO INFOODS
+15,2,62.8,measured,FAO INFOODS
+15,3,15.0,measured,FAO INFOODS
+15,10,343,calculated,FAO INFOODS
+15,30,5.2,measured,FAO INFOODS
+15,25,130,measured,FAO INFOODS
+16,1,25.8,measured,Uganda NEMA
+16,2,16.1,measured,Uganda NEMA
+16,4,49.2,measured,Uganda NEMA
+16,10,567,calculated,Uganda NEMA
+16,30,4.6,measured,Uganda NEMA
+16,27,92,measured,Uganda NEMA
+17,1,17.7,measured,FAO INFOODS
+17,2,23.4,measured,FAO INFOODS
+17,4,49.7,measured,FAO INFOODS
+17,10,573,calculated,FAO INFOODS
+17,25,975,measured,FAO INFOODS
+17,31,14.6,measured,FAO INFOODS
+18,1,20.8,measured,USDA FoodData Central
+18,2,20.0,measured,USDA FoodData Central
+18,4,51.5,measured,USDA FoodData Central
+18,10,584,calculated,USDA FoodData Central
+18,14,35.2,measured,USDA FoodData Central
+19,1,28.8,measured,USDA FoodData Central
+19,2,10.7,measured,USDA FoodData Central
+19,4,49.1,measured,USDA FoodData Central
+19,10,559,calculated,USDA FoodData Central
+19,31,8.8,measured,USDA FoodData Central
+20,1,3.0,measured,Uganda NEMA
+20,2,8.3,measured,Uganda NEMA
+20,3,3.6,measured,Uganda NEMA
+20,10,33,calculated,Uganda NEMA
+20,11,4443,measured,HarvestPlus
+20,12,76.0,measured,Uganda NEMA
+20,25,212,measured,Uganda NEMA
+20,30,1.0,measured,Uganda NEMA
+21,1,4.6,measured,Uganda NEMA
+21,2,6.5,measured,Uganda NEMA
+21,3,5.4,measured,Uganda NEMA
+21,10,45,calculated,Uganda NEMA
+21,11,6700,measured,HarvestPlus
+21,12,47.0,measured,Uganda NEMA
+21,25,270,measured,Uganda NEMA
+21,30,3.9,measured,Uganda NEMA
+22,1,3.2,measured,FAO INFOODS
+22,2,5.7,measured,FAO INFOODS
+22,3,3.0,measured,FAO INFOODS
+22,10,32,calculated,FAO INFOODS
+22,11,5040,measured,HarvestPlus
+22,12,31.0,measured,FAO INFOODS
+22,30,1.5,measured,FAO INFOODS
+23,1,5.8,measured,FAO INFOODS
+23,2,10.5,measured,FAO INFOODS
+23,3,3.7,measured,FAO INFOODS
+23,10,91,calculated,FAO INFOODS
+23,11,4900,measured,HarvestPlus
+23,12,112.0,measured,FAO INFOODS
+23,30,4.0,measured,FAO INFOODS
+24,1,4.7,measured,FAO INFOODS
+24,2,8.8,measured,FAO INFOODS
+24,3,3.9,measured,FAO INFOODS
+24,10,38,calculated,FAO INFOODS
+24,11,3800,measured,HarvestPlus
+24,12,52.0,measured,FAO INFOODS
+24,25,210,measured,FAO INFOODS
+25,1,3.7,measured,Uganda NEMA
+25,2,8.0,measured,Uganda NEMA
+25,3,2.8,measured,Uganda NEMA
+25,10,26,calculated,Uganda NEMA
+25,11,2320,measured,HarvestPlus
+25,12,27.0,measured,Uganda NEMA
+25,30,1.3,measured,Uganda NEMA
+26,1,6.0,measured,Uganda NEMA
+26,2,6.9,measured,Uganda NEMA
+26,3,6.5,measured,Uganda NEMA
+26,10,42,calculated,Uganda NEMA
+26,11,10900,measured,HarvestPlus
+26,12,80.0,measured,Uganda NEMA
+26,25,436,measured,Uganda NEMA
+27,1,5.9,measured,FAO INFOODS
+27,2,7.0,measured,FAO INFOODS
+27,3,4.0,measured,FAO INFOODS
+27,10,37,calculated,FAO INFOODS
+27,11,8100,measured,HarvestPlus
+27,12,95.0,measured,FAO INFOODS
+27,30,3.5,measured,FAO INFOODS
+28,1,2.9,measured,USDA FoodData Central
+28,2,6.4,measured,USDA FoodData Central
+28,3,3.2,measured,USDA FoodData Central
+28,10,23,calculated,USDA FoodData Central
+28,11,9376,measured,HarvestPlus
+28,12,30.0,measured,USDA FoodData Central
+28,25,99,measured,USDA FoodData Central
+29,1,1.3,measured,USDA FoodData Central
+29,2,5.8,measured,USDA FoodData Central
+29,3,2.5,measured,USDA FoodData Central
+29,10,25,calculated,USDA FoodData Central
+29,11,98,measured,USDA FoodData Central
+29,12,36.6,measured,USDA FoodData Central
+30,1,0.9,measured,Uganda NEMA
+30,2,3.6,measured,Uganda NEMA
+30,3,1.8,measured,Uganda NEMA
+30,10,18,calculated,Uganda NEMA
+30,11,833,measured,Uganda NEMA
+30,12,13.7,measured,Uganda NEMA
+30,29,237,measured,Uganda NEMA
+31,1,1.1,measured,Uganda NEMA
+31,2,4.2,measured,Uganda NEMA
+31,3,1.2,measured,Uganda NEMA
+31,10,9,calculated,Uganda NEMA
+31,12,56.7,measured,Uganda NEMA
+32,1,0.8,measured,Uganda NEMA
+32,2,8.6,measured,Uganda NEMA
+32,3,2.8,measured,Uganda NEMA
+32,10,41,calculated,Uganda NEMA
+32,11,16705,measured,HarvestPlus
+32,12,5.9,measured,Uganda NEMA
+33,1,1.0,measured,Uganda NEMA
+33,2,5.9,measured,Uganda NEMA
+33,3,3.0,measured,Uganda NEMA
+33,10,25,calculated,Uganda NEMA
+33,11,23,measured,Uganda NEMA
+33,12,13.3,measured,Uganda NEMA
+34,1,1.2,measured,Uganda NEMA
+34,2,5.7,measured,Uganda NEMA
+34,3,2.5,measured,Uganda NEMA
+34,10,22,calculated,Uganda NEMA
+34,12,22.6,measured,Uganda NEMA
+35,1,7.5,measured,Uganda NEMA
+35,2,26.0,measured,Uganda NEMA
+35,3,3.4,measured,Uganda NEMA
+35,10,92,calculated,Uganda NEMA
+35,11,7140,measured,HarvestPlus
+35,12,28.1,measured,Uganda NEMA
+36,1,0.8,measured,Uganda NEMA
+36,2,3.5,measured,Uganda NEMA
+36,3,0.5,measured,Uganda NEMA
+36,10,15,calculated,Uganda NEMA
+36,12,2.8,measured,Uganda NEMA
+37,1,0.9,measured,Uganda NEMA
+37,2,3.6,measured,Uganda NEMA
+37,3,0.9,measured,Uganda NEMA
+37,10,20,calculated,Uganda NEMA
+37,12,92.7,measured,Uganda NEMA
+38,1,5.3,measured,Uganda NEMA
+38,2,23.9,measured,Uganda NEMA
+38,3,4.1,measured,Uganda NEMA
+38,10,149,calculated,Uganda NEMA
+38,12,31.2,measured,Uganda NEMA
+40,1,1.8,measured,Uganda NEMA
+40,2,17.8,measured,Uganda NEMA
+40,3,2.0,measured,Uganda NEMA
+40,10,80,calculated,Uganda NEMA
+40,12,5.0,measured,Uganda NEMA
+41,1,1.2,measured,Uganda NEMA
+41,2,22.2,measured,Uganda NEMA
+41,10,89,calculated,Uganda NEMA
+41,11,54,measured,Uganda NEMA
+41,12,51.0,measured,Uganda NEMA
+41,29,340,measured,Uganda NEMA
+42,1,1.6,measured,Uganda NEMA
+42,2,36.0,measured,Uganda NEMA
+42,3,2.3,measured,Uganda NEMA
+42,10,167,calculated,Uganda NEMA
+42,29,491,measured,Uganda NEMA
+42,12,36.4,measured,Uganda NEMA
+43,0.5,measured,Uganda NEMA
+43,2,10.8,measured,Uganda NEMA
+43,3,1.7,measured,Uganda NEMA
+43,10,43,calculated,Uganda NEMA
+43,11,1094,measured,HarvestPlus
+43,12,60.9,measured,Uganda NEMA
+44,0.5,measured,Uganda NEMA
+44,2,13.1,measured,Uganda NEMA
+44,3,1.4,measured,Uganda NEMA
+44,10,50,calculated,Uganda NEMA
+44,12,47.8,measured,Uganda NEMA
+44,29,109,measured,Uganda NEMA
+45,0.6,measured,Uganda NEMA
+45,2,7.6,measured,Uganda NEMA
+45,3,0.4,measured,Uganda NEMA
+45,10,30,calculated,Uganda NEMA
+45,12,8.1,measured,Uganda NEMA
+45,29,112,measured,Uganda NEMA
+46,2.0,measured,Uganda NEMA
+46,2,8.5,measured,Uganda NEMA
+46,3,6.7,measured,Uganda NEMA
+46,4,14.7,measured,Uganda NEMA
+46,10,160,calculated,Uganda NEMA
+46,12,10.0,measured,Uganda NEMA
+46,29,485,measured,Uganda NEMA
+47,0.9,measured,Uganda NEMA
+47,2,3.2,measured,Uganda NEMA
+47,3,2.1,measured,Uganda NEMA
+47,10,14,calculated,Uganda NEMA
+47,12,30.0,measured,Uganda NEMA
+48,2.6,measured,Uganda NEMA
+48,2,14.3,measured,Uganda NEMA
+48,3,5.4,measured,Uganda NEMA
+48,10,68,calculated,Uganda NEMA
+48,12,228.3,measured,Uganda NEMA
+49,0.9,measured,Uganda NEMA
+49,2,11.8,measured,Uganda NEMA
+49,3,2.1,measured,Uganda NEMA
+49,10,47,calculated,Uganda NEMA
+49,12,53.2,measured,Uganda NEMA
+50,0.8,measured,USDA FoodData Central
+50,2,2.5,measured,USDA FoodData Central
+50,3,0.3,measured,USDA FoodData Central
+50,10,29,calculated,USDA FoodData Central
+50,12,53.0,measured,USDA FoodData Central
+51,0.8,measured,FAO INFOODS
+51,2,27.7,measured,FAO INFOODS
+51,3,5.4,measured,FAO INFOODS
+51,10,95,calculated,FAO INFOODS
+51,12,13.0,measured,FAO INFOODS
+52,26.2,measured,Uganda NEMA
+52,4,3.3,measured,Uganda NEMA
+52,10,128,calculated,Uganda NEMA
+52,30,1.8,measured,Uganda NEMA
+52,21,1.7,measured,Uganda NEMA
+52,31,1.1,measured,Uganda NEMA
+53,26.0,measured,Uganda NEMA
+53,4,5.6,measured,Uganda NEMA
+53,10,163,calculated,Uganda NEMA
+53,30,2.0,measured,Uganda NEMA
+53,21,3.7,measured,Uganda NEMA
+54,20.1,measured,Uganda NEMA
+54,4,1.8,measured,Uganda NEMA
+54,10,113,calculated,Uganda NEMA
+54,25,290,measured,Uganda NEMA
+54,30,2.2,measured,Uganda NEMA
+55,27.0,measured,Uganda NEMA
+55,4,13.6,measured,Uganda NEMA
+55,10,239,calculated,Uganda NEMA
+55,30,1.0,measured,Uganda NEMA
+55,31,0.9,measured,Uganda NEMA
+56,27.3,measured,Uganda NEMA
+56,4,3.1,measured,Uganda NEMA
+56,10,165,calculated,Uganda NEMA
+56,30,0.7,measured,Uganda NEMA
+56,31,1.2,measured,Uganda NEMA
+57,26.0,measured,Uganda NEMA
+57,4,6.2,measured,Uganda NEMA
+57,10,217,calculated,Uganda NEMA
+57,30,0.8,measured,Uganda NEMA
+57,31,3.4,measured,Uganda NEMA
+58,25.9,measured,Uganda NEMA
+58,4,8.0,measured,Uganda NEMA
+58,10,213,calculated,Uganda NEMA
+58,30,2.1,measured,Uganda NEMA
+58,31,2.0,measured,Uganda NEMA
+59,12.6,measured,USDA FoodData Central
+59,4,9.5,measured,USDA FoodData Central
+59,10,155,calculated,USDA FoodData Central
+59,21,1.1,measured,USDA FoodData Central
+59,31,1.1,measured,USDA FoodData Central
+60,13.6,measured,USDA FoodData Central
+60,4,11.0,measured,USDA FoodData Central
+60,10,196,calculated,USDA FoodData Central
+60,21,1.3,measured,USDA FoodData Central
+60,42,423,measured,USDA FoodData Central
+61,3.2,measured,Uganda NEMA
+61,2,4.7,measured,Uganda NEMA
+61,4,3.3,measured,Uganda NEMA
+61,10,61,calculated,Uganda NEMA
+61,25,150,measured,Uganda NEMA
+61,21,0.04,measured,Uganda NEMA
+62,3.4,measured,Uganda NEMA
+62,2,5.0,measured,Uganda NEMA
+62,4,0.1,measured,Uganda NEMA
+62,10,34,calculated,Uganda NEMA
+62,25,125,measured,Uganda NEMA
+63,3.5,measured,Uganda NEMA
+63,2,4.7,measured,Uganda NEMA
+63,4,0.2,measured,Uganda NEMA
+63,10,59,calculated,Uganda NEMA
+63,25,142,measured,Uganda NEMA
+64,3.5,measured,Uganda NEMA
+64,2,3.6,measured,Uganda NEMA
+64,4,0.4,measured,Uganda NEMA
+64,10,47,calculated,Uganda NEMA
+64,25,111,measured,Uganda NEMA
+65,0.0,measured,Uganda NEMA
+65,4,100.0,measured,Uganda NEMA
+65,10,884,calculated,Uganda NEMA
+66,0.0,measured,Uganda NEMA
+66,4,100.0,measured,Uganda NEMA
+66,5,49.7,measured,Uganda NEMA
+66,10,884,calculated,Uganda NEMA
+67,0.0,measured,USDA FoodData Central
+67,4,99.1,measured,USDA FoodData Central
+67,5,86.5,measured,USDA FoodData Central
+67,10,862,calculated,USDA FoodData Central
+68,0.1,measured,USDA FoodData Central
+68,4,80.7,measured,USDA FoodData Central
+68,5,51.4,measured,USDA FoodData Central
+68,10,717,calculated,USDA FoodData Central
+69,0.9,measured,USDA FoodData Central
+69,4,81.1,measured,USDA FoodData Central
+69,5,50.5,measured,USDA FoodData Central
+69,10,717,calculated,USDA FoodData Central
+70,3.3,measured,FAO INFOODS
+70,2,15.2,measured,FAO INFOODS
+70,3,9.0,measured,FAO INFOODS
+70,4,33.5,measured,FAO INFOODS
+70,10,354,calculated,FAO INFOODS
+71,1.7,measured,FAO INFOODS
+71,4,23.8,measured,FAO INFOODS
+71,5,21.1,measured,FAO INFOODS
+71,10,230,calculated,FAO INFOODS
+72,0.0,measured,USDA FoodData Central
+72,2,99.9,measured,USDA FoodData Central
+72,10,387,calculated,USDA FoodData Central
+72,43,99.9,measured,USDA FoodData Central
+73,0.3,measured,Uganda NEMA
+73,2,82.4,measured,Uganda NEMA
+73,10,304,calculated,Uganda NEMA
+73,43,82.1,measured,Uganda NEMA
+75,0.0,measured,USDA FoodData Central
+75,28,38758,measured,USDA FoodData Central
+84,1.4,measured,FAO INFOODS
+84,2,37.8,measured,FAO INFOODS
+84,3,4.3,measured,FAO INFOODS
+84,10,159,calculated,FAO INFOODS
+84,29,816,measured,FAO INFOODS
+85,1.5,measured,FAO INFOODS
+85,2,27.9,measured,FAO INFOODS
+85,3,4.1,measured,FAO INFOODS
+85,10,112,calculated,FAO INFOODS
+85,29,514,measured,FAO INFOODS
+86,18.5,measured,FAO INFOODS
+86,2,65.0,measured,FAO INFOOIDS
+86,3,6.3,measured,FAO INFOODS
+86,10,364,calculated,FAO INFOODS
+86,30,8.6,measured,FAO INFOODS
+88,48.7,measured,FAO INFOODS
+88,2,10.7,measured,FAO INFOODS
+88,4,31.8,measured,FAO INFOODS
+88,10,576,calculated,FAO INFOODS
+88,30,14.5,measured,FAO INFOODS

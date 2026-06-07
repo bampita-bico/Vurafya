@@ -1,0 +1,51 @@
+id,condition,condition_stage,nutrient_name,target_min,target_max,unit,calculation_formula,clinical_rationale,reference_source
+1,CKD,Stage 3a,Potassium,0,2000,mg,,Restrict to <2g/day to prevent hyperkalemia,KDOQI 2020
+2,CKD,Stage 3a,Phosphorus,0,800,mg,,Limit phosphorus to prevent bone disease,KDOQI 2020
+3,CKD,Stage 3a,Protein,,,g,0.6-0.8 * body_weight_kg,Reduce protein to slow progression,KDOQI 2020
+4,CKD,Stage 3a,Sodium,0,2000,mg,,Restrict sodium for BP control,KDOQI 2020
+5,CKD,Stage 3b,Potassium,0,1500,mg,,Stricter K+ restriction as eGFR declines,KDOQI 2020
+6,CKD,Stage 3b,Phosphorus,0,700,mg,,Tighter phosphorus control,KDOQI 2020
+7,CKD,Stage 3b,Protein,,,g,0.6 * body_weight_kg,Lower protein target for Stage 3b,KDOQI 2020
+8,CKD,Stage 3b,Sodium,0,1500,mg,,Stricter sodium control,KDOQI 2020
+9,CKD,Stage 4,Potassium,0,1000,mg,,Very low K+ for Stage 4,KDOQI 2020
+10,CKD,Stage 4,Phosphorus,0,600,mg,,Aggressive phosphorus restriction,KDOQI 2020
+11,CKD,Stage 4,Protein,,,g,0.6 * body_weight_kg,Strict protein restriction,KDOQI 2020
+12,CKD,Stage 4,Sodium,0,1000,mg,,Minimal sodium intake,KDOQI 2020
+13,CKD,Stage 5,Potassium,0,1000,mg,,Dialysis-dependent limits,KDOQI 2020
+14,CKD,Stage 5,Phosphorus,0,800,mg,,Dialysis removes some phosphorus,KDOQI 2020
+15,CKD,Stage 5,Protein,,,g,1.0-1.2 * body_weight_kg,Higher protein on dialysis (losses),KDOQI 2020
+16,CKD,Stage 5,Sodium,0,1000,mg,,Fluid restriction on dialysis,KDOQI 2020
+17,Diabetes,Type 2,Carbohydrates,135,230,g,,Moderate carb intake for glucose control,ADA 2024
+18,Diabetes,Type 2,Fiber,30,,g,,High fiber improves glycemic control,ADA 2024
+19,Diabetes,Type 2,Sugar,0,25,g,,Limit added sugars,ADA 2024
+20,Diabetes,Type 2,Saturated Fat,0,,g,<7% of total calories,Reduce CVD risk,ADA 2024
+21,Diabetes,Type 1,Carbohydrates,130,230,g,,Carb counting for insulin dosing,ADA 2024
+22,Diabetes,Type 1,Fiber,25,,g,,Fiber target reference,ADA 2024
+23,Diabetes,Type 1,Sugar,0,25,g,,Limit added sugars,ADA 2024
+24,Hypertension,,Sodium,0,1500,mg,,Strict sodium restriction,ACC/AHA 2017
+25,Hypertension,,Potassium,3400,,mg,,High potassium lowers BP (DASH diet),ACC/AHA 2017
+26,Hypertension,,Calcium,1000,,mg,,Adequate calcium for BP control,ACC/AHA 2017
+27,Hypertension,,Magnesium,420,,mg,,Magnesium may lower BP,ACC/AHA 2017
+28,Hypertension,Stage 2,Sodium,0,1000,mg,,Lower sodium target reference,ACC/AHA 2017
+29,Obesity,,Calories,,,kcal,BMR * 0.8,20% calorie deficit for weight loss,WHO 2020
+30,Obesity,,Protein,,,g,1.2-1.5 * body_weight_kg,Higher protein preserves muscle mass,WHO 2020
+31,Obesity,,Fiber,30,,g,,High fiber increases satiety,WHO 2020
+32,Obesity,,Sugar,0,25,g,,Minimize added sugars,WHO 2020
+33,Obesity,,Saturated Fat,0,,g,<7% of total calories,Reduce saturated fats,WHO 2020
+34,Pregnancy,,Protein,71,,g,,Increased protein needs,WHO 2016
+35,Pregnancy,,Folate,600,,μg,,Critical for neural tube development,WHO 2016
+36,Pregnancy,,Iron,27,,mg,,Increased iron needs,WHO 2016
+37,Pregnancy,,Calcium,1000,,mg,,Fetal bone development,WHO 2016
+38,Pregnancy,,Vitamin D,15,,μg,,Calcium absorption and immunity,WHO 2016
+39,Lactation,,Protein,71,,g,,Milk production needs,WHO 2016
+40,Lactation,,Calcium,1000,,mg,,Milk calcium content,WHO 2016
+41,Lactation,,Iron,9,,mg,,Lower than pregnancy (no menstruation),WHO 2016
+42,Lactation,,Calories,,,kcal,BMR + 500,Extra 500 kcal for milk production,WHO 2016
+43,Heart Disease,,Saturated Fat,0,,g,<6% of total calories,Aggressive lipid control,AHA 2021
+44,Heart Disease,,Trans Fat,0,0,g,,Eliminate trans fats completely,AHA 2021
+45,Heart Disease,,Sodium,0,1500,mg,,Low sodium for heart failure,AHA 2021
+46,Heart Disease,,Omega-3,1.5,,g,,Anti-inflammatory for CVD,AHA 2021
+47,Hyperlipidemia,,Saturated Fat,0,,g,<7% of total calories,Lower LDL cholesterol,AHA 2021
+48,Hyperlipidemia,,Trans Fat,0,0,g,,Eliminate trans fats,AHA 2021
+49,Hyperlipidemia,,Cholesterol,0,200,mg,,Limit dietary cholesterol,AHA 2021
+50,Hyperlipidemia,,Fiber,25,,g,,Soluble fiber binds cholesterol,AHA 2021

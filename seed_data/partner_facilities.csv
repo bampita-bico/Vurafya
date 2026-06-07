@@ -1,0 +1,31 @@
+id,facility_name,facility_type,contact_phone,contact_email,address,district,region_code,gps_lat,gps_lng,nhf_code,is_verified,partner_tier,commission_pct,accepts_afya_points,joined_at,is_active
+1,Mulago National Referral Hospital,hospital,+256-414-554000,info@mulagohospital.go.ug,Mulago Hill,Kampala,UG.C,0.335470,32.576470,UG-KLA-001,TRUE,platinum,8.0,TRUE,2025-01-15,TRUE
+2,Mbale Regional Referral Hospital,hospital,+256-454-433777,info@mbalehospital.go.ug,Pallisa Road,Mbale,UG.E,1.082380,34.175310,UG-MBL-002,TRUE,gold,10.0,TRUE,2025-02-01,TRUE
+3,Gulu Regional Referral Hospital,hospital,+256-471-432291,info@guluhospital.go.ug,Lacor Road,Gulu,UG.N,2.774600,32.299270,UG-GUL-003,TRUE,gold,10.0,TRUE,2025-02-10,TRUE
+4,Mbarara Regional Referral Hospital,hospital,+256-485-420763,info@mbararahospital.go.ug,Mbarara-Kabale Road,Mbarara,UG.W,0.603520,30.658750,UG-MBA-004,TRUE,silver,12.0,TRUE,2025-03-01,TRUE
+5,International Hospital Kampala,hospital,+256-312-200400,info@iहk.co.ug,Namuwongo,Kampala,UG.C,0.303860,32.599760,UG-KLA-005,TRUE,platinum,8.0,TRUE,2025-01-20,TRUE
+6,Case Hospital,hospital,+256-414-510000,info@casehospital.com,Naalya,Kampala,UG.C,0.374930,32.645090,UG-KLA-006,TRUE,gold,10.0,TRUE,2025-02-15,TRUE
+7,Kampala Dialysis Center,dialysis,+256-414-344555,info@kampaladialysis.com,Bukoto,Kampala,UG.C,0.348560,32.589760,UG-KLA-007,TRUE,platinum,5.0,TRUE,2025-01-10,TRUE
+8,Nsambya Hospital,hospital,+256-414-267051,info@nsambyahospital.org,Nsambya,Kampala,UG.C,0.298740,32.594320,UG-KLA-008,TRUE,gold,10.0,TRUE,2025-02-20,TRUE
+9,Mengo Hospital,hospital,+256-414-274181,info@mengohospital.org,Namirembe,Kampala,UG.C,0.304860,32.558360,UG-KLA-009,TRUE,silver,12.0,TRUE,2025-03-05,TRUE
+10,Jinja Regional Referral Hospital,hospital,+256-434-120064,info@jinjahospital.go.ug,Main Street,Jinja,UG.E,0.431350,33.204250,UG-JIN-010,TRUE,silver,12.0,TRUE,2025-03-10,TRUE
+11,Kenyatta National Hospital,hospital,+254-20-2726300,info@knh.or.ke,Hospital Road,Nairobi,KE.C,-1.300510,36.807740,KE-NBI-001,TRUE,platinum,8.0,TRUE,2025-01-25,TRUE
+12,Moi Teaching and Referral Hospital,hospital,+254-53-2033471,info@mtrh.go.ke,Nandi Road,Eldoret,KE.W,-0.520240,35.270150,KE-ELD-002,TRUE,gold,10.0,TRUE,2025-02-05,TRUE
+13,Aga Khan Hospital Nairobi,hospital,+254-20-3662000,info@akhnairobi.org,3rd Parklands Avenue,Nairobi,KE.C,-1.267230,36.815240,KE-NBI-003,TRUE,platinum,8.0,TRUE,2025-01-30,TRUE
+14,Nairobi West Hospital,hospital,+254-20-6764000,info@nairobiwesthospital.co.ke,Kenyatta Avenue,Nairobi,KE.C,-1.310450,36.826360,KE-NBI-004,TRUE,gold,10.0,TRUE,2025-02-12,TRUE
+15,Kisumu County Referral Hospital,hospital,+254-57-2023195,info@kisumucounty.go.ke,Jomo Kenyatta Highway,Kisumu,KE.W,-0.101450,34.761530,KE-KSM-005,TRUE,silver,12.0,TRUE,2025-03-15,TRUE
+16,Nairobi Dialysis Center,dialysis,+254-20-2720896,info@nairobidialysis.co.ke,Upper Hill,Nairobi,KE.C,-1.291560,36.815860,KE-NBI-006,TRUE,platinum,5.0,TRUE,2025-02-01,TRUE
+17,Muhimbili National Hospital,hospital,+255-22-2150608,info@mnh.or.tz,United Nations Road,Dar es Salaam,TZ.C,-6.813680,39.266670,TZ-DSM-001,TRUE,platinum,8.0,TRUE,2025-02-10,TRUE
+18,Kilimanjaro Christian Medical Centre,hospital,+255-27-2754377,info@kcmc.ac.tz,Shanty Town,Moshi,TZ.N,-3.351240,37.335560,TZ-MSH-002,TRUE,gold,10.0,TRUE,2025-02-20,TRUE
+19,Bugando Medical Centre,hospital,+255-28-2500851,info@bugandomedicalcentre.go.tz,Bugando,Mwanza,TZ.W,-2.526740,32.916230,TZ-MWZ-003,TRUE,silver,12.0,TRUE,2025-03-01,TRUE
+20,Ocean Road Cancer Institute,hospital,+255-22-2150104,info@orci.or.tz,Ocean Road,Dar es Salaam,TZ.C,-6.826470,39.288640,TZ-DSM-004,TRUE,gold,10.0,TRUE,2025-03-10,TRUE
+21,Quality Pharmacy Kampala,pharmacy,+256-414-258369,info@qualitypharmacy.co.ug,William Street,Kampala,UG.C,0.314740,32.581470,NULL,TRUE,silver,15.0,TRUE,2025-01-15,TRUE
+22,Vine Pharmacy,pharmacy,+256-312-266266,info@vinepharmacy.co.ug,Ntinda,Kampala,UG.C,0.362560,32.625140,NULL,TRUE,silver,15.0,TRUE,2025-01-20,TRUE
+23,Nile Pharmacy,pharmacy,+256-414-344000,info@nilepharmacy.co.ug,Kampala Road,Kampala,UG.C,0.316850,32.580360,NULL,TRUE,basic,18.0,TRUE,2025-02-01,TRUE
+24,Goodlife Pharmacy Nairobi,pharmacy,+254-709-929000,info@goodlife.co.ke,Kimathi Street,Nairobi,KE.C,-1.283640,36.821530,NULL,TRUE,silver,15.0,TRUE,2025-01-25,TRUE
+25,Haltons Pharmacy,pharmacy,+254-20-2726971,info@haltons.co.ke,Kenyatta Avenue,Nairobi,KE.C,-1.285640,36.824560,NULL,TRUE,silver,15.0,TRUE,2025-02-05,TRUE
+26,MedPlus Pharmacy Dar,pharmacy,+255-22-2666988,info@medplustz.com,Samora Avenue,Dar es Salaam,TZ.C,-6.817360,39.285690,NULL,TRUE,basic,18.0,TRUE,2025-02-15,TRUE
+27,Alpha Pharmacy Mwanza,pharmacy,+255-28-2541086,info@alphapharmacy.co.tz,Station Road,Mwanza,TZ.W,-2.516850,32.900140,NULL,TRUE,basic,18.0,TRUE,2025-03-01,TRUE
+28,Lancet Laboratories Uganda,lab,+256-393-202400,info@lancet.co.ug,Kisozi-Lumuli,Kampala,UG.C,0.347850,32.596740,NULL,TRUE,gold,12.0,TRUE,2025-01-10,TRUE
+29,Diagnostic Services Ltd Kenya,lab,+254-20-2720297,info@dslkenya.com,Ralph Bunche Road,Nairobi,KE.C,-1.271450,36.808540,NULL,TRUE,gold,12.0,TRUE,2025-01-20,TRUE
+30,Pathologists Lancet Tanzania,lab,+255-22-2667479,info@lancet.co.tz,Ohio Street,Dar es Salaam,TZ.C,-6.817240,39.289640,NULL,TRUE,silver,15.0,TRUE,2025-02-10,TRUE

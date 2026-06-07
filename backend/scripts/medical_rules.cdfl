@@ -1,0 +1,29 @@
+SET domain: medicine
+
+// Define the Renal System for the patient
+SYSTEM Renal {
+    flux: Patient.filtration_flux
+    constraint: Patient.renal_constraint
+}
+
+// Define the Metabolic System
+SYSTEM Metabolic {
+    flux: Patient.glucose_mg_dl
+    constraint: 100.0
+}
+
+// Rule for low operating ratio review
+RULE CKD_Stability {
+    IF psi < 0.7
+    ACTION mark_for_review
+}
+
+// Rule for high operating ratio review
+RULE Metabolic_Overload {
+    IF psi > 1.3
+    ACTION mark_for_review
+}
+
+OBSERVE {
+    metrics: [psi]
+}

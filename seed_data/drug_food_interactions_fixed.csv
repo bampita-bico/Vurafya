@@ -1,0 +1,41 @@
+id,drug_id,food_id,severity,description
+1,23,20,moderate,Warfarin + Sukuma Wiki (high vitamin K) reduces anticoagulant effect
+2,23,21,moderate,Warfarin + Amaranth Leaves (high vitamin K) reduces warfarin effectiveness
+3,23,22,moderate,Warfarin + African Nightshade (Managu) high in vitamin K
+4,23,23,moderate,Warfarin + Cassava Leaves (high vitamin K)
+5,23,24,moderate,Warfarin + Spider Plant (Saget) contains vitamin K
+6,23,25,moderate,Warfarin + Pumpkin Leaves (high vitamin K)
+7,23,26,moderate,Warfarin + Jute Leaves (Murere) high vitamin K content
+8,23,27,moderate,Warfarin + Sweet Potato Leaves high in vitamin K
+9,23,28,moderate,Warfarin + Spinach (very high vitamin K) can significantly reduce INR
+10,23,46,mild,Warfarin + Avocado (moderate vitamin K) may affect INR
+11,55,11,moderate,Levothyroxine + Red Beans (high fiber) reduces thyroid hormone absorption
+12,55,12,moderate,Levothyroxine + Black Beans (high fiber) reduces absorption
+13,55,13,moderate,Levothyroxine + Cowpeas (high fiber) may reduce thyroid hormone levels
+14,24,61,moderate,Amoxicillin + Milk (calcium) may reduce antibiotic absorption
+15,24,62,moderate,Amoxicillin + Skimmed Milk (calcium) reduces absorption
+16,24,63,moderate,Amoxicillin + Yogurt (calcium) may reduce effectiveness
+17,26,61,severe,Ciprofloxacin + Milk (calcium) significantly reduces antibiotic levels
+18,26,62,severe,Ciprofloxacin + Skimmed Milk (calcium) markedly reduces absorption
+19,26,63,severe,Ciprofloxacin + Yogurt (calcium) reduces ciprofloxacin by 30-40%
+20,9,41,moderate,Lisinopril + Banana (high potassium 491mg/100g) increases hyperkalemia risk
+21,9,42,moderate,Lisinopril + Mango (moderate potassium) may increase K+ levels
+22,9,49,mild,Lisinopril + Oranges (moderate potassium) slight hyperkalemia risk
+23,10,41,moderate,Enalapril + Banana increases potassium levels
+24,10,46,moderate,Enalapril + Avocado (high potassium 485mg/100g) may cause hyperkalemia
+25,11,41,moderate,Losartan + Banana (high potassium) increases K+ levels
+26,11,6,moderate,Losartan + Sweet Potato (high potassium 475mg/100g) may increase hyperkalemia risk
+27,15,41,severe,Spironolactone + Banana increases hyperkalemia risk significantly
+28,15,46,severe,Spironolactone + Avocado (very high K+) dangerous hyperkalemia risk
+29,15,6,severe,Spironolactone + Sweet Potato increases K+ levels
+30,15,49,moderate,Spironolactone + Oranges may contribute to hyperkalemia
+31,1,72,mild,Metformin + Sugar causes blood glucose elevation
+32,1,3,mild,Metformin + White Rice (high glycemic index 73) causes glucose spike
+33,1,2,moderate,Metformin + Maize Meal/Posho (high GI 85) causes significant glucose elevation
+34,2,72,moderate,Glibenclamide + Sugar can cause rebound hypoglycemia
+35,3,72,moderate,Gliclazide + Sugar causes glucose swings
+36,34,65,mild,Paracetamol + Cooking Oil (high fat) delays absorption
+37,35,61,moderate,Ibuprofen + Milk can reduce gastric irritation
+38,35,4,mild,Ibuprofen + Brown Rice (food) reduces gastric side effects
+39,19,65,mild,Atorvastatin + Cooking Oil (high fat meal) increases statin absorption
+40,55,61,moderate,Levothyroxine + Milk (calcium) reduces thyroid hormone absorption by 20-30%
