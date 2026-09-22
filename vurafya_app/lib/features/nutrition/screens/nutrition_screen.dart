@@ -312,7 +312,7 @@ class _LogMealSheetState extends ConsumerState<_LogMealSheet> {
           ),
           const SizedBox(height: 12),
           DropdownButtonFormField<String>(
-            value: _mealType,
+            initialValue: _mealType,
             items: const [
               DropdownMenuItem(value: 'breakfast', child: Text('Breakfast')),
               DropdownMenuItem(value: 'lunch', child: Text('Lunch')),
@@ -355,7 +355,8 @@ class _LogMealSheetState extends ConsumerState<_LogMealSheet> {
             ),
           ),
           DropdownButtonFormField<String>(
-            value: _portion,
+            key: ValueKey(_portion),
+            initialValue: _portion,
             decoration: const InputDecoration(labelText: 'Household measure'),
             items: [
               const DropdownMenuItem(

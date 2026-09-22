@@ -37,7 +37,7 @@ class OfflineEdgeEngine {
         "is_offline_cache": true,
       };
     }
-    final vitals = localVitals ?? {};
+    final vitals = localVitals;
 
     final analysis = <String, dynamic>{};
     final scores = <double>[];
