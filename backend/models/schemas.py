@@ -69,13 +69,13 @@ class UpgradeRequest(BaseModel):
 
 class MealComponentInput(BaseModel):
     food_id: int
-    quantity_grams: float
+    quantity_grams: float = Field(gt=0, le=5000)
     meal_component_type: str = "main"
 
 class MealCreateRequest(BaseModel):
-    meal_type: str = "lunch"
+    meal_type: str = Field(default="lunch", pattern="^(breakfast|lunch|dinner|snack)$")
     meal_date: Optional[str] = None
-    components: list[MealComponentInput]
+    components: list[MealComponentInput] = Field(min_length=1, max_length=50)
     notes: Optional[str] = None
 
 
@@ -232,125 +232,6 @@ class PetCareRequest(BaseModel):
 
 
 # ============================================================================
-# PAYMENTS
-# ============================================================================
-
-class ApToVrcRequest(BaseModel):
-    ap_amount: int = Field(ge=1)
-
-class SendVrcRequest(BaseModel):
-    recipient_user_id: int
-    amount: float = Field(gt=0)
-    description: Optional[str] = None
-
-class InitiatePaymentRequest(BaseModel):
-    transaction_type: str = "general"
-    reference_id: Optional[int] = None
-    payee_type: str = "platform"
-    payee_id: Optional[int] = None
-    total_amount_ugx: float = Field(gt=0)
-    payment_method: str = "mobile_money"
-    fiat_amount_ugx: Optional[float] = None
-    afya_points_amount: int = 0
-    labor_hours_amount: float = 0.0
-    barter_credit_amount: int = 0
-
-
-# ============================================================================
-# BARTER
-# ============================================================================
-
-class PostGoodRequest(BaseModel):
-    item_name: str = Field(min_length=2, max_length=200)
-    item_category: str
-    item_description: Optional[str] = None
-    condition: str = "good"           # new | good | fair | poor
-    estimated_value_ugx: float = Field(gt=0)
-    quantity: int = 1
-    unit: str = "unit"
-    location_district: Optional[str] = None
-    delivery_available: bool = False
-    delivery_radius_km: int = 0
-    perishable: bool = False
-    seeking_categories: list[str] = []
-    open_to_offers: bool = True
-
-class PostServiceRequest(BaseModel):
-    service_name: str = Field(min_length=2, max_length=200)
-    service_category: str
-    service_description: Optional[str] = None
-    estimated_value_ugx: float = Field(gt=0)
-    duration_hours: float = 1.0
-    location_district: Optional[str] = None
-    can_travel: bool = False
-    travel_radius_km: int = 0
-    seeking_categories: list[str] = []
-    open_to_offers: bool = True
-
-class InitiateTradeRequest(BaseModel):
-    party_b_user_id: int
-    offer_type: str = "good"           # good | service
-    offer_id: Optional[int] = None
-    offer_description: str = ""
-    offer_ap_value: int = Field(ge=0, default=0)
-    want_type: str = "good"
-    want_id: Optional[int] = None
-    want_description: str = ""
-    want_ap_value: int = Field(ge=0, default=0)
-
-class RateTradeRequest(BaseModel):
-    rating: int = Field(ge=1, le=5)
-    review: Optional[str] = None
-    reliability_rating: Optional[int] = Field(default=None, ge=1, le=5)
-    quality_rating: Optional[int] = Field(default=None, ge=1, le=5)
-    fairness_rating: Optional[int] = Field(default=None, ge=1, le=5)
-    would_trade_again: bool = True
-    goods_as_described: bool = True
-
-
-# ============================================================================
-# LABOR
-# ============================================================================
-
-class RegisterLaborServiceRequest(BaseModel):
-    skill_category_id: int
-    service_name: str = Field(min_length=2, max_length=200)
-    service_description: Optional[str] = None
-    service_type: Optional[str] = None
-    proficiency_level: str = "intermediate"   # beginner | intermediate | advanced | expert
-    years_experience: int = 0
-    certifications: list[str] = []
-    min_hours: int = 1
-    max_hours_per_week: int = 40
-    rate_negotiable: bool = True
-    location_district: Optional[str] = None
-    can_travel: bool = False
-    travel_radius_km: int = 0
-
-class CreateLaborBookingRequest(BaseModel):
-    labor_service_id: int
-    hours_requested: float = Field(gt=0)
-    booking_date: str               # YYYY-MM-DD
-    start_time: str = "08:00"
-    end_time: Optional[str] = None
-    work_location_address: Optional[str] = None
-    work_description: Optional[str] = None
-
-class RespondBookingRequest(BaseModel):
-    accept: bool
-
-class CompleteWorkRequest(BaseModel):
-    actual_hours: Optional[float] = None
-
-class RateLaborRequest(BaseModel):
-    rating: int = Field(ge=1, le=5)
-    review: Optional[str] = None
-    reliability_rating: Optional[int] = Field(default=None, ge=1, le=5)
-    quality_rating: Optional[int] = Field(default=None, ge=1, le=5)
-    showed_up_on_time: bool = True
-
-
-# ============================================================================
 # TRUST & KYC
 # ============================================================================
 
@@ -435,19 +316,6 @@ class RegisterVulnerableRequest(BaseModel):
     is_ckd_patient: bool = False
     verification_method: str = "self_declared"
     documents: list[str] = []
-
-
-# ============================================================================
-# FLUTTERWAVE
-# ============================================================================
-
-class FlutterwaveInitiateRequest(BaseModel):
-    amount_ugx: float = Field(gt=0)
-    currency: str = "UGX"
-    transaction_type: str = "general"
-    payee_type: str = "platform"
-    payee_id: Optional[int] = None
-    description: Optional[str] = None
 
 
 # ============================================================================

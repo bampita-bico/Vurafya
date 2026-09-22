@@ -31,9 +31,17 @@ class MedicalScreen extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Engine Error: $e')),
         data: (data) {
-          double score =
-              (data['clinical_stability_score'] as num?)?.toDouble() ?? 1.0;
-          String regime = data['clinical_regime'] ?? 'stable';
+          final score = (data['clinical_stability_score'] as num?)?.toDouble();
+          String regime = data['clinical_regime'] ?? 'insufficient_data';
+          if (score == null) {
+            return const Center(
+              child: Padding(
+                padding: EdgeInsets.all(24),
+                child: Text(
+                    'No current biomarker data is available for a model summary.'),
+              ),
+            );
+          }
           bool isCritical = score > 1.2 || score < 0.8;
 
           return SingleChildScrollView(

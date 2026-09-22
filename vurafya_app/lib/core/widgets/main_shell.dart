@@ -3,14 +3,12 @@ import 'package:go_router/go_router.dart';
 
 class MainShell extends StatelessWidget {
   final Widget child;
+  final String location;
 
-  const MainShell({super.key, required this.child});
+  const MainShell({super.key, required this.child, required this.location});
 
   @override
   Widget build(BuildContext context) {
-    // Current route to determine index
-    final String location = GoRouterState.of(context).matchedLocation;
-
     int currentIndex = 0;
     if (location.startsWith('/nutrition')) {
       currentIndex = 1;
@@ -23,12 +21,7 @@ class MainShell extends StatelessWidget {
     }
 
     return Scaffold(
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        switchInCurve: Curves.easeIn,
-        switchOutCurve: Curves.easeOut,
-        child: child, // The router handles the actual screen switching
-      ),
+      body: child,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [

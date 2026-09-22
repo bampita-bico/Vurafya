@@ -1,281 +1,235 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code and contributors working in the **Vurafya** repository.
 
-## Project Overview
+## Project overview
 
-**Vurafya** by Vura iX is a health platform powered by the public **CDFD Runtime**. It uses a flow-under-constraint model to summarize operating-state signals from biometrics, labs, nutrition, and app activity.
+**Vurafya** is a health platform by **VuraLabs** (one word, not “Vura Labs”).
 
-**Tagline**: *"Runtime-guided health workflows."*
+It spans nutrition, biometrics, medical workflows, pharmacy, gamification, and
+pan-African nutrition — with a **local predictive layer** for operating-band
+summaries from vitals, labs, and activity.
 
-**Infrastructure**:
-- **Primary Database**: `AfyaFigo.db` (SQLite) - Clinical records & biometrics.
-- **Ontology Layer**: **Neo4j Graph** - Biological system relationships & cross-system influence.
-- **Runtime Core**: **CDFD Runtime** - Stability ($\Psi_s$), trajectory projection, and neutral operating-state guidance.
+**CDFD Runtime** (sibling repo `CDFD-Runtime/`) is optional research software:
+doctor, info, gallery, CDFL, LLM. It is **not** the product spine. Stability and
+trajectory work without it.
 
----
-
-## Architecture: 7-Level Integration
-
-1.  **Level 1 (Physics)**: Fundamental $\Phi/C$ dynamics running in the background.
-2.  **Level 2 (DSL)**: **CDFL Language** support for custom model rules (`medical_rules.cdfl`).
-3.  **Level 3 (Runtime)**: Async background worker (`background_worker.py`) for population-scale modeling.
-4.  **Level 4 (Domain)**: `VurafyaAdapter` mapping biometrics to runtime stability signals.
-5.  **Level 5 (Discovery)**: Runtime flags emerging model patterns for review.
-6.  **Level 6 (Validation)**: Trajectory checks against historical labs and biometrics.
-7.  **Level 7 (Platform)**:
-    - **Patient Portal (Flutter)**: Gamified health dashboard and System Harmony view.
-    - **Doctor Portal (React)**: Stability dashboards and trajectory projections.
+**Claim boundary:** Ψₛ bands, regimes, and trajectories are **app bookkeeping /
+model review surfaces**. They are not validated clinical predictions, diagnoses,
+or treatment plans.
 
 ---
 
-## Database & Ontology Access
+## Repository map
 
-```bash
-# List all tables
-python3 -c "import sqlite3; conn = sqlite3.connect('AfyaFigo.db'); cursor = conn.cursor(); cursor.execute(\"SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;\"); print('\n'.join([t[0] for t in cursor.fetchall()]))"
-
-# Inspect table schema
-python3 -c "import sqlite3; conn = sqlite3.connect('AfyaFigo.db'); cursor = conn.cursor(); cursor.execute('PRAGMA table_info(TABLE_NAME)'); [print(f'{col[1]:30} {col[2]:15} {\"PRIMARY KEY\" if col[5] else \"\"}') for col in cursor.fetchall()]"
-
-# Get row counts (non-empty tables only)
-python3 << 'EOF'
-import sqlite3
-conn = sqlite3.connect('AfyaFigo.db')
-cursor = conn.cursor()
-cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
-for table in cursor.fetchall():
-    cursor.execute(f"SELECT COUNT(*) FROM {table[0]}")
-    count = cursor.fetchone()[0]
-    if count > 0:
-        print(f"{table[0]}: {count}")
-conn.close()
-EOF
-
-# Execute custom query
-python3 -c "import sqlite3; conn = sqlite3.connect('AfyaFigo.db'); cursor = conn.cursor(); cursor.execute('YOUR_QUERY_HERE'); print(cursor.fetchall())"
+```
+Vurafya/
+├── backend/           # FastAPI — auth, engine, game, pharmacy, …
+├── vurafya_web/       # React doctor portal
+├── vurafya_app/       # Flutter patient app
+├── migrations_pg/     # PostgreSQL migrations (primary for API)
+├── migrations/        # Legacy SQLite migrations
+├── scripts/           # migrate.py, seed, verification
+├── tests/             # pytest (local prediction, runtime artifacts)
+├── releases/          # Canonical signed APKs
+├── seed_data/         # CSV nutrition seeds
+├── ENGINE_INTEGRATION.md
+└── README.md          # Runbook (start here)
 ```
 
 ---
 
-## Architecture: 22 Modules
+## Architecture (current)
 
-### **Modules 1-6: Nutrition to Medical** (~150 tables)
+### Prediction stack
 
-1. **Nutrition Science** (25 tables) - Foods, nutrients, PRAL, bioactives, anti-nutrients, cooking science
-2. **Meal System** (20 tables) - Meals, recipes, meal planning, portion tracking
-3. **Beverage System** (15 tables) - Drinks, cocktails, hydration tracking
-4. **User System** (15 tables) - Accounts, profiles, preferences, streaks
-5. **Biometrics** (15 tables) - BP, glucose, weight, wearables (■ Vuralis data source with consent)
-6. **Medical Consulting** (20 tables) - Tele-consultations, prescriptions, referrals
+| Layer | Location | Notes |
+|-------|----------|-------|
+| **Local backend** | `backend/services/engine_adapter.py` | Biomarker → Ψₛ grid; never gates on Runtime |
+| **Local mobile** | `vurafya_app/lib/core/engine/offline_edge_engine.dart` | Same band logic offline |
+| **Runtime bridge** | `backend/services/cdfd_bridge.py` | Soft-fail imports; domains retired |
+| **Artifacts** | `backend/services/runtime_artifacts.py` | Provenance tagged “Vurafya local” when no Runtime |
+| **API** | `backend/api/engine.py` | No 503 when Runtime offline; `/domains` → 410 |
 
-### **Modules 7-12: Pharmacy to AI** (~80 tables)
+Environment:
 
-7. **Pharmacy** (20 tables) - Medications, inventory, adherence, drug interactions (drug-drug, drug-food, drug-beverage)
-8. **Facility Partnerships** (10 tables) - Clinics, labs, hospitals, revenue sharing
-9. **Lab & Diagnostics** (10 tables) - Test results, imaging, clinical logs
-10. **Preventive Medicine** (10 tables) - Health rules, scoring, condition thresholds, nutrient targets
-11. **Gamification RPG** (20 tables) - Achievements, badges, avatar stats, competitions, leaderboards
-12. **AI Recommendations** (10 tables) - Personalized suggestions
+- `VURAFYA_USE_RUNTIME_KERNEL=1` — optional Runtime kernel for trajectory
+- `ENGINE_PATH` — path to `CDFD-Runtime` (optional)
+- `DATABASE_URL` — PostgreSQL connection string
 
-### **Modules 13-17: Social to Infrastructure** (~40 tables)
+### Clients
 
-13. **Social Health** (15 tables) - Friends, chat, community
-14. **Commerce** (10 tables) - Orders, transactions
-15. **Afya Points** (5 tables) - Loyalty currency
-16. **Research** (5 tables) - Analytics, aggregated data
-17. **Infrastructure** (10 tables) - Audit logs, notifications, metadata
+- **Flutter** (`vurafya_app`): Riverpod, go_router, Dio. API base URL in
+  `lib/core/api/api_client.dart` — must be LAN IP for physical devices.
+- **React** (`vurafya_web`): CRA, Tailwind, Recharts. Demo login button calls
+  `POST /api/v1/auth/demo-login`.
 
-### **Modules 18-22: Payment System** (~55 tables)
-*Revolutionary payment for broke communities: barter + labor + fiat + points*
+### Database
 
-18. **Multi-Currency** (7 tables) - 54 African countries, 45 currencies (42 fiat + AP + LH + BC)
-19. **Barter Trade** (8 tables) - Goods/services exchange (3.5% fee)
-20. **Labor-as-Currency** (10 tables) - Time banking (5% fee)
-21. **Unified Payments** (12 tables) - Hybrid payments + trust scoring
-22. **Revenue & Compliance** (30 tables) - 70% revenue + 30% social good, KYC/AML, fraud detection
+- **Primary:** PostgreSQL via SQLAlchemy + asyncpg (`backend/utils/database.py`).
+  Legacy route SQL uses `DatabaseCompatSession` (`?` placeholders, SQLite-isms
+  normalized for Postgres).
+- **Legacy file:** `AfyaFigo.db` archived at `../archives/vurafya-legacy/` — schema
+  reference only; the API reads Postgres via `DATABASE_URL`.
+- **Migrations:** `python scripts/migrate.py` with `DATABASE_URL` set. Use
+  `migrations_pg/` for Postgres.
 
-**Payment Methods**: Fiat, Afya Points (AP), Labor Hours (LH), Barter Credits (BC)  
-**Target**: Month 12: $23K/month (30,000 users, 20 countries)
+After bootstrap migrations, ensure the app DB user has **sequence** grants
+(`GRANT USAGE, SELECT, UPDATE ON ALL SEQUENCES …`) or inserts fail.
+
+### Auth
+
+- `backend/api/auth.py` — register, login, refresh, demo-login
+- Demo defaults in `backend/config.py` / `.env`
+- Postgres timestamps: use naive UTC (`datetime.now(timezone.utc).replace(tzinfo=None)`)
+  for `TIMESTAMP WITHOUT TIME ZONE` columns
 
 ---
 
-## Key Clinical Formulas
+## Common commands
 
-### PRAL (Potential Renal Acid Load) for CKD
+```bash
+# API (from Vurafya/)
+source venv/bin/activate
+export DATABASE_URL="postgresql://cdfd:PASSWORD@localhost:5432/cdfd"
+export PYTHONPATH="$(pwd)"
+python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000
+
+# Migrations
+DATABASE_URL="postgresql://postgres:PASSWORD@localhost:5432/cdfd" python scripts/migrate.py
+
+# Tests
+python -m pytest -q tests/test_local_prediction.py tests/test_runtime_artifacts.py
+
+# Web
+cd vurafya_web && npm start
+
+# Mobile
+cd vurafya_app && flutter build apk --release
+```
+
+---
+
+## Mobile release notes
+
+- **Application ID:** `com.vurafx.vurafya_app` (historical package name)
+- **Launcher label:** `Vurafya` (`AndroidManifest.xml`)
+- **Signing:** debug keystore at `~/.android/debug.keystore` for local APKs;
+  `android/app/build.gradle` `signingConfigs.release` → debug for sideload builds
+- **Install:** `adb install -r releases/Vurafya-…-release.apk`
+- Rebuild required when LAN IP changes (`api_client.dart`)
+
+---
+
+## Engine integration (short)
+
+Ψₛ = (Φ / C) · S · Mₛ — used as **operating-band bookkeeping** in-app.
+
+| System | Φ proxy | C proxy |
+|--------|---------|---------|
+| Renal | eGFR / 100 | creatinine |
+| Cardio | 70 / pulse | systolic BP / 120 |
+| Metabolic | glucose / 100 | HbA1c / 5.5 |
+| Immune | systemic mean | systemic mean |
+
+Regimes: **constrained** (&lt;0.8), **stable** (0.8–1.2), **overload** (&gt;1.2).
+
+Full mapping and HTTP surface: `ENGINE_INTEGRATION.md`.
+
+---
+
+## Domain modules (data model)
+
+Vurafya’s schema is large (~400+ tables across nutrition, medical, pharmacy,
+gamification and compliance). Migrations live under `migrations_pg/`.
+
+### Modules 1–6: Nutrition → Medical
+
+Nutrition science, meals, beverages, users, biometrics (Vuralis bridge with
+consent), tele-consultations.
+
+### Modules 7–12: Pharmacy → AI
+
+Pharmacy, facilities, labs, preventive rules, RPG gamification, AI recommendations.
+
+### Modules 13–17: Social → Infrastructure
+
+Social, commerce, Afya Points, research aggregates, audit/notifications.
+
+## Key clinical formulas
+
+### PRAL (Potential Renal Acid Load)
+
 ```
 PRAL = 0.49×Protein(g) + 0.037×P(mg) - 0.021×K(mg) - 0.026×Mg(mg) - 0.013×Ca(mg)
 ```
-- **Negative** = Alkalizing (encourage for CKD)
-- **Positive** = Acidifying (limit for CKD)
-- **Critical**: Track individual 3Ps (Protein, Potassium, Phosphorus) separately for dialysis patients (rapid fluctuations)
 
-### Nutritional Accounting
+Negative = alkalizing; positive = acidifying. Track protein, potassium, and
+phosphorus separately for CKD/dialysis workflows.
+
+### Nutritional accounting
+
 ```
 actual_intake = amount_per_100g × (quantity_grams / 100) × retention_factor
 ```
 
-### Glycemic Load
+### Glycemic load
+
 ```
 GL = (GI × available_carb_g) / 100
 ```
-- Low: <10, Medium: 11-19, High: ≥20
 
 ---
 
-## Design Patterns
+## Design patterns
 
-### Naming Conventions
-- **Foreign keys**: `{table}_id` (e.g., `user_id`, `food_id`)
-- **Junction tables**: `{table_a}_{table_b}` (e.g., `food_nutrients`, `drug_drug_interactions`)
-- **User activity**: `user_{action}` (e.g., `user_achievements`, `user_recent_foods`)
-- **Search infrastructure**: `{domain}_search_index`, `{domain}_search_tokens`, `{domain}_popularity`
+- **Foreign keys:** `{table}_id`
+- **Junction tables:** `{table_a}_{table_b}`
+- **User activity:** `user_{action}`
+- **Standard columns:** `id`, `created_at`, `is_active`, `is_verified`, `user_id`
+- **JSON:** stored as TEXT (SQLite legacy) or JSONB (Postgres targets)
 
-### Standard Columns
-- `id INTEGER PRIMARY KEY` - Auto-increment
-- `created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP`
-- `is_active BOOLEAN` - Soft delete
-- `is_verified BOOLEAN` - Data quality flag
-- `user_id INTEGER` - For user-specific data
+### Multi-tenancy
 
-### JSON Columns (TEXT type)
-```sql
--- medications.brand_names
-["Glucophage", "Metformin SR"]
-
--- medications.dosage_forms
-["tablet", "capsule", "syrup"]
-
--- medication_schedules.scheduled_times
-["07:00", "13:00", "19:00"]
-
--- Query JSON in SQLite
-SELECT json_extract(brand_names, '$[0]') FROM medications;
-```
-
-### Multi-Tenancy
-1. **Global Reference Data** (no user_id): `foods`, `nutrients`, `medications`, `facilities`
-2. **User-Specific Data** (user_id): `meals`, `consultations`, `pharmacy_orders`
-3. **User-Generated** (created_by_user): `recipes`, `food_submissions`
+1. Global reference data (no `user_id`): foods, nutrients, medications
+2. User-specific data: meals, consultations, orders
+3. User-generated: recipes, submissions
 
 ---
 
-## Regional Context: Pan-African
+## Regional context
 
-**Target**: 54 African countries (Uganda, Kenya, Tanzania, Nigeria, Ghana, South Africa, etc.)  
-**Currencies**: 42 fiat + Afya Points (AP) + Labor Hours (LH) + Barter Credits (BC)  
-**Languages**: English, Swahili, Hausa, Zulu, Amharic
-
-### Regional Data Fields
-- `local_name` - Vernacular names (Matoke, Posho, Jollof)
-- `region_code` - UG.N, KE.C, TZ.C (sub-regional)
-- `regulatory_body` - NDA Uganda, PPB Kenya, TFDA Tanzania
+Pan-African focus: 54 countries, 45 currencies (42 fiat + AP + LH + BC).
+Regional fields: `local_name`, `region_code`, `regulatory_body`.
 
 ---
 
-## Important Tables by Use Case
+## Vuralis integration
 
-### CKD Management
-- `renal_acid_load_data` - PRAL values (301/302 foods with complete 5 components)
-- `v_protein_content`, `v_potassium_content`, `v_phosphorus_content` - Individual 3P tracking
-- `v_pral_live` - Dynamic PRAL calculation
-- `meal_nutrition_calculations` - Meal-level 3P totals (protein_g_total, potassium_mg_total, phosphorus_mg_total)
-- `potassium_logs`, `phosphorus_logs`, `creatinine_egfr_logs` - Lab tracking
-
-### Medication Safety
-- `medications` - Drug catalog (generic_name, brand_names, drug_class)
-- `drug_drug_interactions` - Drug-to-drug (severity: mild/moderate/severe/contraindicated)
-- `drug_food_interactions` - Drug-to-food (e.g., Warfarin + leafy greens)
-- `drug_beverage_interactions` - Drug-to-beverage (e.g., Alcohol + Metronidazole)
-- `medication_schedules` - Dosing times
-- `adherence_logs` - Patient compliance
-
-### Nutrition Tracking
-- `foods` (302 foods), `nutrients`, `food_nutrients` (3,924 records, 100% coverage)
-- `meals`, `meal_components`, `meal_nutrition_calculations`
-- `daily_nutrition_summary` - Aggregated daily intake
-- `nutrient_targets` - Personalized RDA
-
-### Gamification
-- `achievements`, `user_achievements`, `badges`
-- `avatar_stats` - Level, HP, strength, agility (■ linked to biometrics with consent)
-- `challenges`, `competitions`, `leaderboards`
-
-### Payment System
-- `unified_payment_ledger` - Master record for ALL transactions
-- `barter_exchange_transactions`, `labor_booking_requests`
-- `user_trust_ratings` - Reputation score (0.0-1.0)
-- `pharmacy_orders` - Hybrid payment support
+One-way: Vurafya → Vuralis (with user consent). Vurafya does not depend on Vuralis.
 
 ---
 
-## Data Quality
+## What not to claim
 
-### Nutrient Data Sources
-- USDA FoodData Central
-- FAO INFOODS African food composition tables
-- Regional food databases
-
-### Data Quality Levels
-- `measured` - Lab-tested
-- `calculated` - From known components
-- `estimated` - Statistical estimation
-- `imputed` - Filled from similar foods
+- Do not describe CDFD/AFL or Runtime as demonstrated predictive surplus
+- Do not imply clinical validation of Ψₛ or trajectory outputs
+- Do not require Runtime for core app demos — local path must work
+- Company name is **VuraLabs**
 
 ---
 
-## Vuralis Integration
+## Documentation index
 
-**One-way data flow**: Vurafya → Vuralis  
-**Requires**: User opt-in consent  
-**Columns marked ■**: Read by Vuralis for avatar behavior (primarily Module 5: Biometrics)  
-**Vurafya is standalone**: Does not depend on Vuralis
-
----
-
-## PostgreSQL Migration Notes
-
-**Data Types**:
-- SQLite `INTEGER PK` → PostgreSQL `SERIAL PRIMARY KEY`
-- SQLite `TEXT` → PostgreSQL `TEXT` or `VARCHAR(n)`
-- SQLite `REAL` → PostgreSQL `NUMERIC(10,2)`
-- SQLite JSON (TEXT) → PostgreSQL `JSONB`
-
-**Indexes**:
-- B-tree on foreign keys
-- GIN on JSONB columns
-- GIN on tsvector for full-text search
-
-**Partitioning**:
-- `audit_logs` by date
-- `clinical_logs` by user_id range
+| File | Purpose |
+|------|---------|
+| `README.md` | Runbook: Postgres, API, web, mobile, login |
+| `ENGINE_INTEGRATION.md` | Engine mapping and `/api/v1/engine/*` |
+| `RUNTIME_WORLD_CLASS_UPGRADE_PROGRESS.md` | Release history |
+| `vurafya_app/README.md` | Flutter app |
+| `vurafya_web/README.md` | Doctor portal |
+| `.env.example` | Environment template |
 
 ---
 
-## Documentation
-
-**PDFs**: 
-- `Vurafya 1A Nutrition to Medical.pdf` (39 pages, Modules 1-6)
-- `Vurafya 1B Pharmacy to Vuralis Bridge.pdf` (51 pages, Modules 7-17 + Vuralis map)
-
-**Status Reports**:
-- `PRAL_3P_TRACKING_STATUS.md` - PRAL + 3P implementation complete (Phase 1 & 2)
-- `MIGRATION_STATUS_REPORT.md` - Migration application summary
-- `REBUILD_COMPLETE.md` - Full rebuild report
-
-**For exact schemas, enums, constraints**: Always refer to PDFs.
-
----
-
-## Summary
-
-Vurafya is a **418-table, 22-module health platform** covering:
-- Nutrition science (302 foods, 100% coverage, PRAL + 3P tracking)
-- Medical consultations (tele-health, prescriptions)
-- Pharmacy operations (drug safety, adherence, inventory)
-- Gamification RPG (achievements, avatar stats)
-- Revolutionary payments (barter + labor + fiat + points for broke communities)
-
-**Regional Focus**: Pan-African (54 countries)  
-**Clinical Standards**: FAO, USDA, WHO  
-**Design Philosophy**: Self-sufficient workflows, transparent calculations, clear model boundaries
+© 2026 **VuraLabs**

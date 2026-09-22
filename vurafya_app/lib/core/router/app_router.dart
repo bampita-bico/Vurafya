@@ -8,24 +8,38 @@ import '../../features/home/screens/home_screen.dart';
 import '../../features/nutrition/screens/nutrition_screen.dart';
 import '../../features/medical/screens/medical_screen.dart';
 import '../../features/pharmacy/screens/pharmacy_screen.dart';
-import '../../features/barter/screens/barter_screen.dart';
-import '../../features/labor/screens/labor_screen.dart';
 import '../../features/game/screens/game_screen.dart';
 import '../../features/profile/screens/profile_screen.dart';
 import '../widgets/main_shell.dart';
 
+/// Keeps one GoRouter instance; re-runs redirect when auth state changes.
+class _RouterRefresh extends ChangeNotifier {
+  _RouterRefresh(this.ref) {
+    ref.listen(userProfileProvider, (_, __) => notifyListeners());
+  }
+
+  final Ref ref;
+}
+
 final routerProvider = Provider<GoRouter>((ref) {
-  final profileAsync = ref.watch(userProfileProvider);
+  final refresh = _RouterRefresh(ref);
+  ref.onDispose(refresh.dispose);
 
   return GoRouter(
-    initialLocation: '/home',
+    initialLocation: '/login',
+    refreshListenable: refresh,
     redirect: (context, state) {
-      final loading = profileAsync.isLoading;
-      final loggedIn = profileAsync.valueOrNull != null;
-      final onAuth = state.matchedLocation == '/login' ||
-          state.matchedLocation == '/register';
+      final profileAsync = ref.read(userProfileProvider);
+      final location = state.matchedLocation;
+      final onAuth =
+          location == '/login' || location == '/register';
 
-      if (loading) return null;
+      // Show login immediately while checking stored session.
+      if (profileAsync.isLoading) {
+        return onAuth ? null : '/login';
+      }
+
+      final loggedIn = profileAsync.valueOrNull != null;
       if (!loggedIn && !onAuth) return '/login';
       if (loggedIn && onAuth) return '/home';
       return null;
@@ -40,7 +54,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         pageBuilder: (_, s) => _fade(s, const RegisterScreen()),
       ),
       ShellRoute(
-        builder: (context, state, child) => MainShell(child: child),
+        builder: (context, state, child) => MainShell(
+          location: state.matchedLocation,
+          child: child,
+        ),
         routes: [
           GoRoute(
             path: '/home',
@@ -57,14 +74,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/pharmacy',
             pageBuilder: (_, s) => _fade(s, const PharmacyScreen()),
-          ),
-          GoRoute(
-            path: '/barter',
-            pageBuilder: (_, s) => _fade(s, const BarterScreen()),
-          ),
-          GoRoute(
-            path: '/labor',
-            pageBuilder: (_, s) => _fade(s, const LaborScreen()),
           ),
           GoRoute(
             path: '/game',

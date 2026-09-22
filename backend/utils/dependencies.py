@@ -22,10 +22,15 @@ async def get_current_user(
     except jwt.InvalidTokenError:
         raise AuthenticationError("Invalid token")
 
-    cursor = await db.execute("SELECT id, email, username FROM users WHERE id = ?", (user_id,))
+    cursor = await db.execute(
+        "SELECT id, email, username, is_active, auth_token_version FROM users WHERE id = ?",
+        (user_id,),
+    )
     user = await cursor.fetchone()
-    if not user:
+    if not user or not user.get("is_active", True):
         raise AuthenticationError("User not found")
+    if int(payload.get("ver", 0)) != int(user.get("auth_token_version", 0)):
+        raise AuthenticationError("Token has been revoked")
     return user
 
 

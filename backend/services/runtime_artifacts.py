@@ -41,16 +41,25 @@ def _safe_float(value: Any) -> float | None:
 
 
 def _runtime_version() -> dict[str, Any]:
+    base = {
+        "prediction_primary": "vurafya_local",
+        "runtime_required": False,
+        "runtime_profile": "optional_slim_cdfl",
+    }
     if not RUNTIME_SURFACES_AVAILABLE or runtime_info is None:
-        return {"name": "CDFD Runtime", "status": "unavailable"}
+        return {**base, "name": "CDFD Runtime", "status": "unavailable"}
     info = runtime_info()
     payload = info.get("payload", {}) if isinstance(info, Mapping) else {}
     return {
+        **base,
         "name": payload.get("name", "CDFD Runtime"),
         "language": payload.get("language", "CDFL"),
         "domain_count": payload.get("domain_count"),
         "commands": payload.get("commands", []),
+        "core_surfaces": payload.get("core_surfaces"),
+        "optional_surfaces": payload.get("optional_surfaces"),
         "provenance": info.get("provenance", {}),
+        "status": "optional",
     }
 
 
@@ -88,10 +97,11 @@ def build_patient_envelope(
         "errors": errors or [],
         "finite_audit": {"all_finite": True, "non_finite_paths": []},
         "provenance": {
-            "runtime": "CDFD Runtime",
-            "language": "CDFL",
+            "runtime": "Vurafya local prediction",
+            "language": "app-model",
             "command": command,
             "timestamp_utc": _now(),
+            "optional_cdfd_runtime": RUNTIME_SURFACES_AVAILABLE,
         },
     }
 
@@ -112,6 +122,47 @@ def _run_summary(result: Mapping[str, Any], clinical_state: Mapping[str, Any] | 
     }
 
 
+def _local_run_bundle(
+    result: Mapping[str, Any], artifact_root: Path, label: str
+) -> dict[str, Any]:
+    """Write a minimal audited bundle when optional Runtime helpers are absent."""
+    run_dir = artifact_root / label
+    run_dir.mkdir(mode=0o700, parents=True, exist_ok=False)
+    result_path = run_dir / "result.json"
+    report_md_path = run_dir / "report.md"
+    report_html_path = run_dir / "report.html"
+    manifest_path = run_dir / "manifest.json"
+
+    result_path.write_text(_json(result), encoding="utf-8")
+    summary = _run_summary(result)
+    report_md_path.write_text(
+        "# Vurafya local model result\n\n"
+        f"- Status: {summary.get('status')}\n"
+        f"- Regime: {summary.get('clinical_regime')}\n"
+        f"- Score: {summary.get('clinical_stability_score')}\n"
+        f"- Claim boundary: {CLAIM_BOUNDARY}\n",
+        encoding="utf-8",
+    )
+    report_html_path.write_text(
+        "<html><body><h1>Vurafya local model result</h1>"
+        f"<p>Status: {summary.get('status')}</p>"
+        f"<p>Regime: {summary.get('clinical_regime')}</p>"
+        f"<p>{CLAIM_BOUNDARY}</p></body></html>",
+        encoding="utf-8",
+    )
+    manifest = {
+        "run_dir": str(run_dir),
+        "artifacts": {
+            "result_json": str(result_path),
+            "report_markdown": str(report_md_path),
+            "report_html": str(report_html_path),
+        },
+    }
+    manifest_path.write_text(_json(manifest), encoding="utf-8")
+    manifest["manifest"] = str(manifest_path)
+    return manifest
+
+
 async def persist_runtime_result(
     *,
     user_id: int,
@@ -125,10 +176,14 @@ async def persist_runtime_result(
     run_uid = str(uuid.uuid4())
     artifact_root = Path(settings.RUNTIME_ARTIFACT_ROOT).expanduser()
     artifact_root.mkdir(parents=True, exist_ok=True)
+    artifact_root.chmod(0o700)
 
     bundle: dict[str, Any] = {}
+    label_with_id = f"{user_id}-{label}-{run_uid[:8]}"
     if create_run_bundle:
-        bundle = create_run_bundle(result, root=artifact_root, label=f"{user_id}-{label}-{run_uid[:8]}")
+        bundle = create_run_bundle(result, root=artifact_root, label=label_with_id)
+    else:
+        bundle = _local_run_bundle(result, artifact_root, label_with_id)
 
     explanation = None
     if explanation_for_result:
@@ -272,18 +327,92 @@ async def get_runtime_run(user_id: int, run_uid: str) -> dict[str, Any] | None:
         return dict(row) if row else None
 
 
+async def get_runtime_run_for_reviewer(
+    *, patient_user_id: int, reviewer_user_id: int, run_uid: str
+) -> dict[str, Any] | None:
+    """Return a patient's run only to an active assigned clinician."""
+    async with AsyncSessionLocal() as session:
+        rows = await session.execute(
+            text(
+                """
+                SELECT rr.*
+                FROM runtime_runs rr
+                WHERE rr.user_id = :patient_user_id
+                  AND rr.run_uid = :run_uid
+                  AND EXISTS (
+                    SELECT 1 FROM clinician_patient_assignments cpa
+                    WHERE cpa.clinician_user_id = :reviewer_user_id
+                      AND cpa.patient_user_id = :patient_user_id
+                      AND cpa.is_active = TRUE
+                  )
+                  AND (
+                    EXISTS (
+                        SELECT 1 FROM medical_staff ms
+                        WHERE ms.user_id = :reviewer_user_id AND ms.is_active = TRUE
+                    ) OR EXISTS (
+                        SELECT 1 FROM user_access_controls uac
+                        WHERE uac.user_id = :reviewer_user_id
+                          AND uac.role_name IN ('doctor', 'admin')
+                          AND uac.is_active = TRUE
+                          AND (uac.expires_at IS NULL OR uac.expires_at > NOW())
+                    )
+                  )
+                LIMIT 1
+                """
+            ),
+            {
+                "patient_user_id": patient_user_id,
+                "reviewer_user_id": reviewer_user_id,
+                "run_uid": run_uid,
+            },
+        )
+        row = rows.mappings().first()
+        return dict(row) if row else None
+
+
 async def record_runtime_review(
     *,
-    user_id: int,
+    patient_user_id: int,
     run_uid: str,
     reviewer_user_id: int,
     review_status: str,
     review_note: str | None = None,
 ) -> dict[str, Any]:
     async with AsyncSessionLocal() as session:
+        assignment = await session.execute(
+            text(
+                """
+                SELECT 1 FROM clinician_patient_assignments
+                WHERE clinician_user_id = :clinician_user_id
+                  AND patient_user_id = :patient_user_id
+                  AND is_active = TRUE
+                """
+            ),
+            {"clinician_user_id": reviewer_user_id, "patient_user_id": patient_user_id},
+        )
+        if assignment.scalar() is None:
+            return {"error": "clinician is not assigned to this patient"}
+        clinician = await session.execute(
+            text(
+                """
+                SELECT 1
+                WHERE EXISTS (
+                    SELECT 1 FROM medical_staff
+                    WHERE user_id = :reviewer_user_id AND is_active = TRUE
+                ) OR EXISTS (
+                    SELECT 1 FROM user_access_controls
+                    WHERE user_id = :reviewer_user_id
+                      AND role_name IN ('doctor', 'admin')
+                )
+                """
+            ),
+            {"reviewer_user_id": reviewer_user_id},
+        )
+        if clinician.scalar() is None:
+            return {"error": "reviewer does not have a clinician role"}
         run = await session.execute(
             text("SELECT id FROM runtime_runs WHERE user_id = :user_id AND run_uid = :run_uid"),
-            {"user_id": user_id, "run_uid": run_uid},
+            {"user_id": patient_user_id, "run_uid": run_uid},
         )
         run_row = run.mappings().first()
         if not run_row:

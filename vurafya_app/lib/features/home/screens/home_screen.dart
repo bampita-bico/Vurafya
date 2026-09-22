@@ -90,19 +90,35 @@ class HomeScreen extends ConsumerWidget {
                     stabilityAsync.when(
                       data: (data) {
                         bool isOffline = data['is_offline_cache'] == true;
+                        final score = data['clinical_stability_score'];
+                        if (score is! num) {
+                          return Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.blue.shade50,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: const Text(
+                              'Add current biometrics to see an operating-band summary. No health score is shown when data is unavailable.',
+                            ),
+                          );
+                        }
 
-                        double rawHealth =
-                            (data['clinical_stability_score'] ?? 1.0);
+                        double rawHealth = score.toDouble();
                         double healthPercent =
                             (rawHealth * 100).clamp(0, 100).toDouble();
 
                         final sys = data['system_analysis'] ?? {};
                         double energyPercent =
-                            ((sys['metabolic']?['score'] ?? 1.0) * 100)
+                            (((sys['metabolic']?['score'] as num?) ?? 0.0) *
+                                    100)
                                 .clamp(0, 100)
                                 .toDouble();
                         double immunityPercent =
-                            ((sys['cardiovascular']?['score'] ?? 1.0) * 100)
+                            (((sys['cardiovascular']?['score'] as num?) ??
+                                        0.0) *
+                                    100)
                                 .clamp(0, 100)
                                 .toDouble();
 

@@ -1,75 +1,77 @@
-# Vurafya Runtime Upgrade Progress
+# Vurafya Release & Upgrade Log
 
-Date: 2026-06-07
+**Product:** Vurafya by **VuraLabs**
 
-## Completed
+---
 
-- Recovered the previous release APK and placed the canonical copy at
-  `releases/Vurafya-v1.0.0-build1-release.apk`; removed duplicate generated APKs.
-- Built a fresh runtime-upgrade release APK and placed it at
-  `releases/Vurafya-v1.0.0-build1-runtime-upgrade-2026-06-07-release.apk`;
-  removed duplicate generated APKs from Flutter/Gradle output folders.
-- Added runtime artifact persistence:
-  - `backend/services/runtime_artifacts.py`
-  - `migrations_pg/091_runtime_artifacts.sql`
-  - `migrations/091_runtime_artifacts.sql`
-- Added CDFD Runtime public-surface bridge support for doctor, info, domains,
-  provider inventory, domain runs, result envelopes, finite audits, reports, and
-  run bundles.
-- Upgraded `/api/v1/engine/stability` and `/api/v1/engine/trajectory` to return
-  runtime envelopes, persisted run metadata, finite audit, provenance, artifact
-  paths, and claim boundary.
-- Added runtime endpoints:
-  - `GET /api/v1/engine/runtime-status`
-  - `GET /api/v1/engine/doctor`
-  - `GET /api/v1/engine/info`
-  - `GET /api/v1/engine/domains`
-  - `GET /api/v1/engine/llm/providers`
-  - `GET /api/v1/engine/runs`
-  - `GET /api/v1/engine/runs/{run_uid}`
-  - `POST /api/v1/engine/runs/{run_uid}/review`
-  - `POST /api/v1/engine/domain/{domain}`
-- Added a Postgres compatibility wrapper around legacy SQLite-style route SQL.
-- Updated the background worker to write runtime bundles for scheduled stability
-  checks.
-- Upgraded React and Flutter clients to show runtime evidence bundles.
-- Added focused unit tests in `tests/test_runtime_artifacts.py`.
-- Updated `ENGINE_INTEGRATION.md` with the current runtime artifact lifecycle.
-- Upgraded Android buildchain pins to Android Gradle Plugin `8.11.1`, Kotlin
-  `2.2.20`, and Java/Kotlin target `17`.
+## 2026-08-28 — Local-first decoupling & mobile build 4
 
-## Verified
+### Completed
 
-- Previous APK SHA-256:
-  `382ef5cbf0dd80ffaeab1781faa26f5eb4d237bc12263b3cc3cb76de5ad69b3c`
-- Runtime-upgrade APK SHA-256:
-  `443d6932ba8f9d91fdb02d7215bf7c362abc582df979194bd839538bbc11a68a`
-- `python -m compileall backend tests`
-- `python -m pytest -q tests/test_runtime_artifacts.py`
-- `python -c "from backend.main import app; print(app.title)"`
-- CDFD Runtime `doctor --json`
-- CDFD Runtime `info --json`
-- `npm run build` in `vurafya_web`
-- `flutter analyze`
-- `flutter test`
-- Direct Gradle release build produced the runtime-upgrade APK.
-- Docker had no running containers during verification, and local Postgres
-  connectivity to `localhost:5432/cdfd` failed, so migrations were not applied
-  to a live database in this run.
+- **Runtime decoupling:** stability and trajectory use Vurafya local adapter by default;
+  no `engine_offline` gate when Runtime is absent.
+- **Optional Runtime:** `VURAFYA_USE_RUNTIME_KERNEL=1` for kernel trajectory; CDFL/
+  gallery/doctor soft-fail; `/domains` and `/domain/*` return **410**.
+- **Auth fixes:** Postgres timestamp handling; sequence grants for `cdfd` DB user.
+- **Mobile build 4:** `releases/Vurafya-v1.0.0-build4-vuralabs-2026-08-28-release.apk`
+  - API URL: laptop LAN IP (`api_client.dart`)
+  - Launcher label: **Vurafya**
+  - Version `1.0.0+4`, debug-signed for sideload
+- **Branding:** docs updated to **VuraLabs** (not Vura iX / Vura Labs).
+- **Tests:** `tests/test_local_prediction.py` + `tests/test_runtime_artifacts.py`.
 
-## Still Needed For A Production-Grade Release
+### Verified
 
-- Apply Postgres migration `091_runtime_artifacts.sql` against the live database.
-- Configure production Android signing if this APK will be distributed through a
-  store or formal release channel.
-- Run a live authenticated smoke test for:
-  - `/api/v1/engine/stability`
-  - `/api/v1/engine/trajectory`
-  - `/api/v1/engine/runs`
-  - `/api/v1/engine/runs/{run_uid}/review`
-- Add FHIR/SMART export/import around saved runtime runs.
-- Add clinician role enforcement for run review and alert acknowledgement.
-- Add durable mobile cache storage for recent run bundles instead of only API
-  fetch/fallback display.
-- Add signed artifact manifests if bundles will be used for external clinical or
-  regulatory review.
+- `POST /api/v1/auth/demo-login` and login with demo credentials
+- `flutter build apk --release` on T420
+- `adb install` on Samsung SM_A235F
+
+### Still needed
+
+- Production signing keystore (Play Store / formal distribution)
+- Stable API hostname or build-time config for mobile (avoid hard-coded LAN IP)
+- Full `migrations_pg` apply on clean Postgres (bootstrap + later migrations)
+- Clinician role enforcement for run review
+- Durable mobile cache for run bundles
+
+---
+
+## 2026-06-07 — Runtime artifact upgrade (build 1–2)
+
+### Completed
+
+- Canonical APKs:
+  - `releases/Vurafya-v1.0.0-build1-release.apk`
+  - `releases/Vurafya-v1.0.0-build1-runtime-upgrade-2026-06-07-release.apk`
+- Runtime artifact persistence (`runtime_artifacts.py`, migration `091`)
+- CDFD Runtime public-surface bridge (doctor, info, domains at the time, LLM inventory)
+- Engine API envelopes: finite audit, provenance, claim boundary
+- React + Flutter runtime evidence UI
+- Android: AGP 8.11.1, Kotlin 2.2.20, Java 17
+
+### Verified (June 2026)
+
+- APK SHA-256 recorded in git notes for build 1 and runtime-upgrade build
+- `pytest tests/test_runtime_artifacts.py`
+- `npm run build`, `flutter analyze`, `flutter test`
+
+### Superseded
+
+- Domain adapters and Neo4j webapp removed from slim CDFD Runtime v1.1.1+
+- Product spine moved to **local prediction** (Aug 2026)
+
+---
+
+## APK index
+
+| File | Build | Notes |
+|------|-------|-------|
+| `Vurafya-v1.0.0-build1-release.apk` | 1 | Initial release (unsigned in some builds) |
+| `Vurafya-v1.0.0-build1-runtime-upgrade-2026-06-07-release.apk` | 1 | Runtime UI upgrade |
+| `Vurafya-v1.0.0-build2-local-prediction-2026-08-25-release.apk` | 2 | Local prediction backend |
+| `Vurafya-v1.0.0-build2-local-prediction-2026-08-25-release-signed.apk` | 2 | Debug-signed |
+| `Vurafya-v1.0.0-build4-vuralabs-2026-08-28-release.apk` | 4 | VuraLabs branding, LAN API, label **Vurafya** |
+
+---
+
+© 2026 **VuraLabs**

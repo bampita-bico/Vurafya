@@ -6,8 +6,8 @@ services:
     image: neo4j:5-community
     container_name: vurafya_ontology
     ports:
-      - "7474:7474"
-      - "7687:7687"
+      - "127.0.0.1:7474:7474"
+      - "127.0.0.1:7687:7687"
     environment:
       - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD:-change-me-neo4j-password}
       - NEO4J_PLUGINS=["apoc"]
@@ -28,7 +28,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER:-cdfd}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-change-me-postgres-password}
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5435:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -42,7 +42,7 @@ services:
     image: redis:7-alpine
     container_name: vurafya_cache
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     restart: unless-stopped
     deploy:
       resources:
@@ -64,6 +64,12 @@ services:
       - REDIS_URL=redis://redis:6379/0
       - ENGINE_PATH=/engine
       - PYTHONPATH=/app:/engine
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+      - DEMO_LOGIN_ENABLED=${DEMO_LOGIN_ENABLED:-true}
+      - ENABLE_BACKGROUND_WORKER=${ENABLE_BACKGROUND_WORKER:-false}
+      - ENABLE_MODEL_AUTOMATIONS=${ENABLE_MODEL_AUTOMATIONS:-false}
+      - RUNTIME_PERSIST_ON_READ=${RUNTIME_PERSIST_ON_READ:-false}
+      - CORS_ORIGINS=${CORS_ORIGINS:-["http://localhost:3000"]}
     depends_on:
       - neo4j
       - postgres
@@ -83,7 +89,7 @@ services:
       context: ./vurafya_web
     container_name: vurafya_web
     ports:
-      - "3000:80"
+      - "127.0.0.1:3000:80"
     environment:
       - REACT_APP_API_URL=http://localhost:8000/api/v1
     depends_on:

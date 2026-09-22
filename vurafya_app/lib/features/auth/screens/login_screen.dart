@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/api/api_errors.dart';
 import '../providers/auth_provider.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -13,8 +14,12 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailCtrl = TextEditingController();
-  final _passCtrl = TextEditingController();
+  final _emailCtrl = TextEditingController(
+    text: 'director.demo@vurafya.local',
+  );
+  final _passCtrl = TextEditingController(
+    text: 'vurafya123',
+  );
   bool _loading = false;
   bool _obscure = true;
   String? _error;
@@ -26,23 +31,44 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
-  Future<void> _submit() async {
-    if (!_formKey.currentState!.validate()) return;
+  String _dioMessage(DioException e, {String fallback = 'Login failed'}) {
+    if (e.type == DioExceptionType.connectionError ||
+        e.type == DioExceptionType.connectionTimeout ||
+        e.type == DioExceptionType.receiveTimeout) {
+      return 'Cannot reach the API. Keep USB connected and ensure adb reverse tcp:8000 tcp:8000 is active.';
+    }
+    return parseApiError(e.response?.data?['detail'], fallback: fallback);
+  }
+
+  Future<void> _afterAuth(Future<void> Function() action) async {
     setState(() {
       _loading = true;
       _error = null;
     });
     try {
-      await ref
-          .read(userProfileProvider.notifier)
-          .login(_emailCtrl.text.trim(), _passCtrl.text);
+      await action();
       if (mounted) context.go('/home');
     } on DioException catch (e) {
-      final msg = e.response?.data?['detail'] ?? 'Login failed';
-      setState(() => _error = msg is List ? msg.first['msg'] : msg.toString());
+      setState(() => _error = _dioMessage(e));
+    } catch (e) {
+      setState(() => _error = e.toString());
     } finally {
       if (mounted) setState(() => _loading = false);
     }
+  }
+
+  Future<void> _submit() async {
+    if (!_formKey.currentState!.validate()) return;
+    await _afterAuth(() => ref.read(userProfileProvider.notifier).login(
+          _emailCtrl.text.trim(),
+          _passCtrl.text.trim(),
+        ));
+  }
+
+  Future<void> _demoLogin() async {
+    await _afterAuth(
+      () => ref.read(userProfileProvider.notifier).demoLogin(),
+    );
   }
 
   @override
@@ -57,7 +83,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               key: _formKey,
               child: Column(
                 children: [
-                  // Logo
                   Container(
                     width: 80,
                     height: 80,
@@ -77,11 +102,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       style: theme.textTheme.bodyMedium
                           ?.copyWith(color: Colors.grey)),
                   const SizedBox(height: 40),
-
-                  // Email
                   TextFormField(
                     controller: _emailCtrl,
                     keyboardType: TextInputType.emailAddress,
+                    autocorrect: false,
                     decoration: const InputDecoration(
                       labelText: 'Email',
                       prefixIcon: Icon(Icons.email_outlined),
@@ -91,11 +115,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         : null,
                   ),
                   const SizedBox(height: 16),
-
-                  // Password
                   TextFormField(
                     controller: _passCtrl,
                     obscureText: _obscure,
+                    autocorrect: false,
                     decoration: InputDecoration(
                       labelText: 'Password',
                       prefixIcon: const Icon(Icons.lock_outline),
@@ -106,12 +129,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                     ),
                     validator: (v) =>
-                        v == null || v.length < 6 ? 'Min 6 characters' : null,
+                        v == null || v.trim().length < 6
+                            ? 'Min 6 characters'
+                            : null,
                   ),
-                  const SizedBox(height: 8),
-
                   if (_error != null) ...[
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 12),
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
@@ -134,8 +157,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                   ],
                   const SizedBox(height: 24),
-
-                  // Login button
                   ElevatedButton(
                     onPressed: _loading ? null : _submit,
                     child: _loading
@@ -147,9 +168,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           )
                         : const Text('Sign In'),
                   ),
+                  const SizedBox(height: 12),
+                  OutlinedButton(
+                    onPressed: _loading ? null : _demoLogin,
+                    child: const Text('Instant demo access'),
+                  ),
                   const SizedBox(height: 16),
-
-                  // Register link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

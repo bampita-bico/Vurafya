@@ -3,7 +3,8 @@ OTP / SMS verification.
 Used for: high-risk transactions, phone verification (KYC tier 1), account recovery.
 """
 import hashlib
-import random
+import hmac
+import secrets
 import string
 from datetime import datetime, timezone, timedelta
 from fastapi import APIRouter, Depends
@@ -17,15 +18,16 @@ router = APIRouter()
 
 
 def _now():
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 def _generate_otp(length: int = 6) -> str:
-    return "".join(random.choices(string.digits, k=length))
+    return "".join(secrets.choice(string.digits) for _ in range(length))
 
 
 def _hash_otp(otp: str, user_id: int) -> str:
-    return hashlib.sha256(f"{otp}{user_id}{settings.JWT_SECRET}".encode()).hexdigest()
+    payload = f"{otp}:{user_id}".encode()
+    return hmac.new(settings.JWT_SECRET.encode(), payload, hashlib.sha256).hexdigest()
 
 
 @router.post("/request")
@@ -36,7 +38,19 @@ async def request_otp(
 ):
     now = _now()
     user_id = current_user["id"]
-    expires = (datetime.now(timezone.utc) + timedelta(minutes=10)).isoformat()
+    expires = now + timedelta(minutes=10)
+
+    if not settings.DEBUG:
+        raise ValidationError("OTP delivery is not configured. Enable a verified SMS provider before using this endpoint.")
+
+    recent = await db.scalar(
+        """SELECT COUNT(*) FROM sms_verification_codes
+           WHERE user_id = ? AND verification_purpose = ?
+             AND created_at >= NOW() - INTERVAL '10 minutes'""",
+        (user_id, req.purpose),
+    )
+    if int(recent or 0) >= 3:
+        raise ValidationError("Too many OTP requests. Try again in 10 minutes.")
 
     # Expire any existing active OTPs for this user/purpose
     await db.execute(
@@ -61,7 +75,7 @@ async def request_otp(
         (
             user_id,
             req.phone_number,
-            otp,       # In production: don't store plain OTP; send via SMS only
+            None,      # Plain OTPs are never persisted.
             otp_hash,
             req.purpose,
             req.transaction_id,
@@ -74,11 +88,10 @@ async def request_otp(
     otp_id = cursor.lastrowid
     await db.commit()
 
-    # In production: send via Twilio/Africa's Talking/infobip
-    # For now, return OTP in response (dev mode only)
-    response = {"otp_id": otp_id, "expires_at": expires, "phone": req.phone_number}
-    if settings.DEBUG:
-        response["otp"] = otp  # NEVER expose in production
+    # Development-only transport; production is rejected above until an SMS
+    # provider is integrated and verified.
+    response = {"otp_id": otp_id, "expires_at": expires.isoformat(), "phone": req.phone_number}
+    response["otp"] = otp
     return response
 
 
@@ -115,7 +128,7 @@ async def verify_otp(
     max_attempts = record["max_attempts"] or 3
 
     expected_hash = _hash_otp(req.otp_code, user_id)
-    if record["otp_hash"] != expected_hash:
+    if not hmac.compare_digest(record["otp_hash"] or "", expected_hash):
         locked = attempts >= max_attempts
         await db.execute(
             """UPDATE sms_verification_codes

@@ -7,16 +7,10 @@ class EngineRepository {
   final ApiClient _apiClient = ApiClient();
   final OfflineEdgeEngine _edgeEngine = OfflineEdgeEngine();
 
-  // Mock local cache retriever (in a real app, this would use Hive/SQLite)
+  // Never synthesize biometrics. A durable cache can populate this method once
+  // the user has explicitly saved measurements on-device.
   Map<String, dynamic> _getLocalBiometricsCache() {
-    return {
-      "user_id": 1,
-      "egfr_ml_min": 92.0,
-      "creatinine_mg_dl": 0.9,
-      "pulse_bpm": 72.0,
-      "blood_pressure_systolic": 118.0,
-      "glucose_mg_dl": 95.0
-    };
+    return <String, dynamic>{};
   }
 
   bool _isNetworkError(DioException e) {
@@ -93,8 +87,9 @@ class EngineRepository {
             "[EngineRepository] Network unavailable. Generating trajectory via Offline Edge Engine.");
         final currentStability =
             _edgeEngine.calculateStability(_getLocalBiometricsCache());
-        return _edgeEngine.generateOfflineTrajectory(
-            currentStability['clinical_stability_score'], steps);
+        final score = currentStability['clinical_stability_score'];
+        if (score is! num) return [];
+        return _edgeEngine.generateOfflineTrajectory(score.toDouble(), steps);
       }
       throw Exception('Failed to fetch trajectory projection: ${e.message}');
     }

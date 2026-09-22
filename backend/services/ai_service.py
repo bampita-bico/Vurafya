@@ -34,16 +34,16 @@ async def generate_recommendations(db: aiosqlite.Connection, user_id: int) -> di
     now = _now()
     recommendations = []
 
-    # --- STEP 0: CDFD Runtime stability analysis ---
+    # --- STEP 0: local Vurafya stability analysis (Runtime optional) ---
     try:
         adapter = VurafyaAdapter()
         state = await adapter.get_patient_state(user_id)
-        if state.get("status") != "engine_offline":
-            current_psi = float(state.get("mean_psi", 1.0))
+        if state.get("mean_psi") is not None:
+            current_psi = float(state["mean_psi"])
             rec_logic = state.get("runtime_guidance") or classify_operating_state(
                 current_psi,
                 meta={"life_number": current_psi},
-                domain="medicine",
+                domain="vurafya_local",
             )
             model_state = rec_logic["state"]
             severity = "info"
@@ -55,7 +55,7 @@ async def generate_recommendations(db: aiosqlite.Connection, user_id: int) -> di
             recommendations.append({
                 "type": "engine_stability_review",
                 "category": "stability",
-                "title": f"Runtime State: {model_state.upper().replace('_', ' ')}",
+                "title": f"Model State: {model_state.upper().replace('_', ' ')}",
                 "message": rec_logic["reason"],
                 "severity": severity,
                 "action_data": json.dumps({

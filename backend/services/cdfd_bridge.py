@@ -1,8 +1,8 @@
 """CDFD Runtime integration helpers for Vurafya.
 
-The app uses the public runtime and decision surfaces directly. Neo4j graph
-helpers remain optional because they live in the runtime's web visualization
-layer.
+Aligned with the slim CDFD Runtime (v1.1.1+): kernel, decision, CDFL, doctor,
+info, gallery, and optional LLM surfaces. Domain adapters and the Streamlit
+webapp were removed from the public Runtime and are not imported here.
 """
 from __future__ import annotations
 
@@ -17,6 +17,15 @@ ENGINE_PATH = Path(os.getenv("ENGINE_PATH", str(DEFAULT_RUNTIME_PATH))).expandus
 
 if ENGINE_PATH.exists() and str(ENGINE_PATH) not in sys.path:
     sys.path.append(str(ENGINE_PATH))
+
+# Retired with the slim Runtime; kept as explicit None so API layers can 410.
+list_domains = None
+run_domain = None
+DOMAIN_SURFACES_RETIRED = True
+DOMAIN_SURFACES_MESSAGE = (
+    "CDFD Runtime v1.1.1+ no longer ships domain adapters. "
+    "Use CDFL validate/run, gallery, doctor, and info instead."
+)
 
 
 def _fallback_guidance(
@@ -56,27 +65,29 @@ def _fallback_guidance(
     }
 
 
+CLAIM_BOUNDARY = (
+    "CDFD Runtime output is deterministic modeling and review support, "
+    "not clinical advice or a deployed medical decision system."
+)
+
 try:
-    from runtime.decision import classify_operating_state
     from runtime.artifacts import create_run_bundle
     from runtime.diagnostics import clean_json, result_envelope
-    from runtime.reporting import CLAIM_BOUNDARY, explanation_for_result
-    from runtime.runner import doctor, list_domains, llm_provider_inventory, run_domain, runtime_info
+    from runtime.reporting import CLAIM_BOUNDARY as _RUNTIME_CLAIM_BOUNDARY
+    from runtime.reporting import explanation_for_result
+    from runtime.runner import doctor, gallery, llm_provider_inventory, runtime_info
+
+    CLAIM_BOUNDARY = _RUNTIME_CLAIM_BOUNDARY
     RUNTIME_SURFACES_AVAILABLE = True
     RUNTIME_SURFACES_ERROR = None
 except ImportError as exc:
     clean_json = None
     create_run_bundle = None
     result_envelope = None
-    CLAIM_BOUNDARY = (
-        "CDFD Runtime output is deterministic modeling and review support, "
-        "not clinical advice or a deployed medical decision system."
-    )
     explanation_for_result = None
     doctor = None
-    list_domains = None
+    gallery = None
     llm_provider_inventory = None
-    run_domain = None
     runtime_info = None
     RUNTIME_SURFACES_AVAILABLE = False
     RUNTIME_SURFACES_ERROR = str(exc)
@@ -84,25 +95,23 @@ except ImportError as exc:
 try:
     from runtime.decision import classify_operating_state
     RUNTIME_DECISION_AVAILABLE = True
+    RUNTIME_DECISION_ERROR = None
 except ImportError as exc:
     classify_operating_state = _fallback_guidance
     RUNTIME_DECISION_AVAILABLE = False
     RUNTIME_DECISION_ERROR = str(exc)
-else:
-    RUNTIME_DECISION_ERROR = None
 
 
 try:
     from engine.kernel import Kernel
     from engine.state import State
     KERNEL_AVAILABLE = True
+    KERNEL_ERROR = None
 except ImportError as exc:
     Kernel = None
     State = None
     KERNEL_AVAILABLE = False
     KERNEL_ERROR = str(exc)
-else:
-    KERNEL_ERROR = None
 
 
 try:
@@ -110,36 +119,29 @@ try:
     from dsl.parser import parse
     from dsl.executor import Executor
     DSL_AVAILABLE = True
+    DSL_ERROR = None
 except ImportError as exc:
     tokenize = None
     parse = None
     Executor = None
     DSL_AVAILABLE = False
     DSL_ERROR = str(exc)
-else:
-    DSL_ERROR = None
 
 
 try:
     from ontology.actions.gateway import ActionGateway
     ACTION_GATEWAY_AVAILABLE = True
+    ACTION_GATEWAY_ERROR = None
 except ImportError as exc:
     ActionGateway = None
     ACTION_GATEWAY_AVAILABLE = False
     ACTION_GATEWAY_ERROR = str(exc)
-else:
-    ACTION_GATEWAY_ERROR = None
 
 
-try:
-    from webapp import neo4j_ontology as ontology
-    ONTOLOGY_AVAILABLE = True
-except ImportError as exc:
-    ontology = None
-    ONTOLOGY_AVAILABLE = False
-    ONTOLOGY_ERROR = str(exc)
-else:
-    ONTOLOGY_ERROR = None
+# Neo4j helpers lived in the removed Runtime webapp; keep optional and off.
+ontology = None
+ONTOLOGY_AVAILABLE = False
+ONTOLOGY_ERROR = "webapp/neo4j ontology surface removed from slim CDFD Runtime"
 
 
 ENGINE_AVAILABLE = KERNEL_AVAILABLE and RUNTIME_DECISION_AVAILABLE
@@ -148,6 +150,7 @@ ENGINE_AVAILABLE = KERNEL_AVAILABLE and RUNTIME_DECISION_AVAILABLE
 def runtime_status() -> dict[str, Any]:
     return {
         "engine_path": str(ENGINE_PATH),
+        "runtime_profile": "slim_cdfl",
         "kernel_available": KERNEL_AVAILABLE,
         "kernel_error": KERNEL_ERROR,
         "decision_available": RUNTIME_DECISION_AVAILABLE,
@@ -160,4 +163,7 @@ def runtime_status() -> dict[str, Any]:
         "action_gateway_error": ACTION_GATEWAY_ERROR,
         "ontology_available": ONTOLOGY_AVAILABLE,
         "ontology_error": ONTOLOGY_ERROR,
+        "domain_surfaces_retired": DOMAIN_SURFACES_RETIRED,
+        "domain_surfaces_message": DOMAIN_SURFACES_MESSAGE,
+        "gallery_available": gallery is not None,
     }

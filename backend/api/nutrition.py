@@ -3,7 +3,7 @@ from backend.utils.database import get_db
 from backend.utils.dependencies import get_current_user
 from backend.utils.exceptions import NotFoundError
 from backend.services.nutrition_service import (
-    search_foods, get_food_detail, get_food_pral,
+    search_foods, get_food_detail, get_food_pral, get_food_portions,
     create_meal, get_meals_for_date, get_meal_detail,
     get_daily_dashboard, get_weekly_trends,
 )
@@ -37,6 +37,11 @@ async def food_pral(food_id: int, db=Depends(get_db)):
     if not result:
         raise NotFoundError("PRAL data for food", food_id)
     return result
+
+
+@router.get("/foods/{food_id}/portions")
+async def food_portions(food_id: int, db=Depends(get_db)):
+    return {"portions": await get_food_portions(db, food_id)}
 
 
 @router.post("/meals")

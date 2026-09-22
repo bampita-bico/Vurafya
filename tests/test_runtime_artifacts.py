@@ -16,7 +16,8 @@ def test_sqlite_style_sql_is_bound_for_postgres():
 
     assert "INSERT INTO readings" in bound_statement
     assert "NOW()" in bound_statement
-    assert bound_statement.endswith(":p0)")
+    assert ":p0)" in bound_statement
+    assert bound_statement.endswith("ON CONFLICT DO NOTHING")
     assert params == {"p0": 42}
 
 

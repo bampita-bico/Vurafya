@@ -18,7 +18,6 @@ import {
   Flame,
   Gamepad2,
   GaugeCircle,
-  Hammer,
   HeartPulse,
   Home,
   KeyRound,
@@ -28,7 +27,6 @@ import {
   Network,
   Pill,
   RefreshCw,
-  Scale,
   Save,
   Shield,
   Stethoscope,
@@ -39,8 +37,9 @@ import {
 } from 'lucide-react';
 import './App.css';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000/api/v1';
+const API_BASE = process.env.REACT_APP_API_URL || '/api/v1';
 const HEALTH_URL = API_BASE.replace(/\/api\/v1\/?$/, '/health');
+const DEMO_LOGIN_ENABLED = process.env.REACT_APP_DEMO_LOGIN_ENABLED === 'true';
 
 const sampleStability = {
   user_id: 'demo',
@@ -53,12 +52,12 @@ const sampleStability = {
   },
   finite_audit: { all_finite: true, non_finite_paths: [] },
   provenance: {
-    runtime: 'CDFD Runtime',
-    language: 'CDFL',
+    runtime: 'Vurafya demo data',
+    language: 'demo',
     command: 'local demo stability',
     timestamp_utc: new Date().toISOString(),
   },
-  claim_boundary: 'CDFD Runtime output is deterministic modeling and review support, not clinical advice.',
+  claim_boundary: 'Demo data only. Vurafya scores are review support, not clinical advice.',
   runtime_run: {
     run_uid: 'local-demo',
     summary: {
@@ -111,7 +110,7 @@ const sampleTrajectory = Array.from({ length: 50 }, (_, index) => {
 
 const sampleAvatar = {
   metaverse_id: 'vurafya_export_demo',
-  source_engine: 'CDFD Runtime',
+  source_engine: 'Vurafya demo data',
   consent_granted: true,
   avatar_data: {
     character_class: 'Guardian',
@@ -124,6 +123,20 @@ const sampleAvatar = {
       agility_resilience: 72,
     },
   },
+};
+
+const unavailableStability = {
+  clinical_stability_score: null,
+  clinical_regime: 'insufficient_data',
+  runtime_guidance: {
+    state: 'insufficient_data',
+    reason: 'Enter a usable current measurement to generate an in-app review score.',
+    actions: ['record_measurement'],
+  },
+  finite_audit: null,
+  provenance: {},
+  runtime_run: null,
+  system_analysis: {},
 };
 
 const systems = [
@@ -172,19 +185,17 @@ const portalModules = [
   { id: 'avatar', label: 'Avatar', Icon: Gamepad2 },
   { id: 'doctor', label: 'Doctor', Icon: Stethoscope },
   { id: 'pharmacy', label: 'Pharmacy', Icon: Pill },
-  { id: 'barter', label: 'Barter', Icon: Scale },
-  { id: 'labor', label: 'Labor', Icon: Hammer },
   { id: 'profile', label: 'Profile', Icon: UserCircle },
 ];
 
 function clampPercent(value) {
-  const numeric = Number.isFinite(value) ? value : 1;
+  const numeric = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(100, Math.round(numeric * 100)));
 }
 
 function formatScore(value, digits = 3) {
   const numeric = Number(value);
-  return Number.isFinite(numeric) ? numeric.toFixed(digits) : '1.000';
+  return Number.isFinite(numeric) ? numeric.toFixed(digits) : '—';
 }
 
 function humanize(value) {
@@ -216,43 +227,40 @@ function makeAuthHeader(token) {
 }
 
 function normalizeTrajectory(items, stability) {
-  const source = Array.isArray(items) && items.length > 0 ? items : sampleTrajectory;
+  const source = Array.isArray(items) ? items : [];
   const systemScores = stability?.system_analysis || {};
 
   return source.map((row, index) => ({
     t: row.t ?? row.step ?? index,
-    psi_s: Number(row.psi_s ?? row.mean_psi ?? row.psi ?? stability?.clinical_stability_score ?? 1),
-    renal_psi: Number(row.renal_psi ?? systemScores.renal?.score ?? 1),
-    cardio_psi: Number(row.cardio_psi ?? systemScores.cardiovascular?.score ?? systemScores.cardio?.score ?? 1),
-    metabolic_psi: Number(row.metabolic_psi ?? systemScores.metabolic?.score ?? 1),
+    psi_s: Number(row.psi_s ?? row.mean_psi ?? row.psi ?? stability?.clinical_stability_score),
+    renal_psi: Number(row.renal_psi ?? systemScores.renal?.score),
+    cardio_psi: Number(row.cardio_psi ?? systemScores.cardiovascular?.score ?? systemScores.cardio?.score),
+    metabolic_psi: Number(row.metabolic_psi ?? systemScores.metabolic?.score),
   }));
 }
 
 function normalizeStability(payload) {
-  if (!payload || typeof payload !== 'object') return sampleStability;
+  if (!payload || typeof payload !== 'object') return unavailableStability;
   const envelope = payload.runtime_envelope || {};
+  const score = Number(payload.clinical_stability_score ?? payload.mean_psi);
   return {
-    ...sampleStability,
     ...payload,
-    clinical_stability_score: Number(payload.clinical_stability_score ?? payload.mean_psi ?? 1),
-    clinical_regime: payload.clinical_regime || payload.overall_regime || 'stable',
-    runtime_guidance: payload.runtime_guidance || sampleStability.runtime_guidance,
-    finite_audit: payload.finite_audit || envelope.finite_audit || sampleStability.finite_audit,
-    provenance: payload.provenance || envelope.provenance || sampleStability.provenance,
-    claim_boundary: payload.claim_boundary || envelope.payload?.claim_boundary || sampleStability.claim_boundary,
-    runtime_run: payload.runtime_run || sampleStability.runtime_run,
-    system_analysis: {
-      ...sampleStability.system_analysis,
-      ...(payload.system_analysis || {}),
-    },
+    clinical_stability_score: Number.isFinite(score) ? score : null,
+    clinical_regime: payload.clinical_regime || payload.overall_regime || 'insufficient_data',
+    runtime_guidance: payload.runtime_guidance || unavailableStability.runtime_guidance,
+    finite_audit: payload.finite_audit || envelope.finite_audit || null,
+    provenance: payload.provenance || envelope.provenance || {},
+    claim_boundary: payload.claim_boundary || envelope.payload?.claim_boundary,
+    runtime_run: payload.runtime_run || null,
+    system_analysis: payload.system_analysis || {},
   };
 }
 
 function getSystemScore(analysis, systemId) {
   if (systemId === 'cardiovascular') {
-    return Number(analysis.cardiovascular?.score ?? analysis.cardio?.score ?? 1);
+    return Number(analysis.cardiovascular?.score ?? analysis.cardio?.score);
   }
-  return Number(analysis[systemId]?.score ?? 1);
+  return Number(analysis[systemId]?.score);
 }
 
 function HealthBadge({ status }) {
@@ -349,7 +357,7 @@ function AuthPanel({ token, authMode, setAuthMode, authForm, setAuthForm, onSubm
             >
               {authMode === 'login' ? 'Register' : 'Use sign in'}
             </button>
-            {authMode === 'login' && (
+            {authMode === 'login' && DEMO_LOGIN_ENABLED && (
               <button className="text-button" type="button" onClick={onDemoLogin} disabled={busy}>
                 Instant demo access
               </button>
@@ -513,29 +521,30 @@ function RuntimeEvidencePanel({ stability }) {
 }
 
 function PatientView({ stability, trajectory }) {
-  const score = Number(stability.clinical_stability_score ?? 1);
+  const score = Number(stability.clinical_stability_score);
   const percent = clampPercent(score);
+  const hasScore = Number.isFinite(score);
 
   return (
     <div className="view-grid">
       <MetricCard
         icon={HeartPulse}
         label="Runtime Balance"
-        value={`${percent}%`}
-        detail={humanize(stability.clinical_regime)}
+        value={hasScore ? `${percent}%` : '—'}
+        detail={hasScore ? humanize(stability.clinical_regime) : 'Measurements needed'}
         tone={getScoreTone(score)}
       />
       <MetricCard
         icon={Shield}
         label="Model Band"
-        value={score >= 0.8 && score <= 1.2 ? 'Balanced' : 'Review'}
-        detail={`Psi_s ${formatScore(score)}`}
+        value={hasScore ? (score >= 0.8 && score <= 1.2 ? 'Balanced' : 'Review') : 'Unavailable'}
+        detail={hasScore ? `Psi_s ${formatScore(score)}` : 'No usable score'}
       />
       <MetricCard
         icon={Database}
         label="Runtime Source"
-        value="CDFD"
-        detail={stability.timestamp ? new Date(stability.timestamp).toLocaleString() : 'Local sample'}
+        value="Vurafya local"
+        detail={stability.timestamp ? new Date(stability.timestamp).toLocaleString() : 'Runtime optional'}
       />
       <RuntimeChart trajectory={trajectory} />
       <GuidancePanel stability={stability} />
@@ -692,8 +701,6 @@ function WellnessView({ stability, recommendations, onNavigate }) {
     ['Log Meal', 'fuel'],
     ['Consult Doctor', 'doctor'],
     ['Pharmacy', 'pharmacy'],
-    ['Barter', 'barter'],
-    ['Labor', 'labor'],
     ['Avatar', 'avatar'],
   ];
 
@@ -840,14 +847,12 @@ function App() {
   const [authForm, setAuthForm] = useState({ email: '', username: '', password: '' });
   const [authMessage, setAuthMessage] = useState('');
   const [status, setStatus] = useState({ loading: true });
-  const [stability, setStability] = useState(sampleStability);
-  const [trajectory, setTrajectory] = useState(sampleTrajectory);
+  const [stability, setStability] = useState(DEMO_LOGIN_ENABLED ? sampleStability : unavailableStability);
+  const [trajectory, setTrajectory] = useState(DEMO_LOGIN_ENABLED ? sampleTrajectory : []);
   const [avatar, setAvatar] = useState(sampleAvatar);
   const [profile, setProfile] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
   const [pharmacyData, setPharmacyData] = useState({ schedules: [], orders: [] });
-  const [barterData, setBarterData] = useState({ goods: [], trades: [] });
-  const [laborData, setLaborData] = useState({ services: [], bookings: [] });
   const [quickEntry, setQuickEntry] = useState(quickEntryDefaults);
   const [quickEntryMessage, setQuickEntryMessage] = useState('');
   const [busy, setBusy] = useState({ auth: false, refresh: false, avatar: false, quickEntry: false });
@@ -874,16 +879,20 @@ function App() {
     try {
       const headers = makeAuthHeader(token);
       const [stabilityResponse, trajectoryResponse] = await Promise.all([
-        token ? api.get('/engine/stability', { headers }) : Promise.resolve({ data: sampleStability }),
-        token ? api.get('/engine/trajectory?steps=50', { headers }) : Promise.resolve({ data: { forecast: sampleTrajectory } }),
+        token
+          ? api.get('/engine/stability', { headers })
+          : Promise.resolve({ data: DEMO_LOGIN_ENABLED ? sampleStability : unavailableStability }),
+        token
+          ? api.get('/engine/trajectory?steps=50', { headers })
+          : Promise.resolve({ data: { forecast: DEMO_LOGIN_ENABLED ? sampleTrajectory : [] } }),
       ]);
       const nextStability = normalizeStability(stabilityResponse.data);
       setStability(nextStability);
       setTrajectory(normalizeTrajectory(trajectoryResponse.data?.forecast, nextStability));
     } catch (error) {
-      setAuthMessage(error.response?.status === 401 ? 'Session expired or token rejected.' : 'Runtime API unavailable; showing local sample.');
-      setStability(sampleStability);
-      setTrajectory(sampleTrajectory);
+      setAuthMessage(error.response?.status === 401 ? 'Session expired or token rejected.' : 'Health API unavailable; no score is shown.');
+      setStability(unavailableStability);
+      setTrajectory([]);
     } finally {
       setBusy((current) => ({ ...current, refresh: false }));
     }
@@ -910,35 +919,21 @@ function App() {
       setProfile(null);
       setRecommendations([]);
       setPharmacyData({ schedules: [], orders: [] });
-      setBarterData({ goods: [], trades: [] });
-      setLaborData({ services: [], bookings: [] });
       return;
     }
     const headers = makeAuthHeader(token);
     try {
-      const [profileRes, recsRes, schedulesRes, ordersRes, goodsRes, tradesRes, servicesRes, bookingsRes] = await Promise.all([
+      const [profileRes, recsRes, schedulesRes, ordersRes] = await Promise.all([
         api.get('/users/me', { headers }),
         api.get('/recommendations', { headers }),
         api.get('/pharmacy/schedules', { headers }),
         api.get('/pharmacy/orders', { headers }),
-        api.get('/barter/goods?limit=5', { headers }),
-        api.get('/barter/trades', { headers }),
-        api.get('/labor/my-services', { headers }),
-        api.get('/labor/bookings', { headers }),
       ]);
       setProfile(profileRes.data || null);
       setRecommendations(recsRes.data?.recommendations || []);
       setPharmacyData({
         schedules: schedulesRes.data?.schedules || [],
         orders: ordersRes.data?.orders || [],
-      });
-      setBarterData({
-        goods: goodsRes.data?.goods || [],
-        trades: tradesRes.data?.trades || [],
-      });
-      setLaborData({
-        services: servicesRes.data?.services || [],
-        bookings: bookingsRes.data?.bookings || [],
       });
     } catch (error) {
       if (error.response?.status === 401) {
@@ -1001,12 +996,18 @@ function App() {
     }
   }
 
-  function handleLogout() {
+  async function handleLogout() {
+    const headers = makeAuthHeader(token);
+    try {
+      if (token) await api.post('/auth/logout', {}, { headers });
+    } catch (_error) {
+      // Local credential clearing is still required if the network is unavailable.
+    }
     localStorage.removeItem('vurafya-token');
     setToken('');
     setAuthMessage('Signed out.');
-    setStability(sampleStability);
-    setTrajectory(sampleTrajectory);
+    setStability(DEMO_LOGIN_ENABLED ? sampleStability : unavailableStability);
+    setTrajectory(DEMO_LOGIN_ENABLED ? sampleTrajectory : []);
     setAvatar(sampleAvatar);
     setProfile(null);
     setRecommendations([]);
@@ -1054,7 +1055,8 @@ function App() {
     }
   }
 
-  const overallScore = Number(stability.clinical_stability_score ?? 1);
+  const overallScore = Number(stability.clinical_stability_score);
+  const hasOverallScore = Number.isFinite(overallScore);
 
   return (
     <div className="app-shell">
@@ -1063,7 +1065,7 @@ function App() {
           <HeartPulse size={28} />
           <div>
             <strong>Vurafya</strong>
-            <span>CDFD Runtime Portal</span>
+            <span>Health review portal</span>
           </div>
         </div>
 
@@ -1136,19 +1138,19 @@ function App() {
               icon={GaugeCircle}
               label="Psi_s"
               value={formatScore(overallScore)}
-              detail={humanize(stability.clinical_regime)}
+              detail={hasOverallScore ? humanize(stability.clinical_regime) : 'Measurements needed'}
               tone={getScoreTone(overallScore)}
             />
             <MetricCard
               icon={Activity}
               label="Band"
-              value={overallScore >= 0.8 && overallScore <= 1.2 ? 'Balanced' : 'Review'}
+              value={hasOverallScore ? (overallScore >= 0.8 && overallScore <= 1.2 ? 'Balanced' : 'Review') : 'Unavailable'}
               detail="0.8 to 1.2 reference"
             />
             <MetricCard
               icon={Network}
               label="Systems"
-              value="3 live"
+              value={`${stability.available_domains?.length || 0} live`}
               detail="renal, cardio, metabolic"
             />
           </section>
@@ -1212,48 +1214,6 @@ function App() {
               })),
             ]}
             emptyMessage="No pharmacy entries yet"
-          />
-        )}
-
-        {activeModule === 'barter' && (
-          <SimpleListModule
-            eyebrow="Barter Trade"
-            title="Marketplace activity"
-            icon={Scale}
-            items={[
-              ...barterData.goods.slice(0, 3).map((row) => ({
-                primary: row.title || row.item_name || 'Goods listing',
-                secondary: row.category || 'general',
-                tertiary: row.estimated_value ? `Value: ${row.estimated_value}` : 'Open listing',
-              })),
-              ...barterData.trades.slice(0, 2).map((row) => ({
-                primary: row.trade_reference || `Trade #${row.id || 'N/A'}`,
-                secondary: row.trade_status || 'proposed',
-                tertiary: row.created_at ? new Date(row.created_at).toLocaleDateString() : 'Recent trade',
-              })),
-            ]}
-            emptyMessage="No barter entries yet"
-          />
-        )}
-
-        {activeModule === 'labor' && (
-          <SimpleListModule
-            eyebrow="Labor Exchange"
-            title="Service and bookings"
-            icon={Hammer}
-            items={[
-              ...laborData.services.slice(0, 3).map((row) => ({
-                primary: row.service_type || row.skill_name || 'Registered service',
-                secondary: row.hourly_rate ? `${row.hourly_rate} / hr` : 'Rate not set',
-                tertiary: row.district || row.country_code || 'Location not set',
-              })),
-              ...laborData.bookings.slice(0, 2).map((row) => ({
-                primary: row.booking_reference || `Booking #${row.id || 'N/A'}`,
-                secondary: row.status || 'requested',
-                tertiary: row.created_at ? new Date(row.created_at).toLocaleDateString() : 'Recent booking',
-              })),
-            ]}
-            emptyMessage="No labor entries yet"
           />
         )}
 

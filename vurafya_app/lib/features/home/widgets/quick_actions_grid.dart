@@ -9,8 +9,6 @@ class QuickActionsGrid extends StatelessWidget {
     _Action('Consult Doctor', Icons.medical_services, '/medical',
         Color(0xFF1E88E5)),
     _Action('Pharmacy', Icons.local_pharmacy, '/pharmacy', Color(0xFFE53935)),
-    _Action('Barter', Icons.swap_horiz, '/barter', Color(0xFFFFB300)),
-    _Action('Labor', Icons.handyman, '/labor', Color(0xFF8E24AA)),
     _Action('Game', Icons.sports_esports, '/game', Color(0xFFFF7043)),
   ];
 

@@ -20,6 +20,13 @@ class AuthRepository {
     return tokens;
   }
 
+  Future<AuthTokens> demoLogin() async {
+    final resp = await _api.dio.post('/auth/demo-login');
+    final tokens = AuthTokens.fromJson(resp.data);
+    await _api.saveTokens(tokens.accessToken, tokens.refreshToken);
+    return tokens;
+  }
+
   Future<AuthTokens> login({
     required String email,
     required String password,
@@ -44,6 +51,10 @@ class AuthRepository {
     } on DioException catch (_) {
       // Best-effort logout; clear tokens regardless
     }
+    await _api.clearTokens();
+  }
+
+  Future<void> clearSession() async {
     await _api.clearTokens();
   }
 

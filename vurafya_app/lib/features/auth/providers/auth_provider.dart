@@ -2,7 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/auth_models.dart';
 import '../repositories/auth_repository.dart';
 
-final authRepositoryProvider = Provider<AuthRepository>((_) => AuthRepository());
+final authRepositoryProvider =
+    Provider<AuthRepository>((_) => AuthRepository());
 
 // Holds the logged-in user profile; null = not authenticated
 final userProfileProvider =
@@ -20,14 +21,27 @@ class UserProfileNotifier extends StateNotifier<AsyncValue<UserProfile?>> {
   Future<void> _init() async {
     try {
       final loggedIn = await _repo.isLoggedIn;
-      if (loggedIn) {
-        final profile = await _repo.getProfile();
-        state = AsyncValue.data(profile);
-      } else {
+      if (!loggedIn) {
         state = const AsyncValue.data(null);
+        return;
       }
+      final profile = await _repo.getProfile();
+      state = AsyncValue.data(profile);
+    } catch (_) {
+      await _repo.clearSession();
+      state = const AsyncValue.data(null);
+    }
+  }
+
+  Future<void> demoLogin() async {
+    state = const AsyncValue.loading();
+    try {
+      await _repo.demoLogin();
+      final profile = await _repo.getProfile();
+      state = AsyncValue.data(profile);
     } catch (e, st) {
       state = AsyncValue.error(e, st);
+      rethrow;
     }
   }
 

@@ -3,22 +3,33 @@ from datetime import datetime, timezone
 
 
 async def get_complete_profile(db: aiosqlite.Connection, user_id: int) -> dict | None:
+    """Return a profile dict; works on minimal Postgres bootstrap schemas."""
     cursor = await db.execute(
-        """SELECT u.id, u.email, u.username, u.has_completed_health_declaration,
-                  u.primary_condition_id, u.created_at, u.last_login,
-                  sp.plan_name as subscription_plan, sp.tier as subscription_tier,
-                  us.status as subscription_status,
-                  mc.condition_name as primary_condition,
-                  avs.level, avs.current_xp, avs.current_streak, avs.afya_points_balance
+        """SELECT u.id, u.email, u.username, u.created_at, u.last_login,
+                  avs.level, avs.current_xp, avs.current_streak, avs.afya_points_balance,
+                  us.status as subscription_status
            FROM users u
-           LEFT JOIN user_subscriptions us ON u.id = us.user_id AND us.status IN ('active', 'trial')
-           LEFT JOIN subscription_plans sp ON us.plan_id = sp.id
-           LEFT JOIN medical_conditions mc ON u.primary_condition_id = mc.id
            LEFT JOIN avatar_stats avs ON u.id = avs.user_id
+           LEFT JOIN user_subscriptions us ON u.id = us.user_id
+                AND us.status IN ('active', 'trial')
            WHERE u.id = ?""",
         (user_id,),
     )
-    return await cursor.fetchone()
+    row = await cursor.fetchone()
+    if not row:
+        return None
+
+    profile = dict(row)
+    profile.setdefault("has_completed_health_declaration", False)
+    profile.setdefault("primary_condition_id", None)
+    profile.setdefault("primary_condition", None)
+    profile.setdefault("subscription_plan", "free")
+    profile.setdefault("subscription_tier", "free")
+    profile.setdefault("subscription_status", profile.get("subscription_status") or "active")
+    profile.setdefault("full_name", None)
+    profile.setdefault("avatar_url", None)
+    profile.setdefault("is_verified", False)
+    return profile
 
 
 async def update_profile(db: aiosqlite.Connection, user_id: int, data: dict) -> None:
@@ -92,12 +103,18 @@ async def submit_health_declaration(
         nutrient = await cursor.fetchone()
         if nutrient:
             target_value = t["target_max"] or t["target_min"] or 0
-            await db.execute(
-                """INSERT OR REPLACE INTO nutrient_targets
-                   (user_id, nutrient_id, target_value, created_at)
-                   VALUES (?, ?, ?, ?)""",
-                (user_id, nutrient["id"], target_value, now),
+            updated = await db.execute(
+                """UPDATE nutrient_targets SET target_value = ?, created_at = ?
+                   WHERE user_id = ? AND nutrient_id = ? AND is_active = TRUE""",
+                (target_value, now, user_id, nutrient["id"]),
             )
+            if updated.rowcount == 0:
+                await db.execute(
+                    """INSERT INTO nutrient_targets
+                       (user_id, nutrient_id, target_value, created_at, is_active)
+                       VALUES (?, ?, ?, ?, TRUE)""",
+                    (user_id, nutrient["id"], target_value, now),
+                )
 
     await db.commit()
     return {"condition": condition["condition_name"], "stage": stage, "targets_generated": len(templates)}

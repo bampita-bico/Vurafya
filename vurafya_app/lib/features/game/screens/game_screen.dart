@@ -136,13 +136,23 @@ class _GameScreenState extends ConsumerState<GameScreen>
                   stabilityAsync.when(
                     data: (data) {
                       bool isOffline = data['is_offline_cache'] == true;
+                      final rawScore = data['clinical_stability_score'];
+                      if (rawScore is! num) {
+                        return const Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Text(
+                              'Add biometrics to unlock health-mapped avatar stats.'),
+                        );
+                      }
 
-                      double rawHealth =
-                          (data['clinical_stability_score'] ?? 1.0);
+                      double rawHealth = rawScore.toDouble();
                       final sys = data['system_analysis'] ?? {};
-                      double energyScore = sys['metabolic']?['score'] ?? 1.0;
+                      double energyScore =
+                          (sys['metabolic']?['score'] as num? ?? 0.0)
+                              .toDouble();
                       double immunityScore =
-                          sys['cardiovascular']?['score'] ?? 1.0;
+                          (sys['cardiovascular']?['score'] as num? ?? 0.0)
+                              .toDouble();
 
                       double hp = (rawHealth * 1000).clamp(0, 1000).toDouble();
                       double mp = (energyScore * 500).clamp(0, 500).toDouble();

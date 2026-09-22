@@ -2,12 +2,20 @@ import aiosqlite
 from datetime import datetime, timezone, date
 
 
+def _meal_date(value: str | date | None) -> date:
+    if value is None:
+        return date.today()
+    if isinstance(value, date):
+        return value
+    return date.fromisoformat(str(value))
+
+
 async def search_foods(db: aiosqlite.Connection, query: str, limit: int = 20, offset: int = 0) -> dict:
     q = f"%{query}%"
     cursor = await db.execute(
-        """SELECT f.id, f.name, f.local_name, f.glycemic_index, f.gi_classification
+        """SELECT f.id, f.name, f.local_name, f.category, f.glycemic_index, f.gi_classification
            FROM foods f
-           WHERE f.name IS NOT NULL AND (f.name LIKE ? OR f.local_name LIKE ?)
+           WHERE f.name IS NOT NULL AND (f.name ILIKE ? OR f.local_name ILIKE ?)
            ORDER BY f.name
            LIMIT ? OFFSET ?""",
         (q, q, limit, offset),
@@ -15,7 +23,7 @@ async def search_foods(db: aiosqlite.Connection, query: str, limit: int = 20, of
     items = await cursor.fetchall()
 
     cursor = await db.execute(
-        "SELECT COUNT(*) as total FROM foods WHERE name IS NOT NULL AND (name LIKE ? OR local_name LIKE ?)",
+        "SELECT COUNT(*) as total FROM foods WHERE name IS NOT NULL AND (name ILIKE ? OR local_name ILIKE ?)",
         (q, q),
     )
     total_row = await cursor.fetchone()
@@ -42,7 +50,21 @@ async def get_food_detail(db: aiosqlite.Connection, food_id: int) -> dict | None
     )
     nutrients = await cursor.fetchall()
 
-    return {"food": food, "nutrients": nutrients}
+    portions_cursor = await db.execute(
+        """SELECT portion_name, grams, milliliters, is_estimate
+           FROM food_portions WHERE food_id = ? ORDER BY display_order, id""",
+        (food_id,),
+    )
+    return {"food": food, "nutrients": nutrients, "portions": await portions_cursor.fetchall()}
+
+
+async def get_food_portions(db: aiosqlite.Connection, food_id: int) -> list:
+    cursor = await db.execute(
+        """SELECT portion_name, grams, milliliters, is_estimate
+           FROM food_portions WHERE food_id = ? ORDER BY display_order, id""",
+        (food_id,),
+    )
+    return await cursor.fetchall()
 
 
 async def get_food_pral(db: aiosqlite.Connection, food_id: int) -> dict | None:
@@ -90,8 +112,8 @@ async def get_food_pral(db: aiosqlite.Connection, food_id: int) -> dict | None:
 
 
 async def create_meal(db: aiosqlite.Connection, user_id: int, meal_data: dict) -> dict:
-    now = datetime.now(timezone.utc).isoformat()
-    meal_date = meal_data.get("meal_date") or date.today().isoformat()
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    meal_date = _meal_date(meal_data.get("meal_date"))
 
     # Insert meal
     cursor = await db.execute(
@@ -170,7 +192,7 @@ async def create_meal(db: aiosqlite.Connection, user_id: int, meal_data: dict) -
     return {
         "meal_id": meal_id,
         "meal_type": meal_data["meal_type"],
-        "meal_date": meal_date,
+        "meal_date": meal_date.isoformat(),
         "components_count": len(meal_data["components"]),
         "nutrition": {
             "calories": round(total_calories, 1),
@@ -183,6 +205,7 @@ async def create_meal(db: aiosqlite.Connection, user_id: int, meal_data: dict) -
 
 
 async def get_meals_for_date(db: aiosqlite.Connection, user_id: int, meal_date: str) -> list:
+    meal_day = _meal_date(meal_date)
     cursor = await db.execute(
         """SELECT m.id, m.meal_type, m.meal_date, m.notes, m.created_at,
                   mnc.calories_total, mnc.protein_g_total,
@@ -191,7 +214,7 @@ async def get_meals_for_date(db: aiosqlite.Connection, user_id: int, meal_date: 
            LEFT JOIN meal_nutrition_calculations mnc ON m.id = mnc.meal_id
            WHERE m.user_id = ? AND m.meal_date = ?
            ORDER BY m.created_at""",
-        (user_id, meal_date),
+        (user_id, meal_day),
     )
     return await cursor.fetchall()
 
@@ -222,6 +245,7 @@ async def get_meal_detail(db: aiosqlite.Connection, meal_id: int, user_id: int) 
 
 
 async def get_daily_dashboard(db: aiosqlite.Connection, user_id: int, meal_date: str) -> dict:
+    meal_day = _meal_date(meal_date)
     # Sum all meals for the day
     cursor = await db.execute(
         """SELECT
@@ -234,21 +258,25 @@ async def get_daily_dashboard(db: aiosqlite.Connection, user_id: int, meal_date:
            FROM meals m
            JOIN meal_nutrition_calculations mnc ON m.id = mnc.meal_id
            WHERE m.user_id = ? AND m.meal_date = ?""",
-        (user_id, meal_date),
+        (user_id, meal_day),
     )
     daily = await cursor.fetchone()
 
-    # Get user's nutrient targets
-    cursor = await db.execute(
-        """SELECT nt.*, n.name as nutrient_name
-           FROM nutrient_targets nt
-           JOIN nutrients n ON nt.nutrient_id = n.id
-           WHERE nt.user_id = ?""",
-        (user_id,),
-    )
-    targets = await cursor.fetchall()
+    # Get user's nutrient targets (optional; table may be empty on fresh installs)
+    targets = []
+    try:
+        cursor = await db.execute(
+            """SELECT nt.*, n.name as nutrient_name
+               FROM nutrient_targets nt
+               JOIN nutrients n ON nt.nutrient_id = n.id
+               WHERE nt.user_id = ?""",
+            (user_id,),
+        )
+        targets = await cursor.fetchall()
+    except Exception:
+        targets = []
 
-    return {"date": meal_date, "totals": daily, "targets": targets}
+    return {"date": meal_day.isoformat(), "totals": daily, "targets": targets}
 
 
 async def get_weekly_trends(db: aiosqlite.Connection, user_id: int) -> list:

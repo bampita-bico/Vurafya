@@ -10,6 +10,7 @@ from backend.services.cdfd_bridge import ONTOLOGY_AVAILABLE, ontology, runtime_s
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    settings.validate_deployment()
     db_info = await check_db()
     app.state.db_info = db_info
 
@@ -23,16 +24,17 @@ async def lifespan(app: FastAPI):
     else:
         print(f"CDFD graph layer unavailable: {runtime_status().get('ontology_error')}")
 
-    # Start the Universal Engine background worker
-    db_path = get_db_path()
-    asyncio.create_task(stability_background_worker(db_path))
+    # The worker is opt-in: core app routes do not depend on model processing.
+    if settings.ENABLE_BACKGROUND_WORKER:
+        db_path = get_db_path()
+        asyncio.create_task(stability_background_worker(db_path))
 
     yield
 
 
 app = FastAPI(
     title="Vurafya API",
-    description="Health platform API - Nutrition, Gamification, Payments",
+    description="Health platform API - Nutrition, Gamification, and medical workflows",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -62,16 +64,12 @@ from backend.api.pharmacy import router as pharmacy_router
 from backend.api.biometrics import router as biometrics_router
 from backend.api.medical import router as medical_router
 from backend.api.game_extras import router as game_extras_router
-from backend.api.payments import router as payments_router
-from backend.api.barter import router as barter_router
-from backend.api.labor import router as labor_router
 from backend.api.trust import router as trust_router
 from backend.api.admin import router as admin_router
 from backend.api.preventive import router as preventive_router
 from backend.api.ai_recommendations import router as ai_router
 from backend.api.social import router as social_router
 from backend.api.social_good import router as social_good_router
-from backend.api.flutterwave import router as flw_router
 from backend.api.push_notifications import router as push_router
 from backend.api.otp import router as otp_router
 from backend.api.offline_sync import router as offline_router
@@ -88,16 +86,12 @@ app.include_router(pharmacy_router, prefix="/api/v1/pharmacy", tags=["Pharmacy"]
 app.include_router(biometrics_router, prefix="/api/v1/biometrics", tags=["Biometrics"])
 app.include_router(medical_router, prefix="/api/v1/medical", tags=["Medical"])
 app.include_router(game_extras_router, prefix="/api/v1/game", tags=["Game Extras"])
-app.include_router(payments_router, prefix="/api/v1/payments", tags=["Payments"])
-app.include_router(barter_router, prefix="/api/v1/barter", tags=["Barter"])
-app.include_router(labor_router, prefix="/api/v1/labor", tags=["Labor"])
 app.include_router(trust_router, prefix="/api/v1/users", tags=["Trust & KYC"])
 app.include_router(admin_router, prefix="/api/v1/admin", tags=["Admin"])
 app.include_router(preventive_router, prefix="/api/v1/preventive", tags=["Preventive Medicine"])
 app.include_router(ai_router, prefix="/api/v1/recommendations", tags=["AI Recommendations"])
 app.include_router(social_router, prefix="/api/v1/social", tags=["Social"])
 app.include_router(social_good_router, prefix="/api/v1/social-good", tags=["Social Good"])
-app.include_router(flw_router, prefix="/api/v1/flutterwave", tags=["FlutterWave"])
 app.include_router(push_router, prefix="/api/v1/push", tags=["Push Notifications"])
 app.include_router(otp_router, prefix="/api/v1/otp", tags=["OTP"])
 app.include_router(offline_router, prefix="/api/v1/offline", tags=["Offline Sync"])

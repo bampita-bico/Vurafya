@@ -1,0 +1,112 @@
+-- Repair columns omitted by the early bootstrap placeholder tables.
+-- All statements are idempotent so this also upgrades databases bootstrapped
+-- before the application-specific schemas were introduced.
+
+ALTER TABLE users ADD COLUMN IF NOT EXISTS email VARCHAR(255);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS username VARCHAR(80);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS password_hash VARCHAR(255);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS phone_number VARCHAR(20);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS country_code VARCHAR(5);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT TRUE;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS last_login TIMESTAMP;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS auth_token_version INTEGER NOT NULL DEFAULT 0;
+
+ALTER TABLE avatar_stats ADD COLUMN IF NOT EXISTS user_id INTEGER;
+ALTER TABLE avatar_stats ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE avatar_stats ADD COLUMN IF NOT EXISTS health_level DOUBLE PRECISION;
+ALTER TABLE avatar_stats ADD COLUMN IF NOT EXISTS energy_level DOUBLE PRECISION;
+ALTER TABLE avatar_stats ADD COLUMN IF NOT EXISTS immunity_level DOUBLE PRECISION;
+ALTER TABLE avatar_stats ADD COLUMN IF NOT EXISTS resilience_level DOUBLE PRECISION;
+
+ALTER TABLE user_subscriptions ADD COLUMN IF NOT EXISTS user_id INTEGER;
+ALTER TABLE user_subscriptions ADD COLUMN IF NOT EXISTS plan_id INTEGER DEFAULT 1;
+ALTER TABLE user_subscriptions ADD COLUMN IF NOT EXISTS status VARCHAR(40) DEFAULT 'active';
+ALTER TABLE user_subscriptions ADD COLUMN IF NOT EXISTS billing_cycle VARCHAR(20) DEFAULT 'monthly';
+ALTER TABLE user_subscriptions ADD COLUMN IF NOT EXISTS current_period_start DATE;
+ALTER TABLE user_subscriptions ADD COLUMN IF NOT EXISTS current_period_end DATE;
+
+ALTER TABLE medical_staff ADD COLUMN IF NOT EXISTS user_id INTEGER;
+ALTER TABLE medical_staff ADD COLUMN IF NOT EXISTS staff_role VARCHAR(50);
+ALTER TABLE medical_staff ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT TRUE;
+
+ALTER TABLE user_access_controls ADD COLUMN IF NOT EXISTS user_id INTEGER;
+ALTER TABLE user_access_controls ADD COLUMN IF NOT EXISTS role_name VARCHAR(40);
+ALTER TABLE user_access_controls ADD COLUMN IF NOT EXISTS permissions TEXT;
+ALTER TABLE user_access_controls ADD COLUMN IF NOT EXISTS granted_by INTEGER;
+ALTER TABLE user_access_controls ADD COLUMN IF NOT EXISTS granted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE user_access_controls ADD COLUMN IF NOT EXISTS expires_at TIMESTAMP;
+ALTER TABLE user_access_controls ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT TRUE;
+
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS user_id INTEGER;
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS temperature_c DOUBLE PRECISION;
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS pulse_bpm DOUBLE PRECISION;
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS respiratory_rate DOUBLE PRECISION;
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS oxygen_saturation_pct DOUBLE PRECISION;
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS blood_pressure_systolic DOUBLE PRECISION;
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS blood_pressure_diastolic DOUBLE PRECISION;
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS measurement_location VARCHAR(80);
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS measured_by VARCHAR(80);
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS notes TEXT;
+ALTER TABLE vital_signs_history ADD COLUMN IF NOT EXISTS created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE glucose_monitoring ADD COLUMN IF NOT EXISTS user_id INTEGER;
+ALTER TABLE glucose_monitoring ADD COLUMN IF NOT EXISTS recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE glucose_monitoring ADD COLUMN IF NOT EXISTS glucose_mg_dl DOUBLE PRECISION;
+
+ALTER TABLE creatinine_egfr_logs ADD COLUMN IF NOT EXISTS user_id INTEGER;
+ALTER TABLE creatinine_egfr_logs ADD COLUMN IF NOT EXISTS measured_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE creatinine_egfr_logs ADD COLUMN IF NOT EXISTS egfr_ml_min DOUBLE PRECISION;
+ALTER TABLE creatinine_egfr_logs ADD COLUMN IF NOT EXISTS creatinine_mg_dl DOUBLE PRECISION;
+
+ALTER TABLE nutrients ADD COLUMN IF NOT EXISTS name VARCHAR(120);
+ALTER TABLE nutrients ADD COLUMN IF NOT EXISTS symbol VARCHAR(20);
+ALTER TABLE nutrients ADD COLUMN IF NOT EXISTS units VARCHAR(20);
+ALTER TABLE nutrients ADD COLUMN IF NOT EXISTS category VARCHAR(60);
+
+ALTER TABLE foods ADD COLUMN IF NOT EXISTS name VARCHAR(200);
+ALTER TABLE foods ADD COLUMN IF NOT EXISTS local_name VARCHAR(200);
+ALTER TABLE foods ADD COLUMN IF NOT EXISTS category VARCHAR(100);
+ALTER TABLE foods ADD COLUMN IF NOT EXISTS glycemic_index DOUBLE PRECISION;
+ALTER TABLE foods ADD COLUMN IF NOT EXISTS is_local BOOLEAN DEFAULT TRUE;
+ALTER TABLE foods ADD COLUMN IF NOT EXISTS is_verified BOOLEAN DEFAULT FALSE;
+ALTER TABLE foods ADD COLUMN IF NOT EXISTS region_code VARCHAR(10);
+ALTER TABLE foods ADD COLUMN IF NOT EXISTS scientific_name VARCHAR(200);
+ALTER TABLE foods ADD COLUMN IF NOT EXISTS gi_classification VARCHAR(40);
+
+ALTER TABLE food_nutrients ADD COLUMN IF NOT EXISTS food_id INTEGER;
+ALTER TABLE food_nutrients ADD COLUMN IF NOT EXISTS nutrient_id INTEGER;
+ALTER TABLE food_nutrients ADD COLUMN IF NOT EXISTS amount_per_100g DOUBLE PRECISION;
+ALTER TABLE glycemic_load_index ADD COLUMN IF NOT EXISTS food_id INTEGER;
+ALTER TABLE glycemic_load_index ADD COLUMN IF NOT EXISTS food_name VARCHAR(200);
+ALTER TABLE glycemic_load_index ADD COLUMN IF NOT EXISTS glycemic_load DOUBLE PRECISION;
+ALTER TABLE glycemic_load_index ADD COLUMN IF NOT EXISTS gl_category VARCHAR(40);
+ALTER TABLE renal_acid_load_data ADD COLUMN IF NOT EXISTS food_id INTEGER;
+ALTER TABLE renal_acid_load_data ADD COLUMN IF NOT EXISTS food_name VARCHAR(200);
+ALTER TABLE renal_acid_load_data ADD COLUMN IF NOT EXISTS pral_value DOUBLE PRECISION;
+ALTER TABLE renal_acid_load_data ADD COLUMN IF NOT EXISTS ckd_recommendation VARCHAR(40);
+
+ALTER TABLE meals ADD COLUMN IF NOT EXISTS user_id INTEGER;
+ALTER TABLE meals ADD COLUMN IF NOT EXISTS meal_type VARCHAR(40);
+ALTER TABLE meals ADD COLUMN IF NOT EXISTS meal_date DATE;
+ALTER TABLE meals ADD COLUMN IF NOT EXISTS notes TEXT;
+ALTER TABLE meals ADD COLUMN IF NOT EXISTS created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE meal_components ADD COLUMN IF NOT EXISTS meal_id INTEGER;
+ALTER TABLE meal_components ADD COLUMN IF NOT EXISTS food_id INTEGER;
+ALTER TABLE meal_components ADD COLUMN IF NOT EXISTS quantity_grams DOUBLE PRECISION;
+ALTER TABLE meal_components ADD COLUMN IF NOT EXISTS meal_component_type VARCHAR(40) DEFAULT 'main';
+ALTER TABLE meal_nutrition_calculations ADD COLUMN IF NOT EXISTS meal_id INTEGER;
+ALTER TABLE meal_nutrition_calculations ADD COLUMN IF NOT EXISTS calories_total DOUBLE PRECISION;
+ALTER TABLE meal_nutrition_calculations ADD COLUMN IF NOT EXISTS protein_g_total DOUBLE PRECISION;
+ALTER TABLE meal_nutrition_calculations ADD COLUMN IF NOT EXISTS potassium_mg_total DOUBLE PRECISION;
+ALTER TABLE meal_nutrition_calculations ADD COLUMN IF NOT EXISTS phosphorus_mg_total DOUBLE PRECISION;
+ALTER TABLE meal_nutrition_calculations ADD COLUMN IF NOT EXISTS pral_total DOUBLE PRECISION;
+ALTER TABLE meal_nutrition_calculations ADD COLUMN IF NOT EXISTS calculated_at TIMESTAMP;
+
+CREATE INDEX IF NOT EXISTS idx_vital_signs_history_user_recorded
+    ON vital_signs_history(user_id, recorded_at DESC);
+CREATE INDEX IF NOT EXISTS idx_glucose_monitoring_user_recorded
+    ON glucose_monitoring(user_id, recorded_at DESC);
+CREATE INDEX IF NOT EXISTS idx_creatinine_egfr_logs_user_measured
+    ON creatinine_egfr_logs(user_id, measured_at DESC);

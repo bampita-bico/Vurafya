@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends, Query
 from backend.utils.database import get_db
 from backend.utils.dependencies import get_current_user
-from backend.utils.exceptions import NotFoundError, ValidationError
+from backend.utils.exceptions import ValidationError
 from backend.services.trust_service import (
-    get_trust_profile, recalculate_trust,
     get_kyc_status, submit_kyc,
     get_notifications, mark_read, mark_all_read,
     get_notification_prefs, update_notification_prefs,
@@ -13,41 +12,6 @@ from backend.models.schemas import (
 )
 
 router = APIRouter()
-
-
-# ── Trust scores ─────────────────────────────────────────────────────────────
-
-@router.get("/trust/me")
-async def my_trust(current_user: dict = Depends(get_current_user), db=Depends(get_db)):
-    profile = await get_trust_profile(db, current_user["id"])
-    if not profile:
-        return await recalculate_trust(db, current_user["id"])
-    return profile
-
-
-@router.get("/trust/{user_id}")
-async def user_trust(user_id: int, db=Depends(get_db)):
-    profile = await get_trust_profile(db, user_id)
-    if not profile:
-        raise NotFoundError("Trust profile", user_id)
-    return {
-        "user_id": user_id,
-        "trust_score": profile["trust_score"],
-        "trust_level": profile["trust_level"],
-        "badges": {
-            "verified_trader": profile["has_verified_trader_badge"],
-            "reliable_worker": profile["has_reliable_worker_badge"],
-            "honest_trader": profile["has_honest_trader_badge"],
-            "prompt_payer": profile["has_prompt_payer_badge"],
-        },
-        "max_transaction_ugx": profile["max_transaction_ugx"],
-        "requires_escrow": profile["requires_escrow"],
-    }
-
-
-@router.post("/trust/recalculate")
-async def recalculate(current_user: dict = Depends(get_current_user), db=Depends(get_db)):
-    return await recalculate_trust(db, current_user["id"])
 
 
 # ── KYC ──────────────────────────────────────────────────────────────────────

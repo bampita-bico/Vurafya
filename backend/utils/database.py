@@ -53,15 +53,19 @@ class DatabaseCompatSession:
         normalized = sql
         replacements = {
             "datetime('now')": "NOW()",
+            "date('now', '-7 days')": "(CURRENT_DATE - INTERVAL '7 days')",
             "date('now', '+100 years')": "(CURRENT_DATE + INTERVAL '100 years')",
             "date('now','start of month')": "date_trunc('month', CURRENT_DATE)::date",
             "date('now')": "CURRENT_DATE",
             "strftime('%Y','now')": "EXTRACT(YEAR FROM CURRENT_DATE)::int",
-            "INSERT OR IGNORE": "INSERT",
             "AUTOINCREMENT": "",
         }
         for old, new in replacements.items():
             normalized = normalized.replace(old, new)
+        if "INSERT OR IGNORE" in normalized.upper():
+            normalized = re.sub(r"INSERT\s+OR\s+IGNORE", "INSERT", normalized, flags=re.IGNORECASE)
+            if "ON CONFLICT" not in normalized.upper():
+                normalized = normalized.rstrip().rstrip(";") + " ON CONFLICT DO NOTHING"
         return normalized
 
     @staticmethod
@@ -102,12 +106,16 @@ class DatabaseCompatSession:
 
         try:
             result = await self.session.execute(text(statement), bound)
-        except Exception:
+        except Exception as exc:
+            # A PostgreSQL error aborts the current transaction.  Do not attempt a
+            # second statement in that aborted transaction; expose the SQL issue.
+            # Callers must use explicit RETURNING clauses for non-"id" primary keys.
             if statement.rstrip().lower().endswith(" returning id"):
-                fallback = statement.rsplit(" RETURNING id", 1)[0]
-                result = await self.session.execute(text(fallback), bound)
-            else:
-                raise
+                raise RuntimeError(
+                    "Insert did not return an id; use a PostgreSQL-native repository "
+                    "with an explicit RETURNING clause."
+                ) from exc
+            raise
         return AsyncResultCursor(result)
 
     async def commit(self):
@@ -147,5 +155,4 @@ async def check_db() -> dict:
         return {"connected": False, "error": str(e)}
 
 def get_db_path():
-    # Keep for compatibility with scripts that still expect a path
-    return settings.DB_PATH
+    return settings.DATABASE_URL

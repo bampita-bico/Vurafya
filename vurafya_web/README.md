@@ -1,42 +1,67 @@
 # Vurafya Doctor Portal
 
-A clinical workflow dashboard for model review, powered by the public **CDFD Runtime**.
+Clinical workflow dashboard for **Vurafya** by **VuraLabs**.
+
+Review operating-band stability, trajectory projections, and biometric entry.
+Prediction runs on the **Vurafya local engine** by default; CDFD Runtime is an
+optional review plugin when installed on the API host.
 
 ## Features
-- **Stability Dashboard**: Current runtime stability score (Ψ_s).
-- **Trajectory Projection**: 50-step model projection from the current state.
-- **Biological Ontology**: Cross-system influence visualization using Neo4j.
-- **Runtime Guidance**: Neutral flux and constraint labels from CDFD Runtime.
-- **Instant Demo Access**: One-click demo login for stakeholder presentations.
 
-## Tech Stack
-- **Frontend**: React 18, Tailwind CSS, Lucide Icons.
-- **Charts**: Recharts (High-performance SVG charting).
-- **Backend Integration**: Axios connecting to the Vurafya Python API.
+- **Stability dashboard** — current Ψₛ and regime
+- **Trajectory projection** — forecast from local adapter (optional Runtime kernel)
+- **Quick Entry** — save biometrics and refresh scores
+- **Runtime evidence** — finite audit, provenance, claim boundary when bundles exist
+- **Instant demo access** — one-click `POST /api/v1/auth/demo-login`
 
-## Getting Started
+## Tech stack
 
-### Prerequisites
-- Node.js (v16+)
-- Vurafya Backend running (default: http://localhost:8000)
+- React 18, Tailwind CSS, Lucide Icons
+- Recharts for SVG charts
+- Axios → Vurafya FastAPI (`/api/v1`)
 
-### Installation
+## Prerequisites
+
+- Node.js 16+
+- Vurafya backend on port `8000` (see root `README.md`)
+
+## Development
+
 ```bash
 npm install
-```
-
-### Running in Development
-```bash
 npm start
 ```
 
-### Production Build
+Default: `http://localhost:3000` → API `http://localhost:8000/api/v1`
+
+Override API:
+
 ```bash
-npm run build
+REACT_APP_API_URL=http://192.168.1.10:8000/api/v1 npm start
 ```
 
-## API Configuration
-By default, the portal connects to `http://localhost:8000/api/v1`. You can override this by setting `REACT_APP_API_URL` in your environment.
+## Production build
+
+```bash
+GENERATE_SOURCEMAP=false npm run build
+```
+
+Output: `build/`
+
+## Demo account
+
+Web: click **Instant demo access**.
+
+Credentials (defaults):
+
+- Email: `director.demo@vurafya.local`
+- Password: `change-me-demo-password`
+
+## Claim boundary
+
+Stability and trajectory outputs are **model review surfaces**, not diagnoses or
+treatment plans. See `ENGINE_INTEGRATION.md` for API details.
 
 ---
-© 2026 Vura iX
+
+© 2026 **VuraLabs**

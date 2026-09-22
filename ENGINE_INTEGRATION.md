@@ -1,117 +1,131 @@
-# Vurafya Universal Engine Integration
+# Vurafya Engine Integration
 
-This document defines the mapping between Vurafya records (biometrics, labs, nutrition) and the public **CDFD Runtime**.
+Mapping between Vurafya records (biometrics, labs, nutrition) and the app's
+**local predictive layer**. **VuraLabs** ships stability and trajectory without
+CDFD Runtime. Runtime is an optional sandbox (doctor / info / gallery / CDFL / LLM).
 
-## 1. Core Variables Mapping
+## 0. Dependency rule
 
-The engine operates on the master equation:
-**Ψ_s = (Φ / C) · S · M_s**
+| Capability | Dependency |
+|---|---|
+| Stability / regimes / avatar sync | **Vurafya local** when usable measurements exist |
+| Trajectory forecast | **Vurafya local** by default; `VURAFYA_USE_RUNTIME_KERNEL=1` for optional Runtime kernel |
+| CDFL, gallery, doctor, info | Optional CDFD Runtime |
+| Domain adapters | Retired (HTTP 410) |
 
-In the Vurafya application domain, these are mapped as follows:
+If Runtime is missing or slimmed, the health app still works. API routes do not
+return 503 solely because Runtime is offline. A local score is intentionally
+`null` with `status: insufficient_data` until at least one complete domain has
+current measurements; the app never invents a healthy baseline.
 
-| Engine Variable | Clinical Interpretation | Vurafya Proxy (Biomarkers) |
+## 1. Core variables
+
+Local operating-band bookkeeping:
+
+**Ψₛ = (Φ / C) · S · Mₛ**
+
+Not a validated clinical law — an in-app review surface.
+
+| Variable | Interpretation | Vurafya proxy |
 | :--- | :--- | :--- |
-| **Φ (Phi)** | Model flux / functional signal | eGFR (Renal), Heart Rate (Cardio), Glucose Flux (Metabolic) |
-| **C (Constraint)** | Model constraint / load signal | Creatinine, Systolic BP, HbA1c |
-| **Ψ_s (Psi_s)** | Operating ratio | Runtime stability score (balanced near 1.0) |
-| **S (Surface)** | Body Scaling | Height/Weight (BMI Scaling) |
-| **M_s (Memory)** | Chronicity | Historical baseline of clinical metrics |
+| **Φ** | Flux / functional signal | eGFR (renal), pulse (cardio), glucose (metabolic) |
+| **C** | Constraint / load | Creatinine, systolic BP, glucose floor |
+| **Ψₛ** | Operating ratio | Stability score (balanced near 1.0) |
+| **S** | Body scaling | Fixed at 1.0 in the current local implementation |
+| **Mₛ** | Chronicity | Fixed at 1.0 in the current local implementation |
 
-## 2. Multi-System Grid (2x2)
+## 2. Multi-system grid (2×2)
 
-Vurafya initializes a localized spatial grid to model the coupling between major systems:
-
-| Index | System | Phi (Flux) Source | C (Constraint) Source |
+| Index | System | Φ source | C source |
 | :--- | :--- | :--- | :--- |
-| **[0,0]** | **Renal** | `egfr_ml_min` / 100 | `creatinine_mg_dl` / 1.0 |
-| **[0,1]** | **Cardio** | 1.0 / (`pulse_bpm` / 70) | `bp_systolic` / 120 |
-| **[1,0]** | **Metabolic** | `glucose_mg_dl` / 100 | `hb_a1c` / 5.5 |
-| **[1,1]** | **Immune** | Systemic Mean | Systemic Mean |
+| [0,0] | Renal | `egfr_ml_min` / 100 | `creatinine_mg_dl` / 1.0 |
+| [0,1] | Cardio | 1.0 / (`pulse_bpm` / 70) | `bp_systolic` / 120 |
+| [1,0] | Metabolic | `glucose_mg_dl` / 100 | `max(glucose_mg_dl / 100, 0.8)` |
+| [1,1] | Immune | Not independently measured | Not independently measured |
 
-## 3. Runtime Regimes
+## 3. Regimes
 
-Based on the calculated **Ψ_s**, the app displays three runtime regimes:
-- **Stable (0.8 < Ψ_s < 1.2)**: Balanced model operating band.
-- **Constrained (Ψ_s < 0.8)**: Lower-flux or higher-constraint model state marked for review.
-- **Overload (Ψ_s > 1.2)**: Higher-flux or lower-capacity model state marked for review.
+| Regime | Ψₛ range | Meaning (in-app) |
+|--------|----------|------------------|
+| Constrained | &lt; 0.8 | Lower-flux or higher-constraint band |
+| Stable | 0.8 – 1.2 | Balanced operating band |
+| Overload | &gt; 1.2 | Higher-flux or lower-capacity band |
 
-The runtime output is a modeling and review surface. It is not a diagnosis,
-treatment plan, or substitute for licensed clinical judgment.
+These are modeling labels for review, not diagnoses or treatment plans.
 
-## 4. Gamification Link (Avatar Stats)
+## 4. Gamification (avatar stats)
 
-The engine drives the RPG avatar stats in the mobile app:
-- **Health Level**: `mean_psi * 100`
-- **Energy Level**: `metabolic_psi * 100`
-- **Immunity Level**: `immune_psi * 100`
-- **Resilience Level**: `1 / std(psi_s) * 50`
+- **Health level:** `mean_psi × 100`
+- **Energy level:** `metabolic_psi × 100`
+- **Immunity level:** `immune_psi × 100`
+- **Resilience level:** `1 / std(psi_s) × 50`
 
-## 5. Runtime Artifact Lifecycle
+Mobile offline mirror: `vurafya_app/lib/core/engine/offline_edge_engine.dart`.
 
-Every runtime-facing stability or trajectory request is now wrapped in the
-current CDFD Runtime result envelope before it is returned to the app. The
-envelope records:
+## 5. Artifact lifecycle
 
-- `finite_audit`: strict JSON-visible finite-value audit.
-- `provenance`: runtime, language, command, timestamp, Python, and platform.
-- `claim_boundary`: deterministic modeling/review-support boundary.
-- `payload.runtime_version`: public runtime info, command list, and domain count
-  when the runtime surface is available.
+Stability/trajectory responses may include envelopes with:
 
-The backend writes a run bundle under `RUNTIME_ARTIFACT_ROOT`
-(default: `runtime_runs/`) with:
+- `finite_audit` — JSON-visible finite-value check
+- `provenance` — command, timestamp, engine source (`Vurafya local` when no Runtime)
+- `claim_boundary` — modeling / review-support boundary text
 
-- `result.json`
-- `manifest.json`
-- `report.md`
-- `report.html`
-- `plots/`
+Bundles under `RUNTIME_ARTIFACT_ROOT` (default `runtime_runs/`):
 
-The same run is recorded in Postgres via `migrations_pg/091_runtime_artifacts.sql`
-and in the legacy SQLite migration set via `migrations/091_runtime_artifacts.sql`.
-Non-balanced runtime guidance also creates a `runtime_alerts` row for review.
+- `result.json`, `manifest.json`, `report.md`, `report.html`, `plots/`
 
-## 6. Runtime API Surface
+Persistence is off for read endpoints by default. Set `RUNTIME_PERSIST_ON_READ=true`
+only when retention is intended. Explicit persisted results use the optional
+Runtime bundle when present, or a local JSON/HTML/Markdown bundle when absent.
+Postgres persistence: `migrations_pg/091_runtime_artifacts.sql`.
 
-- `GET /api/v1/engine/stability`: current Vurafya clinical stability plus
-  `runtime_envelope`, `runtime_run`, `finite_audit`, `provenance`, and
-  `claim_boundary`.
-- `GET /api/v1/engine/trajectory?steps=50`: forecast plus saved runtime bundle.
-- `GET /api/v1/engine/runtime-status`: import and availability state for kernel,
-  decision, DSL, action gateway, ontology, and runtime public surfaces.
-- `GET /api/v1/engine/doctor`: CDFD Runtime doctor report.
-- `GET /api/v1/engine/info`: runtime info envelope.
-- `GET /api/v1/engine/domains`: available runtime domains.
-- `GET /api/v1/engine/llm/providers`: provider inventory. Provider calls remain
-  above the deterministic runtime engine boundary.
-- `GET /api/v1/engine/runs`: authenticated user's recent saved runtime runs.
-- `GET /api/v1/engine/runs/{run_uid}`: saved run detail.
-- `POST /api/v1/engine/runs/{run_uid}/review`: clinician/user review marker.
-- `POST /api/v1/engine/domain/{domain}`: run a public runtime domain and save
-  its artifact bundle.
+## 6. HTTP API (`/api/v1/engine`)
 
-## 7. Client Surfaces
+| Method | Path | Notes |
+|--------|------|-------|
+| GET | `/stability` | Local score + optional runtime envelope |
+| GET | `/trajectory?steps=50` | Local forecast by default |
+| GET | `/runtime-status` | Import / availability state |
+| GET | `/doctor` | CDFD Runtime doctor (optional) |
+| GET | `/info` | Runtime info envelope (optional) |
+| GET | `/gallery` | Slim Runtime CDFL gallery (optional) |
+| GET | `/domains` | **410** — retired |
+| GET | `/llm/providers` | Provider inventory (optional) |
+| GET | `/runs` | Authenticated user's saved runs |
+| GET | `/runs/{run_uid}` | Owner run detail; assigned clinician may pass `patient_user_id` |
+| POST | `/runs/{run_uid}/review` | Review marker; requires active clinician role and assignment |
+| POST | `/domain/{domain}` | **410** — retired |
+| POST | `/execute-dsl` | Custom CDFL via adapter (optional) |
 
-The React portal and Flutter medical screen now expose the saved run evidence:
+## 7. Clients
 
-- run UID
-- finite-audit state
-- provenance command
-- result/manifest/report artifact filenames
-- persistence errors when a bundle was written but the database row was not
-- claim boundary text
+- **React** (`vurafya_web`): stability dashboard, trajectory, runtime evidence panel
+- **Flutter** (`vurafya_app`): medical screen, offline edge engine fallback with
+  explicit local evidence envelope
 
-Flutter also annotates offline edge-engine fallbacks with an explicit local
-evidence envelope, so users can distinguish synced runtime artifacts from
-device-only model output.
+## 8. Implementation map
 
-## 8. Technical Implementation
+| Component | Path |
+|-----------|------|
+| Local adapter | `backend/services/engine_adapter.py` |
+| Runtime bridge | `backend/services/cdfd_bridge.py` |
+| Artifacts | `backend/services/runtime_artifacts.py` |
+| API routes | `backend/api/engine.py` |
+| Background worker | `backend/services/background_worker.py` |
+| Sample CDFL | `backend/scripts/medical_rules.cdfl` |
 
-- **Adapter**: `backend/services/engine_adapter.py`
-- **Runtime bridge**: `backend/services/cdfd_bridge.py`
-- **Artifact service**: `backend/services/runtime_artifacts.py`
-- **API**: `backend/api/engine.py`
-- **Worker**: `backend/services/background_worker.py` (Hourly refresh)
-- **DSL**: `backend/scripts/medical_rules.cdfl` (Custom CDFL rules)
-- **Postgres migrations**: `migrations_pg/091_runtime_artifacts.sql`
-- **SQLite migrations**: `migrations/091_runtime_artifacts.sql`
+## 9. Environment
+
+| Variable | Purpose |
+|----------|---------|
+| `ENGINE_PATH` | Path to `CDFD-Runtime` (optional) |
+| `VURAFYA_USE_RUNTIME_KERNEL` | `1` to use Runtime kernel for trajectory |
+| `RUNTIME_ARTIFACT_ROOT` | Bundle output directory |
+| `RUNTIME_REQUIRE_FINITE` | Strict finite audit (default true) |
+| `RUNTIME_PERSIST_ON_READ` | Persist stability and trajectory reads (default false) |
+| `ENABLE_BACKGROUND_WORKER` | Start the non-essential worker (default false) |
+| `ENABLE_MODEL_AUTOMATIONS` | Permit worker model-derived actions (default false) |
+
+---
+
+© 2026 **VuraLabs**

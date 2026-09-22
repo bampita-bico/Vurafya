@@ -1,0 +1,59 @@
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: cdfd
+          POSTGRES_USER: cdfd
+          POSTGRES_PASSWORD: test-password
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U cdfd -d cdfd"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      DATABASE_URL: postgresql://cdfd:test-password@localhost:5432/cdfd
+      JWT_SECRET: test-secret-that-is-at-least-thirty-two-characters
+      DEMO_LOGIN_ENABLED: "false"
+      ENABLE_BACKGROUND_WORKER: "false"
+      ENABLE_MODEL_AUTOMATIONS: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install -r backend/requirements-dev.txt
+      - run: python -m compileall -q backend scripts tests
+      - run: python -m pytest -q
+      - run: python scripts/migrate.py
+      - run: python scripts/import_seed_postgres.py
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run: {working-directory: vurafya_web}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '20', cache: npm, cache-dependency-path: vurafya_web/package-lock.json}
+      - run: npm ci
+      - run: npm run build
+
+  mobile:
+    runs-on: ubuntu-latest
+    defaults:
+      run: {working-directory: vurafya_app}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with: {channel: stable}
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
